@@ -1,9 +1,9 @@
-(function(){
-  function StoryNavSrv{
-    
-  }
-  
-  angular
-    .module('fatebook')
-    .factory('StoryNavSrv', [StoryNavSrv])
-})():
+//(function(){
+//  function StoryNavSrv{
+//    
+//  }
+//  
+//  angular
+//    .module('fatebook')
+//    .factory('StoryNavSrv', [StoryNavSrv])
+//})():
