@@ -2,6 +2,17 @@
 
 {{ testStory.title }}
 
-<ul ng-repeat='page in testStory.pages'>
-  <li>{{page.title }}</li>
-</ul>
+<div>{{ testStory.description }} </div>
+
+</br>
+
+<div>
+  {{ testStory.pages[0].content }}
+</div>
+
+
+<ol>
+  <li ng-repeat='choice in testStory.pages[0].choices'> {{choice.text}} </li>
+</ol>
+
+<!--{{ testStory.pages[0].choices.length }}-->
