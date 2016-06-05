@@ -1,6 +1,6 @@
-#Fatebook
+#Fatebook [Working Title]
 
 A social app for authoring, playing, and sharing interactive stories.
 
 
-## Glen Cooney 2016
+*Glen Cooney 2016*
