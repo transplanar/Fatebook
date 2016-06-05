@@ -1,6 +1,6 @@
 (function(){
   function StoryNavCtrl($scope){
-    $scope.testStory = {
+    var testStory = {
       title: 'TestStory Title',
       description: 'Test of story nav system.',
       summary: 'First story to test story nav system',
@@ -10,6 +10,10 @@
       pages: []
     };
     
+    $scope.currentStory = testStory;
+    
+    
+    //NOTE Need to have choices properly generate their ID
     var Page = function(args){
       this.parentPage = args.parentPage;
       this.title = args.title;
@@ -18,36 +22,47 @@
       this.choices = [];
       this.endpoint = args.endpoint;
       
+      /**************************************/
+      //FIXME dfsljfasdj
+      this.tempChoices = args.choices;
+      /**************************************/
+      
       this.init = function(){
         this.id = $scope.getPageID(this.parentPage);
-
-        for(var i = 0; i < args.choices.length; i++){
-          this.choices.push(new Choice(args.choices[i].text, this));    
+        
+        for(var i = 0; i < this.tempChoices.length; i++){
+          console.log('choice for index', i);
+          this.choices.push(new Choice(this.tempChoices[i].text, i, this));    
         }
       }
-        
-      this.init();
     };
     
-    $scope.getPageID = function(parentPage){
+    $scope.getPageID = function(parentPage, index=-1){
+      console.log('index in getPageID', index)
       if(parentPage===null){
-        return 1;
+        return '1';
       }else{
         var lastChar = parentPage.id[parentPage.id.length -1];
-
-        if(angular.isNumber(lastChar)){
-          return parentPage.id + (String.fromCharCode(lastChar.charCodeAt() + 1));
+        
+        if(angular.isNumber(parseInt(lastChar))){
+          return parentPage.id + indexToAlpha(index);
         }else{
-          return parentPage.id + (lastChar + 1);
+          return parentPage.id + (index+1);
         }
       }
     }
-    
-    function Choice(text, parentPage){
-      return {text: text, dest: $scope.getPageID(parentPage)};
+      
+    var indexToAlpha = function(index){
+//      console.log('convert to ', String.fromCharCode(index + 65));
+      return String.fromCharCode(index + 65);
     }
     
-    $scope.testStory.pages.push(
+    function Choice(text, index, parentID){
+      console.log('index in choice', index);
+      return {text: text, dest: $scope.getPageID(parentID, index)};
+    }
+    
+    $scope.currentStory.pages.push(
       new Page(
         {
           parentPage: null,
@@ -63,10 +78,12 @@
       )
     );
     
-    $scope.testStory.pages.push(
+    $scope.currentPage = $scope.currentStory.pages[0];
+    
+    $scope.currentStory.pages.push(
       new Page(
         {
-          parentPage: null,
+          parentPage: $scope.currentStory.pages[0],
           title: 'Left door', //String
           summary: 'First page', //String
           content: 'You entered the left door.', //String
@@ -76,10 +93,10 @@
       )
     );
     
-    $scope.testStory.pages.push(
+    $scope.currentStory.pages.push(
       new Page(
         {
-          parentPage: null,
+          parentPage: $scope.currentStory.pages[0],
           title: 'Right door', //String
           summary: 'First page', //String
           content: 'You entered the right door.', //String
@@ -89,9 +106,30 @@
       )
     );
     
-    var getPageByID = function(pages, id){
-      return pages[id] || undefined;
+    var getPageByID = function(id){
+      for(var i in $scope.currentStory.pages){
+        if($scope.currentStory.pages[i].id === id){
+          return $scope.currentStory.pages[i];
+        }
+      }
+      
+      return undefined;
     }
+    
+    $scope.setPage = function(pageID){
+      $scope.currentPage = getPageByID(pageID);
+    }
+    
+    var initializePages = function(){
+      for (var i = 0; i < $scope.currentStory.pages.length; i++){
+        $scope.currentStory.pages[i].init();
+      }
+    }
+    
+    $scope.$on('$viewContentLoaded', function(){
+      console.log('content loaded');
+      initializePages();
+    });
   }
   
   angular

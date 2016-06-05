@@ -1,18 +1,24 @@
-<h1>Story Test</h1>
-
-{{ testStory.title }}
-
-<div>{{ testStory.description }} </div>
-
-</br>
-
 <div>
-  {{ testStory.pages[0].content }}
+  <h1>Story Test</h1>
+
+  {{ currentStory.title }}
+
+  <div>{{ currentStory.description }} </div>
+
+  </br>
+
+  <div>
+    {{ currentPage.content }}
+  </div>
+
+  <ol>
+    <li ng-repeat='choice in currentPage.choices'>
+      <span ng-click='setPage(choice)'> {{choice.text}} </span>
+    </li>
+  </ol>
+  
+  <h2>All Pages</h2>
+  <ol>
+    <li ng-repeat='page in currentStory.pages'>{{page.id}}</li>
+  </ol>
 </div>
-
-
-<ol>
-  <li ng-repeat='choice in testStory.pages[0].choices'> {{choice.text}} </li>
-</ol>
-
-<!--{{ testStory.pages[0].choices.length }}-->
