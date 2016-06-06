@@ -33,19 +33,19 @@
     var generateBranchIDs = function(){
       var pages = $scope.currentStory.pages;
 
-      console.log('pages',pages);
-      
       pages[0].id = '1';
       
       for(var i = 1; i < pages.length; i++){
           if(pages[i].parentPage){
             var lastChar = pages[i].parentPage.id[pages[i].parentPage.id.length -1];
             var childIndex = pages[i].parentPage.branches.indexOf(pages[i]);
-
-            if(angular.isNumber(parseInt(lastChar))){
+            
+            var reg = /^\d+$/;
+            
+            if(reg.test(lastChar)){
               pages[i].id = pages[i].parentPage.id + indexToAlpha(childIndex);
             }else{
-              return pages[i].parentPage.id + (childIndex+1);
+              pages[i].id = pages[i].parentPage.id + (childIndex+1);
             }
         }
       }
