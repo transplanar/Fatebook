@@ -22,6 +22,10 @@
       this.choices = [];
       this.endpoint = args.endpoint;
       
+//      for(var i = 0; i < args.choices.length; i++){
+//        this.choices.push()
+//      }
+      
       /**************************************/
       //FIXME dfsljfasdj
       this.tempChoices = args.choices;
@@ -29,20 +33,25 @@
       
       this.init = function(){
         this.id = $scope.getPageID(this.parentPage);
-        
-        for(var i = 0; i < this.tempChoices.length; i++){
-          console.log('choice for index', i);
-          this.choices.push(new Choice(this.tempChoices[i].text, i, this));    
-        }
+        console.log('assigned id', this.id);
       }
+      
+//      this.initChoices = function(){
+//        for(var i = 0; i < this.tempChoices.length; i++){
+//          this.choices.push(new Choice(this.tempChoices[i].text, i, this));    
+//        }
+//      }
     };
     
     $scope.getPageID = function(parentPage, index=-1){
-      console.log('index in getPageID', index)
+      console.log('recieved', [parentPage,index]);
       if(parentPage===null){
         return '1';
       }else{
+        console.log('non-null parent', parentPage.title)
         var lastChar = parentPage.id[parentPage.id.length -1];
+//        var childIndex = parentPage.choices.indexOf(page);
+//        console.log('childIndex', childIndex);
         
         if(angular.isNumber(parseInt(lastChar))){
           return parentPage.id + indexToAlpha(index);
@@ -57,9 +66,9 @@
       return String.fromCharCode(index + 65);
     }
     
-    function Choice(text, index, parentID){
-      console.log('index in choice', index);
-      return {text: text, dest: $scope.getPageID(parentID, index)};
+    function Choice(text, index, parentPage){
+//      console.log('index in choice', index);
+      return {text: text, dest: $scope.getPageID(parentPage, index)};
     }
     
     $scope.currentStory.pages.push(
@@ -124,6 +133,10 @@
       for (var i = 0; i < $scope.currentStory.pages.length; i++){
         $scope.currentStory.pages[i].init();
       }
+      
+//      for (var i = 0; i < $scope.currentStory.pages.length; i++){
+//        $scope.currentStory.pages[i].initChoices();
+//      }
     }
     
     $scope.$on('$viewContentLoaded', function(){
