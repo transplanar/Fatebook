@@ -12,63 +12,47 @@
     
     $scope.currentStory = testStory;
     
-    
     //NOTE Need to have choices properly generate their ID
     var Page = function(args){
       this.parentPage = args.parentPage;
+      this.id = args.id;
       this.title = args.title;
       this.summary = args.summary;
       this.content = args.content;
-      this.choices = [];
+      this.choices = args.choices; //Displayed to user
+      this.branches = []; //Ref to other pages
       this.endpoint = args.endpoint;
       
-//      for(var i = 0; i < args.choices.length; i++){
-//        this.choices.push()
-//      }
-      
-      /**************************************/
-      //FIXME dfsljfasdj
-      this.tempChoices = args.choices;
-      /**************************************/
-      
       this.init = function(){
-        this.id = $scope.getPageID(this.parentPage);
-        console.log('assigned id', this.id);
+        if(this.parentPage){
+          this.parentPage.branches.push(this);
+        }
       }
-      
-//      this.initChoices = function(){
-//        for(var i = 0; i < this.tempChoices.length; i++){
-//          this.choices.push(new Choice(this.tempChoices[i].text, i, this));    
-//        }
-//      }
     };
     
-    $scope.getPageID = function(parentPage, index=-1){
-      console.log('recieved', [parentPage,index]);
-      if(parentPage===null){
-        return '1';
-      }else{
-        console.log('non-null parent', parentPage.title)
-        var lastChar = parentPage.id[parentPage.id.length -1];
-//        var childIndex = parentPage.choices.indexOf(page);
-//        console.log('childIndex', childIndex);
-        
-        if(angular.isNumber(parseInt(lastChar))){
-          return parentPage.id + indexToAlpha(index);
-        }else{
-          return parentPage.id + (index+1);
+    var generateBranchIDs = function(){
+      var pages = $scope.currentStory.pages;
+
+      console.log('pages',pages);
+      
+      pages[0].id = '1';
+      
+      for(var i = 1; i < pages.length; i++){
+          if(pages[i].parentPage){
+            var lastChar = pages[i].parentPage.id[pages[i].parentPage.id.length -1];
+            var childIndex = pages[i].parentPage.branches.indexOf(pages[i]);
+
+            if(angular.isNumber(parseInt(lastChar))){
+              pages[i].id = pages[i].parentPage.id + indexToAlpha(childIndex);
+            }else{
+              return pages[i].parentPage.id + (childIndex+1);
+            }
         }
       }
     }
       
     var indexToAlpha = function(index){
-//      console.log('convert to ', String.fromCharCode(index + 65));
       return String.fromCharCode(index + 65);
-    }
-    
-    function Choice(text, index, parentPage){
-//      console.log('index in choice', index);
-      return {text: text, dest: $scope.getPageID(parentPage, index)};
     }
     
     $scope.currentStory.pages.push(
@@ -79,8 +63,8 @@
           summary: 'First page', //String
           content: 'You see two doors. Which do you choose?', //String
           choices: [
-                        {text: 'Left door', parentPage: this},
-                        {text: 'Right door', parentPage: this}
+                        {text: 'Left door', dest: '1A'},
+                        {text: 'Right door', dest: '1B'}
                    ],
           endpoint: false //Boolean
         }
@@ -96,7 +80,9 @@
           title: 'Left door', //String
           summary: 'First page', //String
           content: 'You entered the left door.', //String
-          choices: [ ],
+          choices: [
+            {text: 'Something else', dest: '1A1'}
+          ],
           endpoint: true //Boolean
         }
       )
@@ -109,39 +95,47 @@
           title: 'Right door', //String
           summary: 'First page', //String
           content: 'You entered the right door.', //String
-          choices: [ ],
           endpoint: true //Boolean
         }
       )
     );
     
-    var getPageByID = function(id){
-      for(var i in $scope.currentStory.pages){
-        if($scope.currentStory.pages[i].id === id){
-          return $scope.currentStory.pages[i];
+    $scope.currentStory.pages.push(
+      new Page(
+        {
+          parentPage: $scope.currentStory.pages[1],
+          title: 'Super last', //String
+          summary: 'First page', //String
+          content: 'Even more final.', //String
+          endpoint: true //Boolean
+        }
+      )
+    );
+    
+    $scope.setPage = function(pageID){
+      var choices = $scope.currentPage.choices;
+      var pages = $scope.currentStory.pages;
+      
+      for(var i in pages){
+        for(var j in choices){
+          if (pages[i].id === choices[j].dest){
+            $scope.currentPage = pages[i];
+          }
         }
       }
       
-      return undefined;
-    }
-    
-    $scope.setPage = function(pageID){
-      $scope.currentPage = getPageByID(pageID);
+      return null;
     }
     
     var initializePages = function(){
       for (var i = 0; i < $scope.currentStory.pages.length; i++){
         $scope.currentStory.pages[i].init();
       }
-      
-//      for (var i = 0; i < $scope.currentStory.pages.length; i++){
-//        $scope.currentStory.pages[i].initChoices();
-//      }
     }
     
     $scope.$on('$viewContentLoaded', function(){
-      console.log('content loaded');
       initializePages();
+      generateBranchIDs();
     });
   }
   
