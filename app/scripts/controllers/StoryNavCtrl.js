@@ -100,6 +100,7 @@
       )
     );
     
+    //TODO Get page by ID for branching?
     $scope.currentStory.pages.push(
       new Page(
         {
@@ -112,15 +113,12 @@
       )
     );
     
-    $scope.setPage = function(pageID){
-      var choices = $scope.currentPage.choices;
+    $scope.setPage = function(dest){
       var pages = $scope.currentStory.pages;
       
       for(var i in pages){
-        for(var j in choices){
-          if (pages[i].id === choices[j].dest){
-            $scope.currentPage = pages[i];
-          }
+        if (pages[i].id === dest){
+          $scope.currentPage = pages[i];
         }
       }
       
@@ -136,6 +134,9 @@
     $scope.$on('$viewContentLoaded', function(){
       initializePages();
       generateBranchIDs();
+      
+      var pages = $scope.currentStory.pages;
+      console.log('pages',pages);
     });
   }
   
