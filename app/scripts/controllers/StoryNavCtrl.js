@@ -29,9 +29,7 @@
         console.log('choice', choice);
         
         if(choice){
-          //$scope or StoryNavSrv here?
           $scope.$apply($scope.setPage(choice.dest));
-//          $scope.$apply(StoryNavSrv.setPage(choice.dest));
         }
       }
     });
