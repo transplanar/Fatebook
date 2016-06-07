@@ -12,14 +12,9 @@
       controller: 'StoryNavCtrl',
       templateUrl: '/templates/story.html'
     });
-    
-    angular.element(document).bind('keyup', function (e) {
-      //Keyboard handler
-    });
   };
   
   angular
-//    .module('chatterBox', ['ui.bootstrap', 'ui.router', 'firebase', 'formatTime', 'ngCookies'])
     .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies'])
     .config(config)
 })();

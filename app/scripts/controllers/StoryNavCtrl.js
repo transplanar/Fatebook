@@ -114,11 +114,15 @@
     );
     
     $scope.setPage = function(dest){
+      console.log('setting page to dest', dest);
       var pages = $scope.currentStory.pages;
       
       for(var i in pages){
         if (pages[i].id === dest){
+          console.log('setting page');
+          console.log('$scope.currentPage',$scope.currentPage);
           $scope.currentPage = pages[i];
+          console.log('$scope.currentPage',$scope.currentPage);
         }
       }
       
@@ -139,13 +143,14 @@
       console.log('pages',pages);
     });
     
-    $scope.keyHandler = function(e){
-      console.log(e);
-    }
+    angular.element(document).bind('keyup', function (e) {
+      var choiceIndex = e.keyCode - 49;
+      
+      $scope.$apply($scope.setPage($scope.currentPage.choices[choiceIndex].dest));
+    });
   }
   
   angular
     .module('fatebook')
-//    .controller('StoryNavCtrl', ['StoryNavSrv', StoryNavCtrl]);
     .controller('StoryNavCtrl', ['$scope', StoryNavCtrl]);
 })();
