@@ -114,15 +114,11 @@
     );
     
     $scope.setPage = function(dest){
-      console.log('setting page to dest', dest);
       var pages = $scope.currentStory.pages;
       
       for(var i in pages){
         if (pages[i].id === dest){
-          console.log('setting page');
-          console.log('$scope.currentPage',$scope.currentPage);
           $scope.currentPage = pages[i];
-          console.log('$scope.currentPage',$scope.currentPage);
         }
       }
       
@@ -140,13 +136,17 @@
       generateBranchIDs();
       
       var pages = $scope.currentStory.pages;
-      console.log('pages',pages);
     });
     
     angular.element(document).bind('keyup', function (e) {
-      var choiceIndex = e.keyCode - 49;
-      
-      $scope.$apply($scope.setPage($scope.currentPage.choices[choiceIndex].dest));
+      if($scope.currentPage && $scope.currentPage.choices){
+        var choiceIndex = e.keyCode - 49;
+        var choice = $scope.currentPage.choices[choiceIndex];
+        
+        if(choice){
+          $scope.$apply($scope.setPage(choice.dest));
+        }
+      }
     });
   }
   
