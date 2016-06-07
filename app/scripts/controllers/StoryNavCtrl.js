@@ -138,6 +138,10 @@
       var pages = $scope.currentStory.pages;
       console.log('pages',pages);
     });
+    
+    $scope.keyHandler = function(e){
+      console.log(e);
+    }
   }
   
   angular
