@@ -94,6 +94,7 @@
     }
     
     StoryNavSrv.getUnfinishedPages = function(){
+      //TODO Refactor to use a Boolean that is changed after a user updates the page
       var pages = StoryNavSrv.currentStory.pages
       
       for(var i = 0; i < pages.length; i++){
