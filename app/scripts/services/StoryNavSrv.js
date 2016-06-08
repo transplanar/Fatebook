@@ -87,19 +87,13 @@
     }
     
     StoryNavSrv.getUnfinishedPages = function(){
-      console.log('testing unfinished');
       var pages = StoryNavSrv.currentStory.pages
-//      var unfinished = [];
       
       for(var i = 0; i < pages.length; i++){
-        console.log(pages[i].title);
         if(pages[i].title === '[AUTO]'){
           StoryNavSrv.unfinishedPages.push(pages[i]);
         }
       }
-      
-//      return unfinished;
-//      StoryNavSrv.unfinishedPages = unfinished; 
     };          
     
 //    TEST FUNCTIONS/DATA ****************************************
