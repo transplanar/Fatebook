@@ -1,3 +1,7 @@
+
+//NOTE how important is this?
+"use strict";
+
 (function(){
   function config($stateProvider, $locationProvider){
     $locationProvider
@@ -5,7 +9,7 @@
       enabled: true,
       requireBase: false
     });
-
+u
     $stateProvider
       .state('landing',{
       url:'/',
@@ -13,7 +17,7 @@
       templateUrl: '/templates/story.html'
     });
   };
-  
+
   angular
     .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies'])
     .config(config)
