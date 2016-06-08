@@ -2,7 +2,6 @@
   function StoryNavSrv() {
     var StoryNavSrv = {};
 
-    StoryNavSrv.unfinishedPages = [];
     
     var Page = function(args){
       this.parentPage = args.parentPage;
@@ -59,6 +58,7 @@
       }
     }
 
+    //NOTE Polish - move this into getBranchID?
     var indexToAlpha = function(index){
       return String.fromCharCode(index + 65);
     }
@@ -72,6 +72,7 @@
     var getPageFromID = function(id){
       var pages = StoryNavSrv.currentStory.pages;
       
+      //NOTE Better way to search for match? Functional method?
       for(var i in pages){
         if(pages[i].id == id){
           return pages[i];
@@ -93,6 +94,8 @@
       }
     }
     
+    //NOTE Convention to put this at the top, or make more sense here?
+    StoryNavSrv.unfinishedPages = [];
     StoryNavSrv.getUnfinishedPages = function(){
       //TODO Refactor to use a Boolean that is changed after a user updates the page
       var pages = StoryNavSrv.currentStory.pages

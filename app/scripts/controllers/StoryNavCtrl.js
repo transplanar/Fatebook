@@ -1,5 +1,4 @@
 (function(){
-//  function StoryNavCtrl($scope){
   function StoryNavCtrl($scope, StoryNavSrv){
     StoryNavSrv.initializeStoryData();
     
