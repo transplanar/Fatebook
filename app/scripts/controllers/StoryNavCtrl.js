@@ -5,6 +5,7 @@
     
     $scope.currentStory = StoryNavSrv.currentStory;
     $scope.currentPage = StoryNavSrv.currentPage;
+    $scope.unfinishedPages = StoryNavSrv.unfinishedPages;
     
     $scope.setPage = function(dest){
       console.log('setting page', dest);
@@ -36,6 +37,5 @@
   
   angular
     .module('fatebook')
-//    .controller('StoryNavCtrl', ['$scope', StoryNavCtrl]);
     .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', StoryNavCtrl]);
 })();

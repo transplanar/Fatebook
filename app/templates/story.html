@@ -25,4 +25,9 @@
   <ol>
     <li ng-repeat='page in currentStory.pages'>{{page.id}} {{page.content }}</li>
   </ol>
+
+  <h2 ng-show='unfinishedPages'>Unfinished Pages</h2>
+  <ol>
+    <li ng-repeat='page in unfinishedPages'>{{page.id}}</li>
+  </ol>
 </div>
