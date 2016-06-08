@@ -8,6 +8,10 @@
   </br>
 
   <div>
+    <h2>PageID = {{ currentPage.id }}</h2>
+  </div>
+
+  <div>
     {{ currentPage.content }}
   </div>
 
@@ -19,6 +23,6 @@
   
   <h2>All Pages</h2>
   <ol>
-    <li ng-repeat='page in currentStory.pages'>{{page.id}}</li>
+    <li ng-repeat='page in currentStory.pages'>{{page.id}} {{page.content }}</li>
   </ol>
 </div>

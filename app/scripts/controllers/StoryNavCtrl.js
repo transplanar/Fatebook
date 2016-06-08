@@ -7,7 +7,7 @@
     $scope.currentPage = StoryNavSrv.currentPage;
     
     $scope.setPage = function(dest){
-      console.log('setting page');
+      console.log('setting page', dest);
       var pages = StoryNavSrv.currentStory.pages;
       
       for(var i in pages){
@@ -24,9 +24,8 @@
     angular.element(document).bind('keyup', function (e) {
       if(StoryNavSrv.currentPage && StoryNavSrv.currentPage.choices){
         var choiceIndex = e.keyCode - 49;
-        var choice = StoryNavSrv.currentPage.choices[choiceIndex];
-        
-        console.log('choice', choice);
+        var page = StoryNavSrv.currentPage;
+        var choice = page.choices[choiceIndex];
         
         if(choice){
           $scope.$apply($scope.setPage(choice.dest));
