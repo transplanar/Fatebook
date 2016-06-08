@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='fatebook'>
 <head>
-  <title>Fatebook</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <meta charset="UTF-8">
+  <title>Fatebook Landing Page</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,600,700,300">
+  <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/styles/normalize.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="/styles/main.css"> -->
 </head>
 <body>
 
 <%= yield %>
+
+<!--    Core App-->
+<!-- <script src="/scripts/app.js"></script> -->
+<!-- <script src="/assets/javascripts/fatebook.js"></script> -->
+
+<!--    Services-->
+<!-- <script src="/scripts/services/StoryNavSrv.js"></script> -->
+
+<!--    Controllers-->
+<!-- <script src="/scripts/controllers/StoryNavCtrl.js"></script> -->
 
 </body>
 </html>
