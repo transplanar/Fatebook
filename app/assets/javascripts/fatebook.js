@@ -1,4 +1,3 @@
-
 //NOTE how important is this?
 "use strict";
 
@@ -9,16 +8,17 @@
       enabled: true,
       requireBase: false
     });
-u
+
     $stateProvider
       .state('landing',{
       url:'/',
       controller: 'StoryNavCtrl',
-      templateUrl: '/templates/story.html'
+      templateUrl: 'story.html'
     });
   };
 
   angular
     .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies'])
+    // .module('fatebook', ['ui.router', 'ngCookies'])
     .config(config)
 })();

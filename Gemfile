@@ -43,7 +43,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
-  gem 'bower-rails'
-  gem 'angular-rails-templates'
 end
+
+gem 'bower-rails'
+gem 'angular-rails-templates'
+gem 'angular-ui-bootstrap-rails'
+gem 'angular-ui-router-rails'
