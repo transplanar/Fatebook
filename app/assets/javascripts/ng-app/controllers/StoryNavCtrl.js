@@ -2,6 +2,7 @@
   function StoryNavCtrl($scope, StoryNavSrv){
     StoryNavSrv.initializeStoryData();
 
+    $scope.debugMode = false;
     $scope.currentStory = StoryNavSrv.currentStory;
     $scope.currentPage = StoryNavSrv.currentPage;
     $scope.unfinishedPages = StoryNavSrv.unfinishedPages;
@@ -33,8 +34,6 @@
       }
     });
   }
-
-  console.log('story nav ctrl loaded');
 
   angular
     .module('fatebook')

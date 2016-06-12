@@ -182,8 +182,6 @@
     return StoryNavSrv;
   }
 
-  console.log('story nav SRV loaded');
-
   angular
     .module('fatebook')
     .factory('StoryNavSrv', [StoryNavSrv])

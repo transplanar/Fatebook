@@ -18,8 +18,6 @@
     });
   };
 
-  console.log('ng-app loaded');
-
   angular
     .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies', 'templates'])
     .config(config)
