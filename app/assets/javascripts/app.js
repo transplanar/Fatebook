@@ -15,8 +15,6 @@
       url:'/',
       controller: 'StoryNavCtrl',
       templateUrl: 'story.html'
-      // templateUrl: 'stories/test.html'
-      // templateUrl: '/views/stories/index.html.erb'
     });
   };
 

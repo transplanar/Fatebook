@@ -1,9 +1,5 @@
 <div>
-  <h1>Story Test</h1>
-
-  {{ currentStory.title }}
-
-  <div>{{ currentStory.description }} </div>
+  <h1>{{ currentStory.title }}</h1>
 
   </br>
 
@@ -20,7 +16,7 @@
       <span ng-click='setPage(choice.dest)'> {{choice.text}} </span>
     </li>
   </ol>
-  
+
   <h2>All Pages</h2>
   <ol>
     <li ng-repeat='page in currentStory.pages'>{{page.id}} {{page.content }}</li>
