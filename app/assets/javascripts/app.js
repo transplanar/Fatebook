@@ -1,5 +1,3 @@
-
-
 //NOTE include "use strict"?
 
 (function(){
@@ -19,6 +17,6 @@
   };
 
   angular
-    .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies', 'templates'])
+    .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies', 'templates', 'ngResource'])
     .config(config)
 })();

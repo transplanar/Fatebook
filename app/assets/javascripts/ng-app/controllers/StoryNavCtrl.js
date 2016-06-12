@@ -1,5 +1,6 @@
 (function(){
-  function StoryNavCtrl($scope, StoryNavSrv){
+//  function StoryNavCtrl($scope, StoryNavSrv){
+   function StoryNavCtrl($scope, StoryNavSrv, $resource){
     StoryNavSrv.initializeStoryData();
 
     $scope.debugMode = false;
@@ -33,9 +34,16 @@
         }
       }
     });
+
+     var Story = $resource('/stories/:id.json', {},{
+       update: {method: 'PUT'}
+     });
+    
+     $scope.data = Story.query();
   }
 
   angular
     .module('fatebook')
-    .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', StoryNavCtrl]);
+     .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', '$resource', StoryNavCtrl]);
+//    .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', StoryNavCtrl]);
 })();
