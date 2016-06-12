@@ -13,11 +13,14 @@
 
     $stateProvider
       .state('landing',{
-      url:'/',
+      url:'/stories',
       controller: 'StoryNavCtrl',
-      templateUrl: '/templates/story.html'
+      templateUrl: 'templates/story.html'
+      // templateUrl: '/views/stories/index.html.erb'
     });
   };
+
+  console.log('ng-app loaded');
 
   angular
     .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies'])
