@@ -1,3 +1,8 @@
+//= require angular
+//= require angular-resource
+
+//NOTE include "use strict"?
+
 (function(){
   function config($stateProvider, $locationProvider){
     $locationProvider
@@ -13,7 +18,7 @@
       templateUrl: '/templates/story.html'
     });
   };
-  
+
   angular
     .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies'])
     .config(config)
