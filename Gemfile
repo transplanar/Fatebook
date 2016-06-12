@@ -46,6 +46,6 @@ group :development do
 end
 
 gem 'bower-rails'
-gem 'angular-rails-templates'
-gem 'angular-ui-bootstrap-rails'
-gem 'angular-ui-router-rails'
+# gem 'angular-rails-templates'
+# gem 'angular-ui-bootstrap-rails'
+# gem 'angular-ui-router-rails'
