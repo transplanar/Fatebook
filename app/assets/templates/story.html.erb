@@ -1,0 +1,29 @@
+<div>
+  <h1>{{ currentStory.title }}</h1>
+
+  </br>
+
+  <div>
+    <h2>PageID = {{ currentPage.id }}</h2>
+  </div>
+
+  <div>
+    {{ currentPage.content }}
+  </div>
+
+  <ol>
+    <li ng-repeat='choice in currentPage.choices'>
+      <span ng-click='setPage(choice.dest)'> {{choice.text}} </span>
+    </li>
+  </ol>
+
+  <h2>All Pages</h2>
+  <ol>
+    <li ng-repeat='page in currentStory.pages'>{{page.id}} {{page.content }}</li>
+  </ol>
+
+  <h2 ng-show='unfinishedPages.length > 0'>Unfinished Pages</h2>
+  <ol>
+    <li ng-repeat='page in unfinishedPages'>{{page.id}}</li>
+  </ol>
+</div>
