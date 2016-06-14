@@ -1,7 +1,9 @@
 (function(){
-  function StoryNavCtrl($scope, StoryNavSrv){
+//  function StoryNavCtrl($scope, StoryNavSrv){
+   function StoryNavCtrl($scope, StoryNavSrv, $resource){
     StoryNavSrv.initializeStoryData();
 
+    $scope.debugMode = false;
     $scope.currentStory = StoryNavSrv.currentStory;
     $scope.currentPage = StoryNavSrv.currentPage;
     $scope.unfinishedPages = StoryNavSrv.unfinishedPages;
@@ -32,11 +34,17 @@
         }
       }
     });
-  }
 
-  console.log('story nav ctrl loaded');
+     var Story = $resource('/stories/:id.json', {},{
+       update: {method: 'PUT'}
+     });
+    
+     //NOTE Need to parse to float? https://youtu.be/KElJ2nhYoOg?t=14m7s
+     $scope.data = Story.query();
+  }
 
   angular
     .module('fatebook')
-    .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', StoryNavCtrl]);
+     .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', '$resource', StoryNavCtrl]);
+//    .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', StoryNavCtrl]);
 })();

@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  root 'stories#index'
+   root 'stories#index'
   resources :stories
 end
