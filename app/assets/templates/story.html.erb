@@ -18,7 +18,10 @@
   </ol>
 
   <h1>From Json</h1>
-  {{data[0].title }}
+  <ol>
+    <li ng-repeat='story in data'> {{story.title}} </li>
+  </ol>
+
 
   <div ng-show='debugMode'>
     <h2>All Pages</h2>
