@@ -72,14 +72,11 @@
     var getPageFromID = function(id){
       var pages = StoryNavSrv.currentStory.pages;
 
-      //NOTE Better way to search for match? Functional method?
-      for(var i in pages){
-        if(pages[i].id == id){
-          return pages[i];
-        }
-      }
+      var result = $.grep(pages, function(page){
+        return page.id == id;
+      });
 
-      return undefined;
+      return result[0];
     };
 
     StoryNavSrv.editPage = function(id, args){

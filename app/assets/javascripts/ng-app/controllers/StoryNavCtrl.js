@@ -38,7 +38,7 @@
      var Story = $resource('/stories/:id.json', {},{
        update: {method: 'PUT'}
      });
-    
+
      //NOTE Need to parse to float? https://youtu.be/KElJ2nhYoOg?t=14m7s
      $scope.data = Story.query();
   }
