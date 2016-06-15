@@ -7,6 +7,7 @@ class CreatePages < ActiveRecord::Migration
       t.integer :parent_id
       t.text :content
       t.timestamps null: false
+      t.string :choices, array: true, default: []
 
       t.references :story, index: true, foreign_key: true
     end

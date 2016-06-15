@@ -1,22 +1,23 @@
 [
   {
-    "title": "Page1",
-    "summary": "The page that started it all",
-    "content": "Are you content with this content?"
+    "title": "Initial page",
+    "summary": "First page",
+    "content": "You see two doors. Which do you choose?",
+    "choices": [
+      {"text": "Left door"},
+      {"text": "Right door"}
+    ]
   },
   {
+    "parent_id": 1,
     "title": "Page2",
-    "summary": "The page that started it all",
-    "content": "Are you content with this content?"
+    "summary": "Left Door",
+    "content": "Left door opened!"
   },
   {
+    "parent_id": 1,
     "title": "Page3",
-    "summary": "The page that started it all",
-    "content": "Are you content with this content?"
-  },
-  {
-    "title": "Page4",
-    "summary": "The page that started it all",
-    "content": "Are you content with this content?"
+    "summary": "Right Door",
+    "content": "Right door opened!"
   }
 ]

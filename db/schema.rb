@@ -21,8 +21,9 @@ ActiveRecord::Schema.define(version: 20160614212432) do
     t.text     "summary"
     t.text     "content"
     t.integer  "parent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "choices",    default: [],              array: true
     t.integer  "story_id"
   end
 
