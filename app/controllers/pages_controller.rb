@@ -25,6 +25,7 @@ class PagesController < ApplicationController
     @story = Story.find(params[:story_id])
     @page = @story.pages.build(page_params)
 
+
     # respond_to do |format|
     #   if @page.save
     #     # format.html { redirect_to @page, notice: 'Page was successfully created.' }
@@ -59,6 +60,8 @@ class PagesController < ApplicationController
   private
     def set_page
       @page = Page.find(params[:id])
+      # permit parent_id
+      # params.require(:post).permit(:title,:body)
     end
 
     def page_params
