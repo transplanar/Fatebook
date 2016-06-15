@@ -7,9 +7,6 @@ class CreateStories < ActiveRecord::Migration
       t.string :keywords #NOTE convert this string to array?
       t.string :system
       t.float :rating
-
-      t.references :pages, index: true, foreign_key: true
-
     end
   end
 end

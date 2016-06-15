@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612205648) do
+ActiveRecord::Schema.define(version: 20160614212433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "branches", force: :cascade do |t|
+    t.text     "choice_text"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.text     "title"
+    t.text     "summary"
+    t.text     "content"
+    t.text     "page_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "story_id"
+  end
+
+  add_index "pages", ["story_id"], name: "index_pages_on_story_id", using: :btree
 
   create_table "stories", force: :cascade do |t|
     t.string "title"
@@ -25,4 +43,5 @@ ActiveRecord::Schema.define(version: 20160612205648) do
     t.float  "rating"
   end
 
+  add_foreign_key "pages", "stories"
 end
