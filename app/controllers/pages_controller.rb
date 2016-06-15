@@ -10,7 +10,14 @@ class PagesController < ApplicationController
     end
   end
 
+  # NOTE needed?
   def show
+    @page = Page.find(params[:page_id])
+
+    respond_to do |format|
+      format.html
+      format.json {render json: @page}
+    end
   end
 
   def new

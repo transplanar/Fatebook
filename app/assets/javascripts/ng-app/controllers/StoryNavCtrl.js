@@ -35,12 +35,17 @@
       }
     });
 
-     var story = $resource('/stories/:id.json', {},{
+     var Story = $resource('/stories/:id.json', {},{
        update: {method: 'PUT'}
      });
 
-     //NOTE Need to parse to float? https://youtu.be/KElJ2nhYoOg?t=14m7s
-     $scope.data = Story.query();
+     $scope.story_data = Story.query();
+
+    var Page = $resource('/pages/:id.json', {},{
+      update: {method: 'PUT'}
+    });
+
+    $scope.page_data = Page.query();
   }
 
   angular
