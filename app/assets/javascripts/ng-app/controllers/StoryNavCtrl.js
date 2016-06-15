@@ -35,7 +35,7 @@
       }
     });
 
-     var Story = $resource('/stories/:id.json', {},{
+     var story = $resource('/stories/:id.json', {},{
        update: {method: 'PUT'}
      });
 
