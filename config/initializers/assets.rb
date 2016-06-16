@@ -8,4 +8,12 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w( app.js stories.css normalize.css ng-app/services/StoryNavSrv.js ng-app/controllers/StoryNavCtrl.js)
+Rails.application.config.assets.precompile +=
+        %w( app.js
+        stories.css
+        normalize.css
+        ng-app/services/StoryNavSrv.js
+        ng-app/services/StorySrv.js
+        ng-app/services/PageSrv.js
+        ng-app/services/PagesSrv.js
+        ng-app/controllers/StoryNavCtrl.js)

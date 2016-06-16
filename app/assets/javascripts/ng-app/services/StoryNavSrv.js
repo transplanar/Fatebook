@@ -1,35 +1,34 @@
 (function(){
   function StoryNavSrv() {
     var StoryNavSrv = {};
+    
+    var Page = function(args){
+      this.parentPage = args.parentPage;
+      this.id = args.id;
+      this.content = args.content;
 
+      this.init = function(args){
+        this.title = args.title;
+        this.summary = args.summary;
+        this.content = args.content;
+        this.choices = args.choices; //Displayed to user
 
-    // var Page = function(args){
-    //   this.parentPage = args.parentPage;
-    //   this.id = args.id;
-    //   this.content = args.content;
-    //
-    //   this.init = function(args){
-    //     this.title = args.title;
-    //     this.summary = args.summary;
-    //     this.content = args.content;
-    //     this.choices = args.choices; //Displayed to user
-    //
-    //     return this;
-    //   }
-    //
-    //   this.createChildPages = function(){
-    //     if(this.choices){
-    //       for(var i = 0; i < this.choices.length; i++){
-    //         var newPageID = getBranchID(this, i);
-    //         createPlaceholderPage(this, newPageID);
-    //
-    //         this.choices[i].dest = newPageID;
-    //       }
-    //     }
-    //   }
-    //
-    //   this.init(args);
-    // };
+        return this;
+      }
+
+      this.createChildPages = function(){
+        if(this.choices){
+          for(var i = 0; i < this.choices.length; i++){
+            var newPageID = getBranchID(this, i);
+            createPlaceholderPage(this, newPageID);
+
+            this.choices[i].dest = newPageID;
+          }
+        }
+      }
+
+      this.init(args);
+    };
 
     var createPlaceholderPage = function(parent, id){
       var newPage = new Page({
@@ -104,77 +103,77 @@
       }
     };
 
-//    TEST FUNCTIONS/DATA ****************************************
-    // var seedTestDataBase = function(){
-    //   var testStory = {
-    //     title: 'TestStory Title',
-    //     description: 'Test of story nav system.',
-    //     summary: 'First story to test story nav system',
-    //     keywords: ['test'],
-    //     system: 'default',
-    //     rating: 'unrated', //TODO set this as default in Rails
-    //     pages: []
-    //   };
-    //
-    //   StoryNavSrv.currentStory = testStory;
-    //   createPlaceholderPage(null, 1);
-    //   StoryNavSrv.currentPage = StoryNavSrv.currentStory.pages[0];
-    //
-    //   StoryNavSrv
-    //     .editPage('1',
-    //        {
-    //           title: 'Initial page',
-    //           summary: 'First page',
-    //           content: 'You see two doors. Which do you choose?',
-    //           choices: [
-    //             {text: 'Left door'},
-    //             {text: 'Right door'}
-    //           ],
-    //         });
-    //   StoryNavSrv
-    //     .editPage('1A',
-    //        {
-    //         title: 'Left door',
-    //         summary: 'First page',
-    //         content: 'You entered the LEFT door.',
-    //       });
-    //   StoryNavSrv
-    //     .editPage('1B',
-    //        {
-    //         title: 'Left door',
-    //         summary: 'First page',
-    //         content: 'You entered the RIGHT door.',
-    //         choices: [
-    //           {text: 'Or did I?'},
-    //           {text: 'No I didn\'t'},
-    //         ],
-    //       });
-    //   StoryNavSrv
-    //     .editPage('1B1',
-    //        {
-    //         title: 'Left door',
-    //         summary: 'First page',
-    //         content: 'You totally did, liar!',
-    //       });
-    //   StoryNavSrv
-    //     .editPage('1B2',
-    //        {
-    //         title: 'Left door',
-    //         summary: 'First page',
-    //         content: 'Stop contradicting!',
-    //         choices: [
-    //           {text: 'Herp'},
-    //           {text: 'Derp'},
-    //         ],
-    //       });
-    // };
+  //  TEST FUNCTIONS/DATA ****************************************
+    var seedTestDataBase = function(){
+      var testStory = {
+        title: 'TestStory Title',
+        description: 'Test of story nav system.',
+        summary: 'First story to test story nav system',
+        keywords: ['test'],
+        system: 'default',
+        rating: 'unrated', //TODO set this as default in Rails
+        pages: []
+      };
 
-    //Initializer ***************************8
-    // StoryNavSrv.initializeStoryData = function(){
-    //   //NOTE: For FE testing only
-    //   seedTestDataBase();;
-    //   StoryNavSrv.getUnfinishedPages();
-    // };
+      StoryNavSrv.currentStory = testStory;
+      createPlaceholderPage(null, 1);
+      StoryNavSrv.currentPage = StoryNavSrv.currentStory.pages[0];
+
+      StoryNavSrv
+        .editPage('1',
+           {
+              title: 'Initial page',
+              summary: 'First page',
+              content: 'You see two doors. Which do you choose?',
+              choices: [
+                {text: 'Left door'},
+                {text: 'Right door'}
+              ],
+            });
+      StoryNavSrv
+        .editPage('1A',
+           {
+            title: 'Left door',
+            summary: 'First page',
+            content: 'You entered the LEFT door.',
+          });
+      StoryNavSrv
+        .editPage('1B',
+           {
+            title: 'Left door',
+            summary: 'First page',
+            content: 'You entered the RIGHT door.',
+            choices: [
+              {text: 'Or did I?'},
+              {text: 'No I didn\'t'},
+            ],
+          });
+      StoryNavSrv
+        .editPage('1B1',
+           {
+            title: 'Left door',
+            summary: 'First page',
+            content: 'You totally did, liar!',
+          });
+      StoryNavSrv
+        .editPage('1B2',
+           {
+            title: 'Left door',
+            summary: 'First page',
+            content: 'Stop contradicting!',
+            choices: [
+              {text: 'Herp'},
+              {text: 'Derp'},
+            ],
+          });
+    };
+
+    // Initializer ***************************
+    StoryNavSrv.initializeStoryData = function(){
+      //NOTE: For FE testing only
+      seedTestDataBase();;
+      StoryNavSrv.getUnfinishedPages();
+    };
 
     return StoryNavSrv;
   }

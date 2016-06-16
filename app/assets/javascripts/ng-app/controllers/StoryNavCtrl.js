@@ -1,6 +1,7 @@
 (function(){
 //  function StoryNavCtrl($scope, StoryNavSrv){
-   function StoryNavCtrl($scope, StoryNavSrv, $resource){
+  //  function StoryNavCtrl($scope, StoryNavSrv, $resource){
+   function StoryNavCtrl($scope, StoryNavSrv, StorySrv, PageSrv, PagesSrv, $resource){
     StoryNavSrv.initializeStoryData();
 
     $scope.debugMode = false;
@@ -35,21 +36,17 @@
       }
     });
 
-     var Story = $resource('/stories/:id.json', {},{
-       update: {method: 'PUT'}
-     });
+    // $scope.story_data = StorySrv.query();
 
-     $scope.story_data = Story.query();
+    $scope.page_data = PagesSrv.query();
 
-    var Page = $resource('/pages/:id.json', {},{
-      update: {method: 'PUT'}
-    });
-
-    $scope.page_data = Page.query();
+    // console.log(PageSrv.get({page_id: 1}));
+    $scope.super_page = PageSrv.show({id: 3});
   }
 
   angular
     .module('fatebook')
-     .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', '$resource', StoryNavCtrl]);
+    //  .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', '$resource', StoryNavCtrl]);
+     .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', 'StorySrv', 'PageSrv', 'PagesSrv', '$resource', StoryNavCtrl]);
 //    .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', StoryNavCtrl]);
 })();
