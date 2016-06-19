@@ -3,10 +3,6 @@
 
   </br>
 
-  <!-- <div>
-    <h2>PageID = {{ currentPage.id }}</h2>
-  </div> -->
-
   <div>
     {{ currentPage.content }}
   </div>
@@ -16,29 +12,3 @@
       <span ng-click='setPage(choice.dest)'> {{choice.text}} </span>
     </li>
   </ol>
-
-  <!--
-  <h3>Stories</h3>
-  <ol>
-    <li ng-repeat='story in story_data'> {{story.title}} </li>
-  </ol>
-
-  <h3>Pages</h3>
-  <ol>
-    <li ng-repeat='page in page_data'> {{page.title}} </li>
-  </ol> -->
-
-<!-- <div class='btn btn-success' ng-click='createNestedPage()'>Click to Test </div>
-
-  <div ng-show='debugMode'>
-    <h2>All Pages</h2>
-    <ol>
-      <li ng-repeat='page in currentStory.pages'>{{page.id}} {{page.content }}</li>
-    </ol>
-
-    <h2 ng-show='unfinishedPages.length > 0'>Unfinished Pages</h2>
-    <ol>
-      <li ng-repeat='page in unfinishedPages'>{{page.id}}</li>
-    </ol>
-  </div>
-</div> -->

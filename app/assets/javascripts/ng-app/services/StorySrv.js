@@ -9,11 +9,12 @@
 
     });
 
-    function transformGet(data, headers){
-      var fromJson = angular.fromJson(data);
-      fromJson.json = data;
-      return fromJson;
-    }
+    // REVIEW Needed?
+    // function transformGet(data, headers){
+    //   var fromJson = angular.fromJson(data);
+    //   fromJson.json = data;
+    //   return fromJson;
+    // }
   }
 
   angular

@@ -3,12 +3,6 @@ class StoriesController < ApplicationController
 
   def index
     render json: Story.all
-    # @stories = Story.all
-
-    # respond_to do |format|
-      # format.html
-      # format.json {render json: Story.all}
-    # end
   end
 
   def show
@@ -62,7 +56,6 @@ class StoriesController < ApplicationController
     end
 
     def story_params
-      # params.fetch(:story, {})
       params.require(:story).permit(:title, :description)
     end
 end
