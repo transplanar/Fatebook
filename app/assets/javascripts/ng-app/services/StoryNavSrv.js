@@ -1,7 +1,7 @@
 (function(){
   function StoryNavSrv() {
     var StoryNavSrv = {};
-    
+
     var Page = function(args){
       this.parentPage = args.parentPage;
       this.id = args.id;
@@ -171,7 +171,7 @@
     // Initializer ***************************
     StoryNavSrv.initializeStoryData = function(){
       //NOTE: For FE testing only
-      seedTestDataBase();;
+      seedTestDataBase();
       StoryNavSrv.getUnfinishedPages();
     };
 

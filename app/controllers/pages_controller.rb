@@ -31,14 +31,15 @@ class PagesController < ApplicationController
   def create
     puts '******************************Pages#Create'
     @story = Story.find(params[:story_id])
+    # @story = params[:parent_story]
     @page = @story.pages.build(page_params)
 
     # page = Page.new(page_params)
 
     # if page.valid?
-    if page.save!
+    if @page.save!
       #  page.save!
-       render json: page, status: 201
+       render json: @page, status: 201
        puts 'New page created************************'
     else
        render json: { error: "Error saving page", status: 400 }, status: 400

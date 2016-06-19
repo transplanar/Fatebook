@@ -1,6 +1,6 @@
 <% stylesheet_link_tag 'stories', property: 'stylesheet' %>
 <% javascript_include_tag 'stories' %>
 
- <div class='container'>
+ <div class='container' ng-init= "currentStory = '<%= @currentStory %>'"  ng-model='currentStory'>
   <ui-view></ui-view>
 </div>
