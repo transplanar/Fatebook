@@ -1,13 +1,12 @@
 (function(){
   function StorySrv($resource) {
-    return $resource('/stories/:id.json')
-    // return $resource('/stories/:id.json',{},{
-    //   query: {method: 'GET', isArray: true}
-    //   create: {method: 'POST'}
-    //   show: {method: 'GET'}
-    //   update: {method: 'PUT', params: {id: '@id'}}
-    //   delete: {method: 'DELETE', params: {id: '@id'}}
-    // });
+    return $resource('/stories/:id.json', {},
+    {
+      // show: {method: 'GET'},
+      show: {method: 'GET', params: {id: '@id'}},
+      update: {method: 'PUT', params: {id: '@id'}},
+      delete: {method: 'DELETE', params: {id: '@id'}}
+    });
   }
 
   angular

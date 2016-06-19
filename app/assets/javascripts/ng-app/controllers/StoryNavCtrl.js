@@ -1,7 +1,7 @@
 (function(){
 //  function StoryNavCtrl($scope, StoryNavSrv){
   //  function StoryNavCtrl($scope, StoryNavSrv, $resource){
-   function StoryNavCtrl($scope, StoryNavSrv, StorySrv, PageSrv, PagesSrv, $resource){
+   function StoryNavCtrl($scope, StoryNavSrv, StorySrv, StoriesSrv, PageSrv, PagesSrv, $resource){
     StoryNavSrv.initializeStoryData();
 
     $scope.debugMode = false;
@@ -36,17 +36,42 @@
       }
     });
 
-    // $scope.story_data = StorySrv.query();
+    $scope.createNestedPage = function(){
+      console.log('button');
+    }
 
-    $scope.page_data = PagesSrv.query();
+    // $scope.story_data = StorySrv.query();
+    // $scope.story_data = StoriesSrv.query();
+    // console.log($scope.story_data)
+
+    // $scope.page_data = PagesSrv.query();
+
+    // var story = StorySrv.show({id: 1}).$promise.then(function(data){
+    //   console.log(data);
+    // });
+
+    // var story = StorySrv.get({id: 1});
+    // console.log(story);
+    // $scope.super_story = StorySrv.show({id: 1});
+
+    // var story = StorySrv.get({id: 1}).$promise.then(function(data){
+    //   console.log(data);
+    // });
 
     // console.log(PageSrv.get({page_id: 1}));
-    $scope.super_page = PageSrv.show({id: 3});
+    // $scope.super_page = PageSrv.show({id: 3});
+
+    // $scope.super_page.pages.create({title:'Nested Story', content: 'blah'});
+    // PagesSrv.create({story_id: $scope.super_page.id, title:'Nested Story', content: 'blah'});
+
+    // PagesSrv.create({story_id: $scope.super_story.id, title: 'Test', content: 'test'})
+
+    // PagesSrv.create({title: 'Test', content: 'test'})
   }
 
   angular
     .module('fatebook')
     //  .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', '$resource', StoryNavCtrl]);
-     .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', 'StorySrv', 'PageSrv', 'PagesSrv', '$resource', StoryNavCtrl]);
+     .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', 'StorySrv', 'StoriesSrv', 'PageSrv', 'PagesSrv', '$resource', StoryNavCtrl]);
 //    .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', StoryNavCtrl]);
 })();

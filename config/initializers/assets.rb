@@ -14,6 +14,7 @@ Rails.application.config.assets.precompile +=
         normalize.css
         ng-app/services/StoryNavSrv.js
         ng-app/services/StorySrv.js
+        ng-app/services/StoriesSrv.js
         ng-app/services/PageSrv.js
         ng-app/services/PagesSrv.js
         ng-app/controllers/StoryNavCtrl.js)

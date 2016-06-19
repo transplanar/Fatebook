@@ -2,15 +2,17 @@ class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
 
   def index
-    @stories = Story.all
+    render json: Story.all
+    # @stories = Story.all
 
-    respond_to do |format|
-      format.html
-      format.json {render json: Story.all}
-    end
+    # respond_to do |format|
+      # format.html
+      # format.json {render json: Story.all}
+    # end
   end
 
   def show
+    render json: @story
   end
 
   def new
@@ -60,6 +62,7 @@ class StoriesController < ApplicationController
     end
 
     def story_params
-      params.fetch(:story, {})
+      # params.fetch(:story, {})
+      params.require(:story).permit(:title, :description)
     end
 end
