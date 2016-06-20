@@ -1,14 +1,25 @@
+<!-- <div ng-init= "currentStory = '<%= @currentStory %>'"  ng-model='currentStory'> -->
 <div >
   <h1>{{ currentStory.title }}</h1>
 
   </br>
 
-  <div>
+  <!-- <div ng-init= "currentStory = '<%= @first_page %>'"  ng-model='currentPage'> -->
+  <div >
     {{ currentPage.content }}
   </div>
 
   <ol>
     <li ng-repeat='choice in currentPage.choices'>
-      <span ng-click='setPage(choice.dest)'> {{choice.text}} </span>
+    <!-- <li ng-repeat='(key, value) in currentPage.choices'> -->
+      <!-- <span ng-click='setPage(choice.dest)'> {{choice}} </span> -->
+      <!-- <span> {{value}} </span> -->
+      <!-- <span> {{value.text}} </span> -->
+      <span> {{choice }}</span>
+      <!-- <span> {{choice.value }}</span> -->
+
+      <!-- <span ng-repeat='(key, val) in choice.value'>{{ key }} </span> -->
+      <!-- <span ng-bind='choice'></span>{{choice.text}} -->
     </li>
   </ol>
+</div>

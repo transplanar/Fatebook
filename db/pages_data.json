@@ -4,8 +4,8 @@
     "summary": "First page",
     "content": "You see two doors. Which do you choose?",
     "choices": [
-      {"text": "Left door"},
-      {"text": "Right door"}
+      {"id":1, "text": "Left door"},
+      {"id":2, "text": "Right door"}
     ]
   },
   {

@@ -6,6 +6,7 @@ class StoriesController < ApplicationController
   end
 
   def show
+    @first_page = @story.pages[0]
     render json: @story
   end
 
