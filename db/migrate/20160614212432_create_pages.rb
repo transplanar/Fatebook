@@ -4,7 +4,7 @@ class CreatePages < ActiveRecord::Migration
       t.text :title
       t.text :summary
       t.text :content
-      t.integer :parent_id
+      # t.integer :parent_id
       t.text :content
       t.timestamps null: false
       t.string :choices, array: true, default: []

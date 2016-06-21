@@ -1,72 +1,47 @@
 (function(){
-   function StoryNavCtrl($scope, StoryNavSrv, StorySrv, StoriesSrv, PageSrv, PagesSrv, $resource){
-    // StoryNavSrv.initializeStoryData();
-
+  function StoryNavCtrl($scope, StoryNavSrv, StorySrv, StoriesSrv, PageSrv, PagesSrv, $resource){
     $scope.debugMode = true;
 
-    // $scope.currentPage = StoryNavSrv.currentPage;
-    // $scope.unfinishedPages = StoryNavSrv.unfinishedPages;
-
-    //NOTE Check that this works
-    // $scope.$watch('StoryNavSrv.currentPage',function(newVal,oldVal){
-    //   $scope.currentPage = StoryNavSrv.currentPage;
-    // })
-
-    $scope.setPage = function(dest){
-      var pages = StoryNavSrv.currentStory.pages;
-
-      for(var i in pages){
-        if (pages[i].id === dest){
-          //NOTE Better way to sync controller and service?
-          StoryNavSrv.currentPage = pages[i];
-          $scope.currentPage = pages[i];
-        }
-      }
+    $scope.setPage = function(id){
+      PageSrv.show({parent_id: $scope.currentPage.id, id: id}).$promise.then(function(data){
+        $scope.currentPage = data;
+        StoryNavSrv.currentPage = data;
+      });
 
       return null;
     }
+    
+    // TODO refactor to use setPage *********************
+    $scope.setPage()
 
-    angular.element(document).bind('keyup', function (e) {
-      if(StoryNavSrv.currentPage && StoryNavSrv.currentPage.choices){
-        var choiceIndex = e.keyCode - 49;
-        var page = StoryNavSrv.currentPage;
-        var choice = page.choices[choiceIndex];
-
-        if(choice){
-          $scope.$apply($scope.setPage(choice.dest));
-        }
-      }
-    });
-
-    $scope.createNestedPage = function(){
-      PagesSrv.create({story_id: StoryNavSrv.currentStory.id, title: 'Nested test', content: 'Baaa'})
-    }
-
-    // $scope.story_data = StorySrv.query();
-
-    //TODO Make ID dynamic here as you navigate to a new page
     StorySrv.show({id: 1}).$promise.then(function(data){
       StoryNavSrv.currentStory = data;
       $scope.currentStory = StoryNavSrv.currentStory;
       $scope.initFirstPage();
     });
 
-
     $scope.initFirstPage = function(){
       PageSrv.show({story_id: StoryNavSrv.currentStory.id, id: 1}).$promise.then(function(data){
         StoryNavSrv.currentPage = data;
         $scope.currentPage = StoryNavSrv.currentPage;
-        // var choices = $.map($scope.currentPage.choices, function(el) {return el});
 
-        // console.log('choices',choices);
-        // console.log($scope.currentPage.choices);
-        // console.log($scope.currentPage.choices[0]);
-        // console.log($scope.currentPage.choices[0]);
-        // console.log(data);
-      })
+        $scope.enableKeyboardListener();
+      });
+    };
+
+    // TODO refactor to work with new relations
+    $scope.enableKeyboardListener = function(){
+      angular.element(document).bind('keyup', function (e) {
+        if(StoryNavSrv.currentPage && StoryNavSrv.currentPage.choices){
+          var choiceIndex = e.keyCode - 49;
+          var page = StoryNavSrv.currentPage;
+
+          if(choice){
+            $scope.$apply($scope.setPage(page.branches[choiceIndex]));
+          }
+        }
+      });
     }
-
-    // StoryNavSrv.initializeStoryData();
   }
 
   angular

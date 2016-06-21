@@ -1,10 +1,42 @@
-data = JSON.parse(File.read('db/stories_data.json'))
-Story.destroy_all
-Story.create!(data)
+story = Story.create!(
+  {
+    title: "Test Story",
+    description:"Initial story to test Rails db",
+    summary: "It's a long story",
+    keywords: "testing arrays coolstuff",
+    system: "default",
+    rating: 10
+  }
+)
 
-story = Story.last
+first_page = story.pages.create!(
+  {
+    title: "Initial page",
+    summary: "First page",
+    content: "You see two doors. Which do you choose?"
+  }
+)
 
-data = JSON.parse(File.read('db/pages_data.json'))
-Page.destroy_all
-# Page.create!(data)
-story.pages.create!(data)
+p2 = first_page.branches.create!(
+  {
+   title: "Page2",
+   summary: "Left Door",
+   content: "Left door opened!"
+  }
+);
+
+first_page.branches.create!(
+  {
+   title: "Page3",
+   summary: "Right Door",
+   content: "Right door opened!"
+  }
+);
+
+p2.branches.create!(
+  {
+   title: "Page4",
+   summary: "blarg",
+   content: "Really? Marvelous!"
+  }
+);
