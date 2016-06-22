@@ -2,11 +2,9 @@
   function StorySrv($resource) {
     return $resource('/stories/:id.json', {},
     {
-      // show: {method: 'GET'},
-      show: {method: 'GET', params: {id: '@id'}},
+      show: {method: 'GET'},
       update: {method: 'PUT', params: {id: '@id'}},
-      delete: {method: 'DELETE', params: {id: '@id'}},
-
+      delete: {method: 'DELETE', params: {id: '@id'}}
     });
 
     // REVIEW Needed?
