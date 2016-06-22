@@ -1,3 +1,3 @@
 class Story < ActiveRecord::Base
-  #  has_many :pages through :choices
+  has_many :pages, dependent: :destroy
 end

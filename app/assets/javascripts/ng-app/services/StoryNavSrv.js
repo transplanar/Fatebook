@@ -2,7 +2,6 @@
   function StoryNavSrv() {
     var StoryNavSrv = {};
 
-
     var Page = function(args){
       this.parentPage = args.parentPage;
       this.id = args.id;
@@ -72,14 +71,11 @@
     var getPageFromID = function(id){
       var pages = StoryNavSrv.currentStory.pages;
 
-      //NOTE Better way to search for match? Functional method?
-      for(var i in pages){
-        if(pages[i].id == id){
-          return pages[i];
-        }
-      }
+      var result = $.grep(pages, function(page){
+        return page.id == id;
+      });
 
-      return undefined;
+      return result[0];
     };
 
     StoryNavSrv.editPage = function(id, args){
@@ -107,77 +103,80 @@
       }
     };
 
-//    TEST FUNCTIONS/DATA ****************************************
-    var seedTestDataBase = function(){
-      var testStory = {
-        title: 'TestStory Title',
-        description: 'Test of story nav system.',
-        summary: 'First story to test story nav system',
-        keywords: ['test'],
-        system: 'default',
-        rating: 'unrated', //TODO set this as default in Rails
-        pages: []
-      };
+  //  TEST FUNCTIONS/DATA ****************************************
+    // var seedTestDataBase = function(){
+      // var testStory = {
+      //   title: 'TestStory Title',
+      //   description: 'Test of story nav system.',
+      //   summary: 'First story to test story nav system',
+      //   keywords: ['test'],
+      //   system: 'default',
+      //   rating: 'unrated', //TODO set this as default in Rails
+      //   pages: []
+      // };
 
-      StoryNavSrv.currentStory = testStory;
-      createPlaceholderPage(null, 1);
-      StoryNavSrv.currentPage = StoryNavSrv.currentStory.pages[0];
+      // StoryNavSrv.currentStory = testStory;
+      // createPlaceholderPage(null, 1);
+      // StoryNavSrv.currentPage = StoryNavSrv.currentStory.pages[0];
 
-      StoryNavSrv
-        .editPage('1',
-           {
-              title: 'Initial page',
-              summary: 'First page',
-              content: 'You see two doors. Which do you choose?',
-              choices: [
-                {text: 'Left door'},
-                {text: 'Right door'}
-              ],
-            });
-      StoryNavSrv
-        .editPage('1A',
-           {
-            title: 'Left door',
-            summary: 'First page',
-            content: 'You entered the LEFT door.',
-          });
-      StoryNavSrv
-        .editPage('1B',
-           {
-            title: 'Left door',
-            summary: 'First page',
-            content: 'You entered the RIGHT door.',
-            choices: [
-              {text: 'Or did I?'},
-              {text: 'No I didn\'t'},
-            ],
-          });
-      StoryNavSrv
-        .editPage('1B1',
-           {
-            title: 'Left door',
-            summary: 'First page',
-            content: 'You totally did, liar!',
-          });
-      StoryNavSrv
-        .editPage('1B2',
-           {
-            title: 'Left door',
-            summary: 'First page',
-            content: 'Stop contradicting!',
-            choices: [
-              {text: 'Herp'},
-              {text: 'Derp'},
-            ],
-          });
-    };
+      // StoryNavSrv
+      //   .editPage('1',
+      //      {
+      //         title: 'Initial page',
+      //         summary: 'First page',
+      //         content: 'You see two doors. Which do you choose?',
+      //         choices: [
+      //           {text: 'Left door'},
+      //           {text: 'Right door'}
+      //         ],
+      //       });
+      // StoryNavSrv
+      //   .editPage('1A',
+      //      {
+      //       title: 'Left door',
+      //       summary: 'First page',
+      //       content: 'You entered the LEFT door.',
+      //     });
+      // StoryNavSrv
+      //   .editPage('1B',
+      //      {
+      //       title: 'Left door',
+      //       summary: 'First page',
+      //       content: 'You entered the RIGHT door.',
+      //       choices: [
+      //         {text: 'Or did I?'},
+      //         {text: 'No I didn\'t'},
+      //       ],
+      //     });
+      // StoryNavSrv
+      //   .editPage('1B1',
+      //      {
+      //       title: 'Left door',
+      //       summary: 'First page',
+      //       content: 'You totally did, liar!',
+      //     });
+      // StoryNavSrv
+      //   .editPage('1B2',
+      //      {
+      //       title: 'Left door',
+      //       summary: 'First page',
+      //       content: 'Stop contradicting!',
+      //       choices: [
+      //         {text: 'Herp'},
+      //         {text: 'Derp'},
+      //       ],
+      //     });
+    // };
 
-    //Initializer ***************************8
-    StoryNavSrv.initializeStoryData = function(){
+    // Initializer ***************************
+    // StoryNavSrv.initializeStoryData = function(){
       //NOTE: For FE testing only
-      seedTestDataBase();;
-      StoryNavSrv.getUnfinishedPages();
-    };
+      // seedTestDataBase();
+      // StoryNavSrv.getUnfinishedPages();
+      // StoryNavSrv.currentPage = StoryNavSrv.currentStory.pages[0];
+      // console.log(StoryNavSrv.currentStory);
+      // console.log(StoryNavSrv.currentStory.pages);
+    // };
 
     return StoryNavSrv;
   }

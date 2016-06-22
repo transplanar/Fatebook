@@ -1,37 +1,16 @@
-<div>
+<div >
   <h1>{{ currentStory.title }}</h1>
 
   </br>
 
-  <div>
-    <h2>PageID = {{ currentPage.id }}</h2>
-  </div>
-
-  <div>
+  <div >
     {{ currentPage.content }}
   </div>
 
-  <ol>
-    <li ng-repeat='choice in currentPage.choices'>
-      <span ng-click='setPage(choice.dest)'> {{choice.text}} </span>
+  <!-- TODO move styling to CSS -->
+  <ul style='list-style-type:none'>
+    <li ng-repeat='choice in currentPage.branches'>
+      <span class='btn btn-info' ng-click='setPage(choice)'>{{$index + 1}}. {{choice.choice_text }}</span>
     </li>
   </ol>
-
-  <h1>From Json</h1>
-  <ol>
-    <li ng-repeat='story in data'> {{story.title}} </li>
-  </ol>
-
-
-  <div ng-show='debugMode'>
-    <h2>All Pages</h2>
-    <ol>
-      <li ng-repeat='page in currentStory.pages'>{{page.id}} {{page.content }}</li>
-    </ol>
-
-    <h2 ng-show='unfinishedPages.length > 0'>Unfinished Pages</h2>
-    <ol>
-      <li ng-repeat='page in unfinishedPages'>{{page.id}}</li>
-    </ol>
-  </div>
 </div>

@@ -1,50 +1,62 @@
 (function(){
-//  function StoryNavCtrl($scope, StoryNavSrv){
-   function StoryNavCtrl($scope, StoryNavSrv, $resource){
-    StoryNavSrv.initializeStoryData();
-
-    $scope.debugMode = false;
-    $scope.currentStory = StoryNavSrv.currentStory;
+  function StoryNavCtrl($scope, StoryNavSrv, StorySrv, StoriesSrv, PageSrv, PagesSrv, $resource){
+    $scope.debugMode = true;
     $scope.currentPage = StoryNavSrv.currentPage;
-    $scope.unfinishedPages = StoryNavSrv.unfinishedPages;
+    $scope.currentStory = StoryNavSrv.currentStory;
 
-    $scope.setPage = function(dest){
-      console.log('setting page', dest);
-      var pages = StoryNavSrv.currentStory.pages;
+    $scope.setPage = function(page){
+      PageSrv.show({story_id: StoryNavSrv.currentStory.id, id: page.id}).$promise.then(function(data){
+        // TODO sync $scope with controller
+        $scope.currentPage = data;
+        StoryNavSrv.currentPage = data;
+      });
 
-      for(var i in pages){
-        if (pages[i].id === dest){
-          //NOTE Better way to sync controller and service?
-          StoryNavSrv.currentPage = pages[i];
-          $scope.currentPage = pages[i];
-        }
-      }
-
-      return null;
+      // TODO simulate mouse click on keyboard input
     }
 
-    angular.element(document).bind('keyup', function (e) {
-      if(StoryNavSrv.currentPage && StoryNavSrv.currentPage.choices){
-        var choiceIndex = e.keyCode - 49;
-        var page = StoryNavSrv.currentPage;
-        var choice = page.choices[choiceIndex];
+    // TODO allow different stories to be set
+    // $scope.setStory = function(story){
+    //   StorySrv.show({id: story.id}).$promise.then(function(data){
+    //     $scope.currentStory = data;
+    //     StoryNavSrv.currentStory = data;
+    //   });
+    // }
 
-        if(choice){
-          $scope.$apply($scope.setPage(choice.dest));
-        }
-      }
+    // $scope.setStory()
+
+    StorySrv.show({id: 1}).$promise.then(function(data){
+      StoryNavSrv.currentStory = data;
+      $scope.currentStory = StoryNavSrv.currentStory;
+      $scope.initFirstPage();
     });
 
-     var Story = $resource('/stories/:id.json', {},{
-       update: {method: 'PUT'}
-     });
-    
-     //NOTE Need to parse to float? https://youtu.be/KElJ2nhYoOg?t=14m7s
-     $scope.data = Story.query();
+    $scope.initFirstPage = function(){
+      $scope.setPage($scope.currentStory.pages[0]);
+    };
+
+    angular.element(document).bind('keyup', function (e) {
+      if(StoryNavSrv.currentPage){
+        if (e.keyCode == 32){
+          var story = StoryNavSrv.currentStory;
+          $scope.$apply($scope.setPage(story.pages[0]));
+        }else{
+          var choiceIndex = numToIndex(e.keyCode);
+          var page = StoryNavSrv.currentPage;
+          var branches = page.branches;
+
+          if(choiceIndex >= 0 && choiceIndex < branches.length ){
+            $scope.$apply($scope.setPage(page.branches[choiceIndex]));
+          }
+        }
+      }
+
+      function numToIndex(num){
+        return num - 49;
+      }
+    });
   }
 
   angular
     .module('fatebook')
-     .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', '$resource', StoryNavCtrl]);
-//    .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', StoryNavCtrl]);
+     .controller('StoryNavCtrl', ['$scope', 'StoryNavSrv', 'StorySrv', 'StoriesSrv', 'PageSrv', 'PagesSrv', '$resource', StoryNavCtrl]);
 })();

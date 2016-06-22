@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
-   root 'stories#index'
+  resources :pages
   resources :stories
+  root 'landing#index'
+  # root
+
+  # NOTE more correct than landing?
+  # root to: 'application#angular'
 end
