@@ -10,7 +10,7 @@ class PagesController < ApplicationController
 
   # NOTE needed?
   def show
-    render json: @page
+    render json: @page, include: 'branches'
   end
 
   def new

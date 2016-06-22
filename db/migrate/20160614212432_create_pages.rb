@@ -4,10 +4,10 @@ class CreatePages < ActiveRecord::Migration
       t.text :title
       t.text :summary
       t.text :content
-      # t.integer :parent_id
+      t.integer :parent_id
+      t.string :choice_text
       t.text :content
       t.timestamps null: false
-      t.string :choices, array: true, default: []
 
       t.references :story, index: true, foreign_key: true
     end

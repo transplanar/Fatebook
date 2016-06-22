@@ -10,16 +10,9 @@
   </div>
 
   <ol>
-    <li ng-repeat='choice in currentPage.choices'>
-    <!-- <li ng-repeat='(key, value) in currentPage.choices'> -->
-      <!-- <span ng-click='setPage(choice.dest)'> {{choice}} </span> -->
-      <!-- <span> {{value}} </span> -->
-      <!-- <span> {{value.text}} </span> -->
-      <span> {{choice }}</span>
-      <!-- <span> {{choice.value }}</span> -->
-
-      <!-- <span ng-repeat='(key, val) in choice.value'>{{ key }} </span> -->
-      <!-- <span ng-bind='choice'></span>{{choice.text}} -->
+    <li ng-repeat='choice in currentPage.branches'>
+      <!-- TODO add ng-click back in -->
+      <span> {{choice.choice_text }}</span>
     </li>
   </ol>
 </div>
