@@ -1,18 +1,16 @@
-<!-- <div ng-init= "currentStory = '<%= @currentStory %>'"  ng-model='currentStory'> -->
 <div >
   <h1>{{ currentStory.title }}</h1>
 
   </br>
 
-  <!-- <div ng-init= "currentStory = '<%= @first_page %>'"  ng-model='currentPage'> -->
   <div >
     {{ currentPage.content }}
   </div>
 
-  <ol>
+  <!-- TODO move styling to CSS -->
+  <ul style='list-style-type:none'>
     <li ng-repeat='choice in currentPage.branches'>
-      <!-- TODO add ng-click back in -->
-      <span> {{choice.choice_text }}</span>
+      <span class='btn btn-info' ng-click='setPage(choice)'>{{$index + 1}}. {{choice.choice_text }}</span>
     </li>
   </ol>
 </div>

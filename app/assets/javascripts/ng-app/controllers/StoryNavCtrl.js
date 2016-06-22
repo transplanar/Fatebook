@@ -1,14 +1,20 @@
 (function(){
   function StoryNavCtrl($scope, StoryNavSrv, StorySrv, StoriesSrv, PageSrv, PagesSrv, $resource){
     $scope.debugMode = true;
+    $scope.currentPage = StoryNavSrv.currentPage;
+    $scope.currentStory = StoryNavSrv.currentStory;
 
     $scope.setPage = function(page){
       PageSrv.show({story_id: StoryNavSrv.currentStory.id, id: page.id}).$promise.then(function(data){
+        // TODO sync $scope with controller
         $scope.currentPage = data;
         StoryNavSrv.currentPage = data;
       });
+
+      // TODO simulate mouse click on keyboard input
     }
 
+    // TODO allow different stories to be set
     // $scope.setStory = function(story){
     //   StorySrv.show({id: story.id}).$promise.then(function(data){
     //     $scope.currentStory = data;
