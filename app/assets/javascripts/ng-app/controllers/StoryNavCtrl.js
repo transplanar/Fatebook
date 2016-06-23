@@ -7,16 +7,14 @@
     //TODO move these to service
 
     // TODO allow different stories to be set
-    // $scope.setStory = function(story){
     $scope.setStory = function(id){
-      // StorySrv.show({id: story.id}).$promise.then(function(data){
       StorySrv.show({id: id}).$promise.then(function(data){
         $scope.currentStory = data;
         StoryNavSrv.currentStory = data;
         $scope.initFirstPage();
       });
     }
-    
+
     $scope.setStory($stateParams.story_id);
 
     // TODO sync $scope with Service

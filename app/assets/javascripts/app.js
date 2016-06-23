@@ -17,15 +17,20 @@
       })
       .state('play',{
         url:'/play/:story_id',
-        // url:'/play',
         controller: 'StoryNavCtrl',
         templateUrl: 'play.html'
       })
-      .state('create',{
+      .state('create_story',{
         url:'/create',
         controller: 'StoryCreateCtrl',
-        templateUrl: 'create.html'
-      });
+        templateUrl: 'story_form.html'
+      })
+      .state('edit_page',{
+        url:'/story/:story_id/editPage/:page_id',
+        // url:'/story/editPage/:page_id',
+        controller: 'PageEditCtrl',
+        templateUrl: 'page_form.html'
+      });;
   };
 
   angular

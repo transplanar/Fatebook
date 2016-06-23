@@ -17,20 +17,26 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.new(story_params)
+    # @story = Story.new(story_params)
+    @story = Story.create!(story_params)
+    # @story.save
+    p "**************************#{@story}"
+    @story.pages.create!({title: ''})
+
+    render json: @story
     # TODO below
     # @page = @story.pages...
 
     # respond_to do |format|
-      if @story.save
+      # if @story.save
         # format.html { redirect_to @story, notice: 'Story was successfully created.' }
         # format.json { render :show, status: :created, location: @story }
       # else
         # format.html { render :new }
         # format.json { render json: @story.errors, status: :unprocessable_entity }
-        render json: @story
+        # render json: @story
       # end
-    end
+    # end
   end
 
   def update
