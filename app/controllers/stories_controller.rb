@@ -18,15 +18,18 @@ class StoriesController < ApplicationController
 
   def create
     @story = Story.new(story_params)
+    # TODO below
+    # @page = @story.pages...
 
-    respond_to do |format|
+    # respond_to do |format|
       if @story.save
-        format.html { redirect_to @story, notice: 'Story was successfully created.' }
-        format.json { render :show, status: :created, location: @story }
-      else
-        format.html { render :new }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
+        # format.html { redirect_to @story, notice: 'Story was successfully created.' }
+        # format.json { render :show, status: :created, location: @story }
+      # else
+        # format.html { render :new }
+        # format.json { render json: @story.errors, status: :unprocessable_entity }
+        render json: @story
+      # end
     end
   end
 
@@ -56,6 +59,7 @@ class StoriesController < ApplicationController
     end
 
     def story_params
-      params.require(:story).permit(:title, :description)
+      # REVIEW is :pages correct here?
+      params.require(:story).permit(:title, :description, :summary)
     end
 end
