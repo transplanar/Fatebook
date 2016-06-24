@@ -7,8 +7,8 @@
           description: $scope.description,
           summary: $scope.summary
         }
-      ).$promise.then(function(story){
-        $state.go('edit_page',{story_id: story.id, page_id: story.pages[0].id});
+      ).$promise.then(function(data){
+        $state.go('edit_page',{story_id: data.id, page_id: data.pages[0].id});
       });
     }
   }
