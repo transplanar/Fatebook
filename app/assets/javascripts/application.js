@@ -17,4 +17,5 @@
 //= require angular-ui-router/release/angular-ui-router
 //= require angular-rails-templates
 //= require bootstrap
+//= require underscore
 //= require_tree ../templates

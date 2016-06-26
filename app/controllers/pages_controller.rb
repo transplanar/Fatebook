@@ -4,8 +4,13 @@ class PagesController < ApplicationController
 
   before_action :set_page, only: [:show, :edit, :update, :destroy]
 
+  # REVIEW change to custom route?
   def index
-    render json: Page.all
+    # render json: Page.all
+    @pages = Page.where(parent_id: params[:parent_id]);
+
+    # render json: Page.all
+    render json: @pages
   end
 
   # NOTE needed?
@@ -35,12 +40,19 @@ class PagesController < ApplicationController
   # TODO Update this later
   def update
     @story = Story.find(params[:story_id])
-    @page = @story.pages.build(page_params)
+    # REVIEW better way to do this?
+    # @page = @story.pages.build(page_params)
+    @page = @story.pages.create(page_params)
     @choices = params[:choices]
 
-    @choices.each do |choice|
-      newPage = @story.pages.create!({choice_text: choice})
-      @page.branches.push(newPage)
+    if @choices
+      @choices.each_with_index do |choice,index|
+        if(choice != '')
+          # newPage = @story.pages.create!({title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
+          # @page.branches.push(newPage)
+          @page.branches.create!({title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
+        end
+      end
     end
 
     if @page.update(page_params)

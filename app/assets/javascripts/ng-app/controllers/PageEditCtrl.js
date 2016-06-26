@@ -1,34 +1,77 @@
 (function(){
-  function PageEditCtrl($scope,$log, $stateParams,PageSrv){
-    $scope.pageSaved = false;
-
-    PageSrv.show({id: $stateParams.page_id}).$promise.then(function(data){
-      $scope.page = data;
+  function PageEditCtrl($scope,$log, $stateParams,PageSrv, PagesSrv, StorySrv){
+    StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
+      $scope.story = data;
+      initCurrentPage();
     });
 
+    var initCurrentPage =  function(){
+      PageSrv.show({id: $stateParams.page_id}).$promise.then(function(data){
+        $scope.page = data;
+
+        if($scope.page.parent_page){
+          initParentPage();
+        }
+      });
+    }
+
+    var initParentPage = function(){
+      PageSrv.show({id: $scope.page.parent_page.id}).$promise.then(function(data){
+        $scope.parentPage = data;
+        initSiblingPages();
+      });
+    };
+
+    var initSiblingPages = function(){
+      // PagesSrv.query({story_id: $scope.story.id, parent_id: $scope.page.parent_page.id}).$promise.then(function(data){
+      PagesSrv.query({story_id: $scope.story.id, parent_id: $scope.parentPage.id}).$promise.then(function(data){
+        $scope.siblingPages = data;
+      });
+    };
+
+
+
+    // $log('siblings',$scope.page);
+
+
     // Start with single blank element
-    $scope.choices = [''];
+    $scope.choices = [{text: null, saved: false}];
 
     $scope.submit = function(){
+      if($scope.page.title !==''){
+        var scopeText = [];
 
+        _.each($scope.choices, function(choice){
+          scopeText.push(choice.text);
+        });
 
-      PageSrv.update(
-        {
-          story_id: $scope.page.story.id,
-          id: $scope.page.id,
-          title: $scope.title,
-          summary: $scope.summary,
-          content: $scope.content,
-          // will this work?
-          choices: $scope.choices
-        }
-      )
-      .$promise.then(function(data){
-      //   // $state.go('edit_page',{story_id: data.id, page_id: data.pages[0].id});
-        console.log(data);
-      });
+        PageSrv.update(
+          {
+            story_id: $scope.page.story.id,
+            id: $scope.page.id,
+            title: $scope.page.title,
+            // summary: $scope.summary,
+            summary: $scope.page.summary,
+            // content: $scope.content,
+            content: $scope.page.content,
+            // will this work?
+            choices: scopeText
+          }
+        )
+        .$promise.then(function(data){
+          //   // $state.go('edit_page',{story_id: data.id, page_id: data.pages[0].id});
+          // console.log(data);
+          $scope.page = data;
+          $scope.choices = $scope.page.branches;
+        });
 
-      $scope.pageSaved = true;
+        // REVIEW better way to do this?
+        _.each($scope.choices, function(choice){
+          if(!_.isEmpty(choice.text)){
+            choice.saved = true;
+          }
+        });
+      }
     }
 
     // NOTE how to get watch statements working?
@@ -40,16 +83,12 @@
 
     // Creates choice box
     $scope.addChoice = function(){
-      // console.log('choice added');
-      // console.log($scope.choices.last);
-      var lastStr = $scope.choices[$scope.choices.length-1];
+      var lastStr = _.last($scope.choices);
 
-      if(lastStr !== ''){
-        $scope.choices.push('');
+      // if(lastStr !== '') {
+      if(!_.isEmpty(lastStr)) {
+        $scope.choices.push({text: null, saved: false});
       }
-
-      console.log('choice',$scope.choices);
-      console.log('last',_.last($scope.choices));
     }
 
     $scope.deleteChoice = function(id){
@@ -70,5 +109,5 @@
 
   angular
     .module('fatebook')
-    .controller('PageEditCtrl',['$scope','$log','$stateParams','PageSrv',PageEditCtrl]);
+    .controller('PageEditCtrl',['$scope','$log','$stateParams','PageSrv', 'PagesSrv', 'StorySrv',PageEditCtrl]);
 })();

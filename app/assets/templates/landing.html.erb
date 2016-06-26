@@ -1,5 +1,14 @@
 <h1>Mode Selection (Testing)</h1>
 
-<div class='btn btn-info' ui-sref='play({story_id: 1})'>Story Navigation</div>
+<!-- <div class='btn btn-info' ui-sref='play({story_id: 1})'>Story Navigation</div> -->
+
 <!-- <div class='btn btn-info' ui-sref='play'>Story Navigation</div> -->
-<div class='btn btn-info' ui-sref='create_story' >Create Story</div>
+<div class='btn btn-info' ui-sref='create_story'>Create Story</div>
+
+<h2>Stories</h2>
+<ul>
+  <li ng-repeat='story in stories'>
+    <div class='btn btn-info' ui-sref='play({story_id: $index+1})'>Story {{$index+1}}</div>
+  </li>
+
+</ul>

@@ -1,5 +1,16 @@
-{{$index}}<span>Text: </span> <input type='text' ng-model="choices[$index]">
+<!-- TODO how to maintain sync with choices and branches? -->
+
+
+<span ng-show='page.branches.length < 1'><b>Choice {{$index+1}}:</b> <input type='text' ng-model="choices[$index].text"></span>
+<span ng-show='page.branches.length > 0'><b>Choice {{$index+1}}:</b> <input type='text' ng-model="page.branches[$index].choice_text"></span>
+<!-- <span><b>Choice {{$index+1}}:</b> </span> <input type='text' ng-model="choices[$index].text"> -->
+
+<span class='btn btn-info' ng-click='addChoice()' ng-enabled="choices[$index]!==''">New</span>
   <span class='btn btn-danger' ng-click='deleteChoice($index)'>Delete</span>
   <!-- TODO add highlight for enabled/disabled -->
-  <span class='btn btn-info' ng-click='addChoice()' ng-enabled="choices[$index]!==''">New</span>
+  <span class='btn btn-warning' ng-show="page.branches[$index]" ui-sref='edit_page({story_id: story.id, page_id: page.branches[$index].id } )'>View Page</span>
+  <!-- <span class='btn btn-warning' ng-show="choices[$index].saved">View Page</span> -->
  </span>
+
+ <!-- $state.go('edit_page',{story_id: data.id, page_id: data.pages[0].id}); -->
+ <!-- // ui-sref='play({story_id: 1}) -->

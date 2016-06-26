@@ -20,8 +20,7 @@ class StoriesController < ApplicationController
     # @story = Story.new(story_params)
     @story = Story.create!(story_params)
     # @story.save
-    p "**************************#{@story}"
-    @story.pages.create!({title: ''})
+    @story.pages.create!({title: "Child Page of Story #{@story.title}"})
 
     render json: @story
     # TODO below

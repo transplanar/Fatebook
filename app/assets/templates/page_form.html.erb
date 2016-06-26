@@ -1,41 +1,70 @@
-<h1>Create New Page</h1>
+<h1>Edit Page</h1>
 
-<b>Parent Page</b>
-<b>Sibling Pages (list)</b>
+<!-- PAGE: {{page}} -->
+
+<!-- TODO make a story edit controller to point this to -->
+<span class='btn btn-success'>Parent Story</span>
+{{story.title}}
+
+<div ng-show = "page.choice_text">
+  Choice = {{ page.choice_text }}
+</div>
+
+<div ng-show='parentPage'>
+  <!-- <span class='btn btn-success' ui-sref='edit_page({page_id: parentPage.id})'>Parent Page</span> -->
+  <span class='btn btn-success' ui-sref='edit_page({story_id: story.id, page_id: parentPage.id })'>Parent Page</span>
+</div>
+
+<div ng-show='siblingPages'>
+  <b>Sibling Pages (list)</b>
+  <ul>
+    <li ng-repeat='s in siblingPages'>
+      {{ s.title }}
+    </li>
+  </ul>
+</div>
 
 </b>
-
 
 <!-- TODO rename to generic container -->
 <div class="page_create_container">
   <form ng-submit='submit()'>
-    <span>Title: </span> <input type='text' ng-model='title'> <br />
+    <!-- <span>Title: </span> <input type='text' ng-model='title'> <br /> -->
+    <span>Title: </span> <input type='text' ng-model='page.title'> <br />
     <span>Summary (WIP)</span> <br />
-    <span>Content: </span> <input type='text' ng-model='content'> <br />
+    <!-- <span>Content: </span> <input type='text' ng-model='content'> <br /> -->
+    <span>Content: </span> <input type='text' ng-model='page.content'> <br />
 
-    <span class='btn btn-info' ng-click='addChoice()'>New Choice</span>
+    <!-- <span class='btn btn-info' ng-click='addChoice()'>New Choice</span> -->
 
     <!-- <div ng-include="'choice_input.html'"></div> -->
 
     <!-- <ul class = 'no-bullet'> -->
     <ul style='list-style-type:none'>
       <!-- <li ng-repeat='choice in choices track by $index' ng-include='choice_input.html.erb'> </li> -->
-      <li ng-repeat='choice in choices track by $index'><div ng-include="'choice_input.html'"> </div> </li>
+      <!-- <li ng-repeat='choice in choices track by $index'><div ng-include="'choice_input.html'"> </div> </li> -->
+      <li ng-show = '!page.branches' ng-repeat='choice in choices track by $index' ng-include="'choice_input.html'"> </li>
+      <li ng-show = 'page.branches' ng-repeat='choice in page.branches track by $index' ng-include="'choice_input.html'"> </li>
+      <!-- <li ng-repeat='choice in choices track by $index' ng-include="'choice_input.html'"> </li> -->
     </ul>
   </form>
 
 
-  <button class="btn btn-success" type="button" ng-click="submit()">Submit</button>
+  <!-- TODO switch between update or submit based on state of page (COSMETIC) -->
+  <button class="btn btn-success" type="button" ng-click="submit()">Update</button>
 
   <span><b>List Choices</b></span>
   <span>Create Choice</span>
 </div>
 
-<b>Message for if this is a terminal page. (ng-show)</b>
-
 <div class='alert alert-success' ng-show='pageSaved'><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Page Saved! </div>
 
-<div ng-show='pageSaved'>
-  Hello!
-  {{$scope.page}}
+<div ng-show='page.branches'>
+  <h2>Child Pages</h2>
+  <ol>
+    <li ng-repeat='child in page.branches'>
+      {{child.title}} - {{child.content}} - {{child.choice_text }}
+    </li>
+  </ol>
+
 </div>
