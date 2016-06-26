@@ -36,6 +36,12 @@ class PagesController < ApplicationController
   def update
     @story = Story.find(params[:story_id])
     @page = @story.pages.build(page_params)
+    @choices = params[:choices]
+
+    @choices.each do |choice|
+      newPage = @story.pages.create!({choice_text: choice})
+      @page.branches.push(newPage)
+    end
 
     if @page.update(page_params)
       render json: @page

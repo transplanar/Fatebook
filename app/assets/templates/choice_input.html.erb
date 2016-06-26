@@ -1,0 +1,5 @@
+{{$index}}<span>Text: </span> <input type='text' ng-model="choices[$index]">
+  <span class='btn btn-danger' ng-click='deleteChoice($index)'>Delete</span>
+  <!-- TODO add highlight for enabled/disabled -->
+  <span class='btn btn-info' ng-click='addChoice()' ng-enabled="choices[$index]!==''">New</span>
+ </span>

@@ -12,6 +12,7 @@ Rails.application.config.assets.precompile +=
         %w( app.js
         stories.css
         normalize.css
+        authoring_tools.css
         ng-app/services/StoryNavSrv.js
         ng-app/services/StorySrv.js
         ng-app/services/StoriesSrv.js

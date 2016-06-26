@@ -12,11 +12,30 @@
     <span>Title: </span> <input type='text' ng-model='title'> <br />
     <span>Summary (WIP)</span> <br />
     <span>Content: </span> <input type='text' ng-model='content'> <br />
+
+    <span class='btn btn-info' ng-click='addChoice()'>New Choice</span>
+
+    <!-- <div ng-include="'choice_input.html'"></div> -->
+
+    <!-- <ul class = 'no-bullet'> -->
+    <ul style='list-style-type:none'>
+      <!-- <li ng-repeat='choice in choices track by $index' ng-include='choice_input.html.erb'> </li> -->
+      <li ng-repeat='choice in choices track by $index'><div ng-include="'choice_input.html'"> </div> </li>
+    </ul>
   </form>
 
+
   <button class="btn btn-success" type="button" ng-click="submit()">Submit</button>
+
   <span><b>List Choices</b></span>
   <span>Create Choice</span>
 </div>
 
 <b>Message for if this is a terminal page. (ng-show)</b>
+
+<div class='alert alert-success' ng-show='pageSaved'><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Page Saved! </div>
+
+<div ng-show='pageSaved'>
+  Hello!
+  {{$scope.page}}
+</div>
