@@ -34,15 +34,14 @@ class PagesController < ApplicationController
 
   # TODO Update this later
   def update
-    # respond_to do |format|
-    #   if @page.update(page_params)
-    #     format.html { redirect_to @page, notice: 'Page was successfully updated.' }
-    #     format.json { render :show, status: :ok, location: @page }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @page.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    @story = Story.find(params[:story_id])
+    @page = @story.pages.build(page_params)
+
+    if @page.update(page_params)
+      render json: @page
+    else
+      render json: @page.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy

@@ -72,6 +72,7 @@
 
           if(choiceIndex >= 0 && choiceIndex < branches.length ){
             $scope.$apply($scope.setPage(page.branches[choiceIndex]));
+            // jQUery mock mouseover
           }
         }
       }

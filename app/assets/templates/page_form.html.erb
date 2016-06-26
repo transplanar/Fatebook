@@ -1,5 +1,22 @@
-<h1>Edit Page!</h1>
+<h1>Create New Page</h1>
+
+<b>Parent Page</b>
+<b>Sibling Pages (list)</b>
+
+</b>
 
 
-Page:
-{{page}}
+<!-- TODO rename to generic container -->
+<div class="page_create_container">
+  <form ng-submit='submit()'>
+    <span>Title: </span> <input type='text' ng-model='title'> <br />
+    <span>Summary (WIP)</span> <br />
+    <span>Content: </span> <input type='text' ng-model='content'> <br />
+  </form>
+
+  <button class="btn btn-success" type="button" ng-click="submit()">Submit</button>
+  <span><b>List Choices</b></span>
+  <span>Create Choice</span>
+</div>
+
+<b>Message for if this is a terminal page. (ng-show)</b>
