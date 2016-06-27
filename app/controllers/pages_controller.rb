@@ -45,15 +45,33 @@ class PagesController < ApplicationController
     @page = @story.pages.create(page_params)
     @choices = params[:choices]
 
+    # FIXME Should only create child pages the FIRST time a page is updated
+    # OR only make child pages after they have been saved? The moment you access them?
     if @choices
       @choices.each_with_index do |choice,index|
-        if(choice != '')
-          # newPage = @story.pages.create!({title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
-          # @page.branches.push(newPage)
-          @page.branches.create!({title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
+        if(!choice.saved)
+          pageHash = {story_id: @story.id, title: "Child #{index} Page of Page #{@page.title}", choice_text: choice}
+
+          if(params[:parent_id])
+            # pageHash.parent_id = params[:parent_id]
+            pageHash.parent_page = Page.find(params[:parent_id]);
+          end
+
+          # TODO how to make new pages associate with story and their parent page?
+          newPage = @story.pages.create!({title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
+          @page.branches.push(newPage)
+          # @page.branches.create!({title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
+          # REVIEW better way to do this?
+
+          # @page.branches.create!({story_id: @story.id, title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
+          # @page.branches.create!(pageHash)
+          # newPage.story = @story
+
         end
       end
     end
+
+    @page.save
 
     if @page.update(page_params)
       render json: @page

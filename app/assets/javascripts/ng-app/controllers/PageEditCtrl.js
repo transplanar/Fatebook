@@ -8,12 +8,27 @@
     var initCurrentPage =  function(){
       PageSrv.show({id: $stateParams.page_id}).$promise.then(function(data){
         $scope.page = data;
+        initChoices();
 
         if($scope.page.parent_page){
           initParentPage();
         }
+
+        console.log('editting page', data);
       });
     }
+
+    var initChoices = function(){
+      $scope.choices = [];
+
+      if($scope.page.branches.length === 0){
+        $scope.choices = [{text: null, saved: false}];
+      }else{
+        _.each($scope.page.branches, function(branch, index){
+          $scope.choices.push({text: branch.choice_text, saved: true});
+        });
+      }
+    };
 
     var initParentPage = function(){
       PageSrv.show({id: $scope.page.parent_page.id}).$promise.then(function(data){
@@ -29,14 +44,6 @@
       });
     };
 
-
-
-    // $log('siblings',$scope.page);
-
-
-    // Start with single blank element
-    $scope.choices = [{text: null, saved: false}];
-
     $scope.submit = function(){
       if($scope.page.title !==''){
         var scopeText = [];
@@ -45,24 +52,50 @@
           scopeText.push(choice.text);
         });
 
+        var pageHash = {
+          story_id: $scope.page.story.id,
+          id: $scope.page.id,
+          title: $scope.page.title,
+          // summary: $scope.summary,
+          summary: $scope.page.summary,
+          // content: $scope.content,
+          content: $scope.page.content,
+          // will this work?
+          choices: scopeText
+        }
+
+        if($scope.parentPage){
+          // console.log($scope.page,'has parent', $scope.parentPage);
+          pageHash.parent_id = $scope.parentPage.id;
+        }
+
+        console.log('hsh',pageHash);
+
         PageSrv.update(
-          {
-            story_id: $scope.page.story.id,
-            id: $scope.page.id,
-            title: $scope.page.title,
-            // summary: $scope.summary,
-            summary: $scope.page.summary,
-            // content: $scope.content,
-            content: $scope.page.content,
-            // will this work?
-            choices: scopeText
-          }
+          // {
+          //   story_id: $scope.page.story.id,
+          //   id: $scope.page.id,
+          //   title: $scope.page.title,
+          //   // summary: $scope.summary,
+          //   summary: $scope.page.summary,
+          //   // content: $scope.content,
+          //   content: $scope.page.content,
+          //   // will this work?
+          //   choices: scopeText
+          // }
+          pageHash
         )
         .$promise.then(function(data){
           //   // $state.go('edit_page',{story_id: data.id, page_id: data.pages[0].id});
           // console.log(data);
           $scope.page = data;
-          $scope.choices = $scope.page.branches;
+          console.log('result',data);
+          // if($scope.page.branches){
+          //   $scope.choices = $scope.page.branches;
+          // }else{
+          //   $scope.choices = [{text: null, saved: false}];
+          // }
+
         });
 
         // REVIEW better way to do this?
@@ -71,6 +104,8 @@
             choice.saved = true;
           }
         });
+
+        // $scope.choices = [{text: null, saved: false}];
       }
     }
 
@@ -102,6 +137,11 @@
     var after = function(s){
       console.log('after',s);
     }
+
+    // Display choices
+    // $scope.displayChoices()
+
+
 
     // $scope.submitChoice
 
