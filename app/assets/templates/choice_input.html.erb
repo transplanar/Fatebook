@@ -10,7 +10,8 @@
   <span class='btn btn-danger' ng-click='deleteBranch($index)'>Delete</span>
   <!-- TODO add highlight for enabled/disabled -->
   <!-- TODO on view, update choice_text -->
-  <span class='btn btn-warning' ng-show="page.branches[$index]" ui-sref='edit_page({story_id: story.id, page_id: page.branches[$index].id } )'>View Page</span>
+  <!-- <span class='btn btn-warning' ng-show="page.branches[$index]" ui-sref='edit_page({story_id: story.id, page_id: page.branches[$index].destination_page.id } )'>View Page</span> -->
+  <span class='btn btn-warning' ng-show="page.branches[$index]" ui-sref='edit_page({story_id: story.id, parent_id: page.branches[$index].parent_id, page_id: page.branches[$index].destination_id } )'>View Page</span>
   <!-- <span class='btn btn-warning' ng-show="choices[$index].saved">View Page</span> -->
  </span>
 

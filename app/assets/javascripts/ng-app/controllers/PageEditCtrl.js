@@ -1,5 +1,6 @@
 (function(){
   function PageEditCtrl($scope,$log, $stateParams,PageSrv, PagesSrv, StorySrv){
+    // $log.log($stateParams);
     $scope.choiceText = '';
 
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
@@ -10,40 +11,64 @@
     var initCurrentPage =  function(){
       PageSrv.show({id: $stateParams.page_id}).$promise.then(function(data){
         $scope.page = data;
-        initChoices();
+        // initChoices();
 
-        if($scope.page.parent_page){
+        // if($scope.page.parent_branch){
+        if($stateParams.parent_id){
           initParentPage();
+        }else{
+          $log.log('no parent found')
         }
 
-        // $log.log('editting page', data);
+        $log.log('editting page', data);
+        // $log.log('branches', $scope.page.branches);
+        // if(!_.isEmpty($scope.page.branches)){
+        //   $log.log('branches', $scope.page.branches[0].destination_id);
+        // }
       });
     }
 
-    var initChoices = function(){
-      $scope.choices = [];
-
-      if($scope.page.branches.length === 0){
-        $scope.choices = [{text: null, saved: false}];
-      }else{
-        _.each($scope.page.branches, function(branch, index){
-          $scope.choices.push({text: branch.choice_text, saved: true});
-        });
-      }
-    };
+    // var initChoices = function(){
+    //   $scope.choices = [];
+    //
+    //   if($scope.page.branches.length === 0){
+    //     $scope.choices = [{text: null, saved: false}];
+    //   }else{
+    //     _.each($scope.page.branches, function(branch, index){
+    //       $scope.choices.push({text: branch.choice_text, saved: true});
+    //     });
+    //   }
+    // };
 
     var initParentPage = function(){
-      PageSrv.show({id: $scope.page.parent_page.id}).$promise.then(function(data){
+      // PageSrv.show({id: $scope.page.parent_branch.parent_id}).$promise.then(function(data){
+      // $log.log('parent init');
+      PageSrv.show({id: $stateParams.parent_id}).$promise.then(function(data){
         $scope.parentPage = data;
+        // $log.log('parent init complete')
         initSiblingPages();
       });
     };
 
     var initSiblingPages = function(){
-      // PagesSrv.query({story_id: $scope.story.id, parent_id: $scope.page.parent_page.id}).$promise.then(function(data){
-      PagesSrv.query({story_id: $scope.story.id, parent_id: $scope.parentPage.id}).$promise.then(function(data){
-        $scope.siblingPages = data;
+      // console.log('parent',$scope.parentPage);
+      // console.log('parent branches',$scope.parentPage.branches);
+
+      // REVIEW sibling pages cleared on refresh
+      $scope.siblingPages = [];
+
+      _.each($scope.parentPage.branches, function(branch){
+        PageSrv.show({id: branch.destination_id}).$promise.then(function(data){
+          $scope.siblingPages.push(data);
+        });
+        // $log.log($scope.siblingPages);
       });
+
+
+      // PagesSrv.query({story_id: $scope.story.id, parent_id: $scope.page.parent_page.id}).$promise.then(function(data){
+      // PagesSrv.query({story_id: $scope.story.id, parent_id: $scope.parentPage.id}).$promise.then(function(data){
+      //   $scope.siblingPages = data;
+      // });
     };
 
     $scope.submit = function(){
@@ -122,29 +147,28 @@
 
     // Creates choice box
     $scope.createBranch = function(){
-      // var lastStr = _.last($scope.choices);
-
-      // if(lastStr !== '') {
       if(!_.isEmpty($scope.choiceText)) {
-        // $scope.choices.push({text: null, saved: false});
         var numBranches = 1;
 
         if($scope.page.branches){
           numBranches = $scope.page.branches.length +1;
         }
+
         var stubTitle = 'Child Page ' + numBranches + ' of Page ' + $scope.page.id;
 
-        pageHash = {
+        var pageDataHash = {
           story_id: $scope.story.id,
+          // parent_id: $scope.page.id,
           parent_id: $scope.page.id,
+          title: stubTitle,
           choice_text: $scope.choiceText,
-          title: stubTitle
         }
 
-        PagesSrv.create(pageHash).$promise.then(function(data){
+        PagesSrv.create(pageDataHash).$promise.then(function(data){
           // REVIEW is this the best way?
           PageSrv.show({id: $scope.page.id}).$promise.then(function(data){
             $scope.page = data;
+            $log.log('updated page',$scope.page);
           });
         });
       }

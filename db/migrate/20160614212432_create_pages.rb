@@ -10,6 +10,9 @@ class CreatePages < ActiveRecord::Migration
       t.timestamps null: false
 
       t.references :story, index: true, foreign_key: true
+      # Branch or parent branch?
+      # t.references :branch, index: true, foreign_key: true
+      # t.references :parent_page, index: true, foreign_key: true
     end
   end
 end

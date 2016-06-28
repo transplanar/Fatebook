@@ -7,7 +7,7 @@ class PagesController < ApplicationController
   # REVIEW change to custom route?
   def index
     # render json: Page.all
-    @pages = Page.where(parent_id: params[:parent_id]);
+    @pages = Page.where(parent_id: params[:story_id]);
 
     # render json: Page.all
     render json: @pages
@@ -15,7 +15,8 @@ class PagesController < ApplicationController
 
   # NOTE needed?
   def show
-    render json: @page, include: 'branches'
+    # render json: @page, include: 'branches'
+    render json: @page
   end
 
   def new
@@ -30,15 +31,32 @@ class PagesController < ApplicationController
     @story = Story.find(params[:story_id])
     @page = @story.pages.build(page_params)
 
+    @parent = Page.find(params[:parent_id]);
+    # @page.parent_id = @parent.id
+    # @page.parent_page = @parent
+
     if @page.save!
-      if(params[:parent_id])
+      if(params[:parent_id] && params[:choice_text])
         @parent = Page.find(params[:parent_id]);
-        @parent.branches << @page
+        # @page.parent_id = @parent.id
+
+        # IDEA indirectly associate? Do something like Branch.where(...)?
+        # IDEA does @page already know it's parent branch?
+        @branch = @parent.branches.build(destination_id: @page.id, choice_text: params[:choice_text])
+        # @branch = @parent.branches.build(parent_page: @parent, destination_id: @page.id, choice_text: params[:choice_text])
+        # @page.parent_branch = @branch
+        # @page.save
+
+        if !@branch.save
+          render json: { error: "Error saving page", status: 400 }, status: 400
+        end
+
+        if !@parent.save
+          render json: { error: "Error saving page", status: 400 }, status: 400
+        end
       end
 
-       render json: @page, status: 201
-    else
-       render json: { error: "Error saving page", status: 400 }, status: 400
+      render json: @page, status: 201
     end
   end
 
@@ -111,6 +129,7 @@ class PagesController < ApplicationController
     # TODO update for proper reqs and permits
     def page_params
       # params.require(:page).permit(:title, :content)
-      params.require(:page).permit(:title, :content, :choice_text)
+      params.require(:page).permit(:title, :content, :parent_id)
+      # params.require(:page).permit(:title, :content, :parent_id, :parent_page)
     end
 end

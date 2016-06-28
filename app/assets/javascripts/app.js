@@ -25,11 +25,15 @@
         controller: 'StoryCreateCtrl',
         templateUrl: 'story_form.html'
       })
+      // FIXME fix page id display
       .state('edit_page',{
         url:'/story/:story_id/editPage/:page_id',
         // url:'/story/editPage/:page_id',
         controller: 'PageEditCtrl',
-        templateUrl: 'page_form.html'
+        templateUrl: 'page_form.html',
+        params: {
+          parent_id: null
+        }
       });;
   };
 
