@@ -43,10 +43,13 @@
     <ul style='list-style-type:none'>
       <!-- <li ng-repeat='choice in choices track by $index' ng-include='choice_input.html.erb'> </li> -->
       <!-- <li ng-repeat='choice in choices track by $index'><div ng-include="'choice_input.html'"> </div> </li> -->
-      <li ng-show = 'page.branches.length <= 0' ng-repeat='choice in choices track by $index' ng-include="'choice_input.html'"> </li>
+      <!-- <li ng-show = 'page.branches.length <= 0' ng-repeat='choice in choices track by $index' ng-include="'choice_input.html'"> </li> -->
       <li ng-show = 'page.branches.length > 0' ng-repeat='choice in page.branches track by $index' ng-include="'choice_input.html'"> </li>
       <!-- <li ng-repeat='choice in choices track by $index' ng-include="'choice_input.html'"> </li> -->
     </ul>
+
+    <!-- TODO styling w/o spaces -->
+    <span>New Choice:</span><input type='text' ng-model='choiceText' />  <span class='btn btn-success' ng-click='createBranch()'>Create</span>
   </form>
 
 

@@ -31,6 +31,11 @@ class PagesController < ApplicationController
     @page = @story.pages.build(page_params)
 
     if @page.save!
+      if(params[:parent_id])
+        @parent = Page.find(params[:parent_id]);
+        @parent.branches << @page
+      end
+
        render json: @page, status: 201
     else
        render json: { error: "Error saving page", status: 400 }, status: 400
@@ -40,38 +45,40 @@ class PagesController < ApplicationController
   # TODO Update this later
   def update
     @story = Story.find(params[:story_id])
+    # @page = Page.find(page_params)
+    # @page = @story.pages.build(page_params)
     # REVIEW better way to do this?
     # @page = @story.pages.build(page_params)
-    @page = @story.pages.create(page_params)
-    @choices = params[:choices]
+    # @page = @story.pages.create(page_params)
+    # @choices = params[:choices]
 
     # FIXME Should only create child pages the FIRST time a page is updated
     # OR only make child pages after they have been saved? The moment you access them?
-    if @choices
-      @choices.each_with_index do |choice,index|
-        if(!choice.saved)
-          pageHash = {story_id: @story.id, title: "Child #{index} Page of Page #{@page.title}", choice_text: choice}
+    # if @choices
+    #   @choices.each_with_index do |choice,index|
+    #     if(!choice.saved)
+    #       pageHash = {story_id: @story.id, title: "Child #{index} Page of Page #{@page.title}", choice_text: choice}
+    #
+    #       if(params[:parent_id])
+    #         # pageHash.parent_id = params[:parent_id]
+    #         pageHash.parent_page = Page.find(params[:parent_id]);
+    #       end
+    #
+    #       # TODO how to make new pages associate with story and their parent page?
+    #       newPage = @story.pages.create!({title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
+    #       @page.branches.push(newPage)
+    #       # @page.branches.create!({title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
+    #       # REVIEW better way to do this?
+    #
+    #       # @page.branches.create!({story_id: @story.id, title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
+    #       # @page.branches.create!(pageHash)
+    #       # newPage.story = @story
+    #
+    #     end
+    #   end
+    # end
 
-          if(params[:parent_id])
-            # pageHash.parent_id = params[:parent_id]
-            pageHash.parent_page = Page.find(params[:parent_id]);
-          end
-
-          # TODO how to make new pages associate with story and their parent page?
-          newPage = @story.pages.create!({title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
-          @page.branches.push(newPage)
-          # @page.branches.create!({title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
-          # REVIEW better way to do this?
-
-          # @page.branches.create!({story_id: @story.id, title: "Child #{index} Page of Page #{@page.title}", choice_text: choice})
-          # @page.branches.create!(pageHash)
-          # newPage.story = @story
-
-        end
-      end
-    end
-
-    @page.save
+    # @page.save
 
     if @page.update(page_params)
       render json: @page
@@ -81,10 +88,16 @@ class PagesController < ApplicationController
   end
 
   def destroy
-    # @page.destroy
+    if(params[:parent_id])
+      @parent = Page.find(params[:parent_id]);
+    end
+
+    @page.destroy
+
+    render json: @parent
     # respond_to do |format|
-    #   format.html { redirect_to pages_url, notice: 'Page was successfully destroyed.' }
-    #   format.json { head :no_content }
+      # format.html { redirect_to pages_url, notice: 'Page was successfully destroyed.' }
+      # format.json { head :no_content }
     # end
   end
 
@@ -97,6 +110,7 @@ class PagesController < ApplicationController
 
     # TODO update for proper reqs and permits
     def page_params
-      params.require(:page).permit(:title, :content)
+      # params.require(:page).permit(:title, :content)
+      params.require(:page).permit(:title, :content, :choice_text)
     end
 end
