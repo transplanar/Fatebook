@@ -12,6 +12,7 @@
     <span>{{story.title}}
       <span class='btn btn-info' ui-sref='play({story_id: $index+1})'>Play</span>
       <span class='btn btn-success' ui-sref='edit_story({story_id: $index+1})'>Edit</span>
+      <span class='btn btn-danger' ng-click='deleteStory($index+1)'>Delete</span>
     </span>
   </li>
 

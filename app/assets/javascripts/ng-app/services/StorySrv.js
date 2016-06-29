@@ -4,7 +4,7 @@
     {
       show: {method: 'GET'},
       update: {method: 'PUT', params: {id: '@id'}},
-      delete: {method: 'DELETE', params: {id: '@id'}}
+      delete: {method: 'DELETE', params: {id: '@id'}, isArray: true}
     });
 
     // REVIEW Needed?

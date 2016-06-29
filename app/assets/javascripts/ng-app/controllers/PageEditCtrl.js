@@ -22,6 +22,7 @@
         });
       });
     }
+    
     var initParentPage = function(parent_id){
       PageSrv.show({id: parent_id}).$promise.then(function(data){
         $scope.parentPage = data;
