@@ -1,0 +1,19 @@
+<h1>Mode Selection (Testing)</h1>
+
+<!-- <div class='btn btn-info' ui-sref='play({story_id: 1})'>Story Navigation</div> -->
+
+<!-- <div class='btn btn-info' ui-sref='play'>Story Navigation</div> -->
+<div class='btn btn-info' ui-sref='create_story'>Create Story</div>
+
+<h2>Stories</h2>
+<ul>
+  <li ng-repeat='story in stories'>
+    <!-- <div class='btn btn-info' ui-sref='play({story_id: $index+1})'>{{story.title}}</div> -->
+    <span>{{story.title}}
+      <span class='btn btn-info' ui-sref='play({story_id: $index+1})'>Play</span>
+      <span class='btn btn-success' ui-sref='edit_story({story_id: $index+1})'>Edit</span>
+      <span class='btn btn-danger' ng-click='deleteStory($index+1)'>Delete</span>
+    </span>
+  </li>
+
+</ul>

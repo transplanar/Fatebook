@@ -4,7 +4,8 @@
   <title>Fatebook</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'normalize' %>
-  <%= stylesheet_link_tag    'normalize' %>
+  <%= stylesheet_link_tag    'authoring_tools' %>
+  <%= stylesheet_link_tag    'stories' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'app' %>
   <%= csrf_meta_tags %>
@@ -30,8 +31,14 @@
   <%= javascript_include_tag 'ng-app/services/PageSrv' %>
   <%= javascript_include_tag 'ng-app/services/PagesSrv' %>
 
+  <%= javascript_include_tag 'ng-app/services/BranchSrv' %>
+
   <!--    Controllers-->
   <%= javascript_include_tag 'ng-app/controllers/StoryNavCtrl' %>
+  <%= javascript_include_tag 'ng-app/controllers/LandingCtrl' %>
+  <%= javascript_include_tag 'ng-app/controllers/StoryCreateCtrl' %>
+  <%= javascript_include_tag 'ng-app/controllers/StoryEditCtrl' %>
+  <%= javascript_include_tag 'ng-app/controllers/PageEditCtrl' %>
 
 </body>
 </html>
