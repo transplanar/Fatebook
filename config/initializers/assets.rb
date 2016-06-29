@@ -21,6 +21,7 @@ Rails.application.config.assets.precompile +=
         ng-app/services/BranchSrv.js
         ng-app/controllers/StoryNavCtrl.js
         ng-app/controllers/StoryCreateCtrl.js
+        ng-app/controllers/StoryEditCtrl.js
         ng-app/controllers/PageEditCtrl.js
         ng-app/controllers/LandingCtrl.js
         )

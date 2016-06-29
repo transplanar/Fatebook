@@ -3,11 +3,11 @@
 <!-- PAGE: {{page}} -->
 
 <!-- TODO make a story edit controller to point this to -->
-<span class='btn btn-success'>Parent Story</span>
-{{story.title}}
+<span class='btn btn-success' ui-sref='edit_story({story_id: story.id})'>Parent Story</span>
+<!-- {{story.title}} -->
 
-<div ng-show = "page.choice_text">
-  Choice = {{ page.choice_text }}
+<div ng-show = "fromChoiceText">
+  From Choice = {{ fromChoiceText }}
 </div>
 
 <div ng-show='parentPage'>

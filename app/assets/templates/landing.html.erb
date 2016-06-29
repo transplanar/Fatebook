@@ -8,7 +8,11 @@
 <h2>Stories</h2>
 <ul>
   <li ng-repeat='story in stories'>
-    <div class='btn btn-info' ui-sref='play({story_id: $index+1})'>Story {{$index+1}}</div>
+    <!-- <div class='btn btn-info' ui-sref='play({story_id: $index+1})'>{{story.title}}</div> -->
+    <span>{{story.title}}
+      <span class='btn btn-info' ui-sref='play({story_id: $index+1})'>Play</span>
+      <span class='btn btn-success' ui-sref='edit_story({story_id: $index+1})'>Edit</span>
+    </span>
   </li>
 
 </ul>

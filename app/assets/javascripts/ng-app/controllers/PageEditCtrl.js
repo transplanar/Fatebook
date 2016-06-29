@@ -1,6 +1,5 @@
 (function(){
   function PageEditCtrl($scope,$log, $stateParams,PageSrv, PagesSrv, StorySrv, BranchSrv){
-    // $log.log($stateParams);
     $scope.choiceText = '';
 
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
@@ -16,15 +15,12 @@
         //NOTE note possible with current UI. Future development
         BranchSrv.query({destination_id: $scope.page.id}).$promise.then(function(data){
           if(data[0]){
+            $scope.fromChoiceText = data[0].choice_text;
             initParentPage(data[0].parent_id);
           }
         });
 
-        $log.log('editting page', data);
-        // $log.log('branches', $scope.page.branches);
-        // if(!_.isEmpty($scope.page.branches)){
-        //   $log.log('branches', $scope.page.branches[0].destination_id);
-        // }
+        // $log.log('editting page', data);
       });
     }
 

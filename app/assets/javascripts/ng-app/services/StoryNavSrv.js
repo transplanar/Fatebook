@@ -91,6 +91,7 @@
     }
 
     //NOTE Convention to put this at the top, or make more sense here?
+    // TODO move and refactor for author tools
     StoryNavSrv.unfinishedPages = [];
     StoryNavSrv.getUnfinishedPages = function(){
       //TODO Refactor to use a Boolean that is changed after a user updates the page

@@ -25,9 +25,14 @@
         controller: 'StoryCreateCtrl',
         templateUrl: 'story_form.html'
       })
+      .state('edit_story',{
+        url:'/edit_story/:story_id',
+        controller: 'StoryEditCtrl',
+        templateUrl: 'story_form.html'
+      })
       // FIXME fix page id display
       .state('edit_page',{
-        url:'/story/:story_id/editPage/:page_id',
+        url:'/edit_story/:story_id/editPage/:page_id',
         // url:'/story/editPage/:page_id',
         controller: 'PageEditCtrl',
         templateUrl: 'page_form.html',
