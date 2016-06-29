@@ -7,10 +7,8 @@
     {{ currentPage.content }}
   </div>
 
-  <!-- TODO move styling to CSS -->
+  <!-- REVIEW why doesn't this work as a css class? -->
   <ul style='list-style-type:none'>
-  <!-- <ul class='no-frills-list'> -->
-  <!-- <ul class = 'ul.no-bullet'> -->
     <li ng-repeat='choice in currentPage.branches'>
       <span id="choice-{{$index}}" class='btn btn-info' ng-click='setPage(choice)'>{{$index + 1}}. {{choice.choice_text }}</span>
     </li>
