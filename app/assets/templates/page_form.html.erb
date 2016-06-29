@@ -1,14 +1,13 @@
 <h1>Edit Page</h1>
 
-<span class='btn btn-success' ui-sref='edit_story({story_id: story.id})'>Parent Story</span>
+<span class='btn btn-success' ng-click='navToParentStory()'>Parent Story</span>
 
 <div ng-show = "fromChoiceText">
   From Choice = {{ fromChoiceText }}
 </div>
 
 <div ng-show='parentPage'>
-  <!-- <span class='btn btn-success' ui-sref='edit_page({page_id: parentPage.id})'>Parent Page</span> -->
-  <span class='btn btn-success' ui-sref='edit_page({story_id: story.id, page_id: parentPage.id })'>Parent Page</span>
+  <span class='btn btn-success' ng-click='navToParentPage()'>Parent Page</span>
 </div>
 
 <div ng-show='siblingPages'>

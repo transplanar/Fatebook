@@ -94,7 +94,19 @@
       });
     }
 
-    $scope.editPage = function(index){
+    $scope.navToParentStory = function(){
+      $scope.submit();
+
+      $state.go('edit_story',{story_id: $scope.story.id});
+    }
+
+    $scope.navToParentPage = function(){
+      $scope.submit();
+
+      $state.go('edit_page',{story_id: $scope.story.id, page_id: $scope.parentPage.id});
+    }
+
+    $scope.navToChildPage = function(index){
       $scope.submit();
 
       var pageDataHash = {
