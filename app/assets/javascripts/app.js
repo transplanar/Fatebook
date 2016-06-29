@@ -33,7 +33,6 @@
       // FIXME fix page id display
       .state('edit_page',{
         url:'/edit_story/:story_id/editPage/:page_id',
-        // url:'/story/editPage/:page_id',
         controller: 'PageEditCtrl',
         templateUrl: 'page_form.html',
         params: {
