@@ -5,9 +5,10 @@
       $scope.stories = data;
     });
 
-    $scope.deleteStory = function(story_id){
+    $scope.deleteStory = function(index){
       console.log('deleting story');
-      StorySrv.delete({id: story_id}).$promise.then(function(data){
+      // index instead
+      StorySrv.delete({id: $scope.stories[index].id}).$promise.then(function(data){
         $scope.stories = data;
         console.log('story deleted');
       });
