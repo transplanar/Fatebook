@@ -1,5 +1,5 @@
 (function(){
-  function PageEditCtrl($scope,$log, $stateParams,PageSrv, PagesSrv, StorySrv){
+  function PageEditCtrl($scope,$log, $stateParams,PageSrv, PagesSrv, StorySrv, BranchSrv){
     // $log.log($stateParams);
     $scope.choiceText = '';
 
@@ -11,14 +11,14 @@
     var initCurrentPage =  function(){
       PageSrv.show({id: $stateParams.page_id}).$promise.then(function(data){
         $scope.page = data;
-        // initChoices();
 
-        // if($scope.page.parent_branch){
-        if($stateParams.parent_id){
-          initParentPage();
-        }else{
-          $log.log('no parent found')
-        }
+        // REVIEW in the event where multiple branches point to the same page, how do you make that work?
+        //NOTE note possible with current UI. Future development
+        BranchSrv.query({destination_id: $scope.page.id}).$promise.then(function(data){
+          if(data[0]){
+            initParentPage(data[0].parent_id);
+          }
+        });
 
         $log.log('editting page', data);
         // $log.log('branches', $scope.page.branches);
@@ -40,10 +40,12 @@
     //   }
     // };
 
-    var initParentPage = function(){
+    // var initParentPage = function(){
+    var initParentPage = function(parent_id){
       // PageSrv.show({id: $scope.page.parent_branch.parent_id}).$promise.then(function(data){
       // $log.log('parent init');
-      PageSrv.show({id: $stateParams.parent_id}).$promise.then(function(data){
+      $log.log('init parent');
+      PageSrv.show({id: parent_id}).$promise.then(function(data){
         $scope.parentPage = data;
         // $log.log('parent init complete')
         initSiblingPages();
@@ -51,6 +53,7 @@
     };
 
     var initSiblingPages = function(){
+      $log.log('init siblings');
       // console.log('parent',$scope.parentPage);
       // console.log('parent branches',$scope.parentPage.branches);
 
@@ -203,5 +206,5 @@
 
   angular
     .module('fatebook')
-    .controller('PageEditCtrl',['$scope','$log','$stateParams','PageSrv', 'PagesSrv', 'StorySrv',PageEditCtrl]);
+    .controller('PageEditCtrl',['$scope','$log','$stateParams','PageSrv', 'PagesSrv', 'StorySrv', 'BranchSrv',PageEditCtrl]);
 })();

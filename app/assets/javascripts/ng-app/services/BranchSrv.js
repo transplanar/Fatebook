@@ -1,8 +1,10 @@
 (function(){
   function BranchSrv($resource) {
-    return $resource('/branches/:id.json',{},
+    // return $resource('/branches/:destination_id.json',{},
+    return $resource('/branches',{},
     {
-      show: {method: 'GET'}
+      query: {method: 'GET', isArray: true},
+      // show: {method: 'GET'}
       // update: {method: 'PUT', params: {id: '@id'}},
       // update: {method: 'PUT'},
       // delete: {method: 'DELETE', params: {id: '@id'}}
