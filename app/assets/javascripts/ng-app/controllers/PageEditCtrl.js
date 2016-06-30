@@ -41,6 +41,7 @@
       });
     };
 
+    // FIXME content does not parse newline constants
     $scope.submit = function(){
       if($scope.page.title !==''){
         var pageDataHash = {
