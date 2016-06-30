@@ -1,5 +1,5 @@
 (function(){
-  function PageEditCtrl($scope,$log, $stateParams,PageSrv, PagesSrv, StorySrv, BranchSrv){
+  function PageEditCtrl($scope,$log, $state, $stateParams,PageSrv, PagesSrv, StorySrv, BranchSrv){
     $scope.choiceText = '';
 
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
@@ -22,7 +22,7 @@
         });
       });
     }
-    
+
     var initParentPage = function(parent_id){
       PageSrv.show({id: parent_id}).$promise.then(function(data){
         $scope.parentPage = data;
@@ -93,9 +93,33 @@
           $scope.page = data;
       });
     }
+
+    $scope.navToParentStory = function(){
+      $scope.submit();
+
+      $state.go('edit_story',{story_id: $scope.story.id});
+    }
+
+    $scope.navToParentPage = function(){
+      $scope.submit();
+
+      $state.go('edit_page',{story_id: $scope.story.id, page_id: $scope.parentPage.id});
+    }
+
+    $scope.navToChildPage = function(index){
+      $scope.submit();
+
+      var pageDataHash = {
+        story_id: $scope.story.id,
+        parent_id: $scope.page.branches[index].parent_id,
+        page_id: $scope.page.branches[index].destination_id
+      }
+
+      $state.go('edit_page', pageDataHash);
+    }
   }
 
   angular
     .module('fatebook')
-    .controller('PageEditCtrl',['$scope','$log','$stateParams','PageSrv', 'PagesSrv', 'StorySrv', 'BranchSrv',PageEditCtrl]);
+    .controller('PageEditCtrl',['$scope','$log','$state','$stateParams','PageSrv', 'PagesSrv', 'StorySrv', 'BranchSrv',PageEditCtrl]);
 })();
