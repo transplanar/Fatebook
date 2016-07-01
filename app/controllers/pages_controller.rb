@@ -4,7 +4,9 @@ class PagesController < ApplicationController
   # REVIEW change to custom route?
   def index
     # render json: Page.all
-    @pages = Page.where(parent_id: params[:story_id]);
+    if(params[:story_id])
+      @pages = Page.where(parent_id: params[:story_id]);
+    end
 
     render json: @pages
   end

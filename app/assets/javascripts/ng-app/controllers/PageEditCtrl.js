@@ -11,13 +11,10 @@
       PageSrv.show({id: $stateParams.page_id}).$promise.then(function(data){
         $scope.page = data;
 
-        // REVIEW in the event where multiple branches point to the same page, how do you make that work?
-        //NOTE note possible with current UI. Future development
-        // TODO change to use SHOW instead
-        BranchSrv.query({destination_id: $scope.page.id}).$promise.then(function(data){
-          if(data[0]){
-            $scope.fromChoiceText = data[0].choice_text;
-            initParentPage(data[0].parent_id);
+        BranchSrv.findPageByDestination({id: $scope.page.id}).$promise.then(function(data){
+          if(data){
+            $scope.fromChoiceText = data.choice_text;
+            initParentPage(data.parent_id);
           }
         });
       });

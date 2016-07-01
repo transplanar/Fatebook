@@ -43,7 +43,7 @@ class StoriesController < ApplicationController
       @story = Story.find(params[:id])
     end
 
-    # TODO only require titlte and description
+    # TODO only require title and description
     def story_params
       params.require(:story).permit(:title, :description, :summary)
     end

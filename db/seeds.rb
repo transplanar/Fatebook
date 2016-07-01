@@ -1,5 +1,6 @@
 endings = 19
 # TODO edit and revise pages
+# TODO associate child pages with parent
 def create_branch(child, parent_id)
   parent = Page.find(parent_id)
 
