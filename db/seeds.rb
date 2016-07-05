@@ -1,3 +1,5 @@
+User.create!(email:'admin@example.com',password:'password')
+
 endings = 19
 
 story = Story.create!(

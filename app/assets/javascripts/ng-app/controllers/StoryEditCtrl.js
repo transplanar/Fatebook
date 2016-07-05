@@ -1,5 +1,5 @@
 (function(){
-  function StoryEditCtrl($scope, $stateParams, PagesSrv, StorySrv){
+  function StoryEditCtrl($scope, $stateParams, PagesSrv, StorySrv, SessionsSrv){
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
       $scope.currentStory = data;
       $scope.title = $scope.currentStory.title;
@@ -46,9 +46,25 @@
         });
       }
     }
+
+    // REVIEW TODO move to appropriate spot
+    $scope.login = function(){
+      // console.log('login')
+      SessionsSrv.create({
+        email: 'admin@example.com',
+        password: 'password'
+      }).$promise.then(function(data){
+        // console.log('logged in');
+        console.log(data);
+      })
+    };
+
+    $scope.signUp = function(){
+      console.log('singup')
+    };
   }
 
   angular
     .module('fatebook')
-    .controller('StoryEditCtrl', ['$scope', '$stateParams','PagesSrv', 'StorySrv', StoryEditCtrl]);
+    .controller('StoryEditCtrl', ['$scope', '$stateParams','PagesSrv', 'StorySrv', 'SessionsSrv', StoryEditCtrl]);
 })();

@@ -12,8 +12,17 @@
 </head>
 <body ng-app='fatebook'>
 
-<%= yield %>
+  <!-- <%= yield  %> -->
 
+  <!-- REVIEW why can't I use ng-include? -->
+  <!-- <div ng-include="'login_form.html'"</div> -->
+  <!-- <div ng-controller='LoginCtrl'> -->
+  <!-- <div ng-controller="LoginCtrl">
+    <div class='btn btn-success' ng-click='login()'>Login</div>
+    <div class='btn btn-success' ng-click='signUp()' >Sign up</div>
+  </div> -->
+
+  <ui-view></ui-view>
 
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,600,700,300">
   <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -33,12 +42,18 @@
 
   <%= javascript_include_tag 'ng-app/services/BranchSrv' %>
 
+  <%= javascript_include_tag 'ng-app/services/SessionsSrv' %>
+
   <!--    Controllers-->
   <%= javascript_include_tag 'ng-app/controllers/StoryNavCtrl' %>
   <%= javascript_include_tag 'ng-app/controllers/LandingCtrl' %>
   <%= javascript_include_tag 'ng-app/controllers/StoryCreateCtrl' %>
   <%= javascript_include_tag 'ng-app/controllers/StoryEditCtrl' %>
   <%= javascript_include_tag 'ng-app/controllers/PageEditCtrl' %>
+
+  <!-- TODO delete this? -->
+  <%= javascript_include_tag 'ng-app/controllers/LoginCtrl' %>
+
 
 </body>
 </html>
