@@ -4,7 +4,12 @@ class PagesController < ApplicationController
   # REVIEW change to custom route?
   def index
     # render json: Page.all
-    @pages = Page.where(parent_id: params[:story_id]);
+    p 'index'
+    if(params[:story_id])
+      p 'hit this'
+      # @pages = Page.where(parent_id: params[:story_id]);
+      @pages = Page.where(story_id: params[:story_id]);
+    end
 
     render json: @pages
   end
@@ -71,6 +76,7 @@ class PagesController < ApplicationController
     # TODO update for proper reqs and permits
     # TODO only require content
     def page_params
-      params.require(:page).permit(:title, :content, :summary, :parent_id)
+      # params.require(:page).permit(:title, :content, :summary, :parent_id)
+      params.require(:page).permit(:title, :content, :summary, :parent_id, :complete)
     end
 end

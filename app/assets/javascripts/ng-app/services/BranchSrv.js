@@ -1,13 +1,8 @@
 (function(){
   function BranchSrv($resource) {
-    // return $resource('/branches/:destination_id.json',{},
-    return $resource('/branches',{},
+    return $resource('/branches/find_by_destination/:id',{},
     {
-      query: {method: 'GET', isArray: true},
-      // show: {method: 'GET'}
-      // update: {method: 'PUT', params: {id: '@id'}},
-      // update: {method: 'PUT'},
-      // delete: {method: 'DELETE', params: {id: '@id'}}
+      findPageByDestination: {method: 'GET'}
     });
   }
 

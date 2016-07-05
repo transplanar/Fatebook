@@ -4,11 +4,11 @@
 <h2>Stories</h2>
 <ul>
   <li ng-repeat='story in stories'>
-    <span>{{story.title}} {{story.id}}
+    <h2>{{story.title}}
       <span class='btn btn-info' ui-sref='play({story_id: story.id})'>Play</span>
       <span class='btn btn-success' ui-sref='edit_story({story_id: story.id})'>Edit</span>
       <span class='btn btn-danger' ng-click='deleteStory(story.id)'>Delete</span>
-    </span>
+    </h2>
   </li>
 
 </ul>

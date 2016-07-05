@@ -16,9 +16,17 @@
   <div ng-show='currentStory'>
     <button class="btn btn-success" type="button" ng-click="submit()">Update</button>
     <ul>
-      <li ng-repeat='page in currentStory.pages track by $index'> {{page.title}}
+      <!-- <li ng-repeat='page in currentStory.pages track by $index'> {{page.title}} -->
+      <li ng-repeat='page in completePages track by $index'> {{page.title}}
         <span class='btn btn-warning' ui-sref='edit_page({story_id: currentStory.id, page_id: page.id } )'>Edit</span>
       </li>
     </ul>
   </div>
 </div>
+
+<h1>Incomplete</h1>
+<ul>
+  <li ng-repeat='page in incompletePages track by $index'> {{page.title}}
+    <span class='btn btn-warning' ui-sref='edit_page({story_id: currentStory.id, page_id: page.id } )'>Edit</span>
+  </li>
+</ul>

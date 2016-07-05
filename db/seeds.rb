@@ -1,4 +1,6 @@
-# def create_branch(child, parent)
+endings = 19
+# TODO edit and revise pages
+# TODO associate child pages with parent
 def create_branch(child, parent_id)
   parent = Page.find(parent_id)
 
@@ -504,7 +506,7 @@ create_branch(@B2b, @B2[:id])
       teach people of the merits of throwing their life savings away at a game of chance, and in doing so
       create a breed of gamblers that no Casino could crush.\n
       In the mighty Casino Wars of 2143, the Casino Empire fell to the superior skill of the gamblers,
-      and a thousand years of peace rained upon the land."
+      and a thousand years of peace rained upon the land.\n\nTHE END 18/#{endings}"
     }).id
   }
 create_branch(@B2b1, @B2b[:id])
@@ -548,7 +550,7 @@ create_branch(@B3, @B[:id])
       razor sharp blades of sugar at you. You deftly deflect it with the pie, then hurl the pie like a discus
       into her gaping maw. The demon succumbs to the deliciousness and vanishes in a puff of smoke.\n
       But all of that is besides the point, that was a damn good pie man! Why'd you have to go and
-      throw it away like that! Way to be a dick, asshole!"
+      throw it away like that! Way to be a dick, asshole!\n\nTHE END 19/#{endings}"
     }).id
   }
 create_branch(@B3a, @B3[:id])
@@ -594,5 +596,9 @@ create_branch(@B3b1, @B3b[:id])
   }
 create_branch(@B3b2, @B3b[:id])
 
+story.pages.each do |page|
+  page.update(complete: true)
+end
+
 p 'Story created'
-p "#{story.pages.length} pages created with 19 endings"
+p "#{story.pages.length} pages created with #{endings} endings"
