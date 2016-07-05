@@ -4,6 +4,8 @@ class CreateBranch < ActiveRecord::Migration
       t.integer :parent_id
       t.integer :destination_id
       t.string :choice_text
+
+      t.references :story, index: true, foreign_key: true
     end
   end
 end

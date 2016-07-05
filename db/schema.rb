@@ -20,7 +20,10 @@ ActiveRecord::Schema.define(version: 20160628190150) do
     t.integer "parent_id"
     t.integer "destination_id"
     t.string  "choice_text"
+    t.integer "story_id"
   end
+
+  add_index "branches", ["story_id"], name: "index_branches_on_story_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.text     "title"
@@ -45,5 +48,6 @@ ActiveRecord::Schema.define(version: 20160628190150) do
     t.float  "rating"
   end
 
+  add_foreign_key "branches", "stories"
   add_foreign_key "pages", "stories"
 end
