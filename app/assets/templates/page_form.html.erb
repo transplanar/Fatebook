@@ -25,7 +25,8 @@
 
 <!-- TODO rename to generic container -->
 <div class="page_create_container">
-  <form ng-submit='submit()'>
+  <!-- <form ng-submit='submit()'> -->
+  <form ng-submit='submitDraft()'>
     <span>Title: </span> <input type='text' ng-model='page.title'> <br />
     <!-- <span>Summary (WIP)</span> <br /> -->
     <span>Content: </span> <input type='text' ng-model='page.content'> <br />
@@ -41,7 +42,12 @@
 
 
   <!-- TODO switch between update or submit based on state of page (COSMETIC) -->
-  <button class="btn btn-success" type="button" ng-click="submit()">Update</button>
+  <!-- <button class="btn btn-info" type="button" ng-click="submit()">Submit Draft</button> -->
+  <button class="btn btn-info" type="button" ng-click="submitDraft()">Submit Draft</button>
+  <button class="btn btn-success" type="button" ng-click="submitComplete()">Submit Complete</button>
 </div>
+
+<h3 ng-show='page.complete'>This Page is Marked as Complete</h3>
+<h3 ng-hide='page.complete'>This Page is Incomplete</h3>
 
 <div class='alert alert-success' ng-show='pageSaved'><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Page Saved! </div>

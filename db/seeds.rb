@@ -596,5 +596,9 @@ create_branch(@B3b1, @B3b[:id])
   }
 create_branch(@B3b2, @B3b[:id])
 
+story.pages.each do |page|
+  page.update(complete: true)
+end
+
 p 'Story created'
 p "#{story.pages.length} pages created with #{endings} endings"

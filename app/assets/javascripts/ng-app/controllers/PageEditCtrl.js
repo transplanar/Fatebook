@@ -38,15 +38,27 @@
       });
     };
 
+    $scope.submitDraft = function(){
+      $scope.complete = false;
+      $scope.submit();
+    }
+
+    $scope.submitComplete = function(){
+      $scope.complete = true;
+      $scope.submit();
+    }
+
     // FIXME content does not parse newline constants
     $scope.submit = function(){
+
       if($scope.page.title !==''){
         var pageDataHash = {
           story_id: $scope.page.story.id,
           id: $scope.page.id,
           title: $scope.page.title,
           summary: $scope.page.summary,
-          content: $scope.page.content
+          content: $scope.page.content,
+          complete: $scope.complete
         }
 
         if($scope.parentPage){
