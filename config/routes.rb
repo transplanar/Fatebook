@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :pages
   resources :stories
+  resources :users, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
   # resources :branches, only: [] do
   #   member do
   #     get :find_by_destination
