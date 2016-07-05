@@ -1,15 +1,4 @@
 endings = 19
-# TODO edit and revise pages
-# TODO associate child pages with parent
-def create_branch(child, parent_id)
-  parent = Page.find(parent_id)
-
-  parent.branches.create!({
-    destination_id: child[:id],
-    choice_text: child[:text]
-    })
-end
-
 
 story = Story.create!(
   {
@@ -17,6 +6,21 @@ story = Story.create!(
     description:"A surrealistic journey through a door",
   }
 )
+# TODO edit and revise pages
+# TODO associate child pages with parent
+def create_branch(child, parent_id)
+  parent = Page.find(parent_id)
+
+  branch = parent.branches.create!({
+    destination_id: child[:id],
+    choice_text: child[:text]
+    })
+
+  story = Story.first
+  story.branches << branch
+end
+
+
 
 @start = story.pages.create!(
   {
@@ -131,7 +135,7 @@ create_branch(@A1a3, @A1a[:id])
       humbled to be in the presence of such a mighty warrior.\”"
     }
     ).id
-  }
+}
 create_branch(@A1b, @A1[:id])
 
 # TODO revise

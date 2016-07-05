@@ -23,6 +23,7 @@
     var initParentPage = function(parent_id){
       PageSrv.show({id: parent_id}).$promise.then(function(data){
         $scope.parentPage = data;
+        // REVIEW better way to detect empty response?
         initSiblingPages();
       });
     };
