@@ -1,5 +1,5 @@
 (function(){
-  function LoginCtrl($scope, SessionsSrv, SessionSrv, UsersSrv, UserSessionSrv){
+  function LoginCtrl($scope, $rootScope, SessionsSrv, SessionSrv, UsersSrv, UserSessionSrv){
     // REVIEW TODO move to appropriate spot
     $scope.login = function(){
       SessionsSrv.create({
@@ -10,6 +10,7 @@
         $scope.currentUser = data;
         UserSessionSrv.setCurrentUser(data);
         // UserSessionSrv.currentUser = data;
+        $rootScope.$broadcast('userLogin');
       })
     };
 
@@ -22,6 +23,7 @@
         $scope.currentUser = data;
         UserSessionSrv.setCurrentUser($scope.currentUser);
         // UserSessionSrv.currentUser = data;
+        $rootScope.$broadcast('userLogin');
       });
     };
 
@@ -33,7 +35,9 @@
       });
     };
 
+  };
+
   angular
     .module('fatebook')
-    .controller('LoginCtrl',['$scope', 'SessionsSrv','SessionSrv','UsersSrv','UserSessionSrv',LoginCtrl])
+    .controller('LoginCtrl',['$scope', '$rootScope', 'SessionsSrv','SessionSrv','UsersSrv','UserSessionSrv',LoginCtrl])
 })();

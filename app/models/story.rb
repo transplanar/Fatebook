@@ -12,6 +12,7 @@ class Story < ActiveRecord::Base
 
   # scope :owned_by_user, ->(user){ user.stories.where(id: params[id]).exists? }
   # REVIEW is current_user accessible from here?
-  scope :owned_by_user, -> (user){ where(user_id: user.id) }
+  # scope :owned_by_user, -> (user){ where(user_id: user.id) }
+  scope :owned_by_user, -> (id){ where(user_id: id) }
   scope :is_published, -> { where(published: true) }
 end

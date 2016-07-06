@@ -1,5 +1,6 @@
 (function(){
   function StoriesSrv($resource) {
+    // TODO refactor to allow for custom routes?
     return $resource('/stories',{},
     {
       query: {method: 'GET', isArray: true},

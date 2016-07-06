@@ -5,10 +5,19 @@ class StoriesController < ApplicationController
     # REVIEW set up scoping
     # @stories = Story.where(user_id: current_user.id)
 
-    p "params #{params[:user_id]} ***********************************"
+    # p "params #{params[:user_id]} ***********************************"
+    # user_id = params[:user_id]
 
-    render json: Story.all
-    # render json: Story.owned_by_user(current_user).published
+    # render json: Story.all
+    # render json: Story.owned_by_user(user_id).is_published
+  end
+
+  def published_stories
+    render json: Story.is_published
+  end
+
+  def owned_drafts
+    render json: Story.owned_by_user(params[:user_id])
   end
 
   def show
