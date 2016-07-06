@@ -6,21 +6,22 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email:params[:session][:email].downcase)
+    @user = User.find_by(username: params[:session][:username].downcase)
 
     if @user && @user.authenticate(params[:session][:password])
       create_session(@user)
-      # render json: user
+      render json: @user, status: 201
     else
-      # error
-      render json: { error: "Error saving user", status: 400 }, status: 400
+      render json: { error: "Error saving session. PARAMS #{params}", status: 400 }, status: 400
     end
-
-    render json: @user, status: 201
 
   end
 
   def destroy
     destroy_session(current_user)
+
+    # REVIEW better way to dismiss no template error?
+    @user = nil
+    render json: @user
   end
 end

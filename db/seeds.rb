@@ -1,4 +1,4 @@
-User.create!(email:'admin@example.com',password:'password')
+User.create!(username:'admin',password:'password')
 
 endings = 19
 

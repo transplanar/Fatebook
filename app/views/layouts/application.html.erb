@@ -16,11 +16,18 @@
 
   <!-- REVIEW why can't I use ng-include? -->
   <!-- <div ng-include="'login_form.html'"</div> -->
-  <!-- <div ng-controller='LoginCtrl'> -->
-  <!-- <div ng-controller="LoginCtrl">
-    <div class='btn btn-success' ng-click='login()'>Login</div>
-    <div class='btn btn-success' ng-click='signUp()' >Sign up</div>
-  </div> -->
+  <div ng-controller='LoginCtrl'>
+    <form ng-submit='login()'>
+      <div ng-hide='currentUser'>
+        <span>username:<input type='text' ng-model='usernameInput' />password:<input type='password' ng-model='passwordInput' /></span>
+        <div class='btn btn-success' ng-click='login()'>Login</div>
+        <div class='btn btn-success' ng-click='signUp()' >Sign up</div>
+      </div>
+      <div ng-show='currentUser'>
+        <span><b>Welcome Back {{currentUser.username}}!</b> <div class='btn btn-warning' ng-click='logOut()'>Logout</div> </span>
+      </div>
+    </form>
+  </div>
 
   <ui-view></ui-view>
 
@@ -43,6 +50,8 @@
   <%= javascript_include_tag 'ng-app/services/BranchSrv' %>
 
   <%= javascript_include_tag 'ng-app/services/SessionsSrv' %>
+  <%= javascript_include_tag 'ng-app/services/SessionSrv' %>
+  <%= javascript_include_tag 'ng-app/services/UsersSrv' %>
 
   <!--    Controllers-->
   <%= javascript_include_tag 'ng-app/controllers/StoryNavCtrl' %>

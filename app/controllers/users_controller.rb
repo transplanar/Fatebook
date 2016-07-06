@@ -1,14 +1,17 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: [:create]
 
   def new
     @user = User.new
   end
 
   def create
-    @user = User.build(user_params)
+    # p "paramZ #{user_params}"
+    # p "paramZ2 #{params}"
+    @user = User.new(user_params)
+    # @user = User.new(params)
 
-    if user.save
+    if @user.save
       create_session(@user)
       render json: @user
     else
@@ -26,6 +29,9 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    # REVIEW why does this fix it?
+    # http://stackoverflow.com/questions/29815610/using-angular-and-rails-bcrypt-throwing-an-error-when-trying-to-create-user
+    # params.require(:user).permit(:username, :password, :password_confirmation)
+    params.permit(:username, :password, :password_confirmation)
   end
 end
