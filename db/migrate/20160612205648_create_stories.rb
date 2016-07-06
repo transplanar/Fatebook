@@ -8,7 +8,9 @@ class CreateStories < ActiveRecord::Migration
       t.string :system
       t.float :rating
 
-      # t.references :user,
+      t.boolean :published
+
+      # REVIEW is this needed?
     end
   end
 end

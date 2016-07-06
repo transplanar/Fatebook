@@ -9,12 +9,6 @@
 
     PagesSrv.query({story_id: $stateParams.story_id}).$promise.then(function(data){
       var pages = data;
-      // console.log(pages);
-      // console.log(pages.length);
-      //
-      // $scope.incompletePages = _.filter(pages,function(page){
-      //   return !page.complete;
-      // });
       $scope.completePages = [];
       $scope.incompletePages = [];
 
@@ -25,19 +19,27 @@
           $scope.incompletePages.push(page);
         }
       })
-
-      // console.log('pages',pages);
-      // console.log('incomplete', $scope.incompletePages);
     });
 
-    $scope.submit = function(){
+    // TODO allow for draft changes to remain saved but not published?
+    $scope.saveDraft = function(){
+      update(false);
+    }
+
+    $scope.publish = function(){
+      update(true);
+    }
+
+    // $scope.submit = function(){
+    var update = function(readyToPublish){
       if(!_.isEmpty($scope.title)){
         var storyDataHash =
           {
             id: $scope.currentStory.id,
             title: $scope.title,
             description: $scope.description,
-            summary: $scope.summary
+            summary: $scope.summary,
+            published: readyToPublish
           }
 
         StorySrv.update(storyDataHash).$promise.then(function(data){

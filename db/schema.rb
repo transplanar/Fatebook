@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160706210152) do
     t.string  "keywords"
     t.string  "system"
     t.float   "rating"
+    t.boolean "published"
     t.integer "user_id"
   end
 

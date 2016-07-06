@@ -16,7 +16,7 @@
 
   <!-- REVIEW why can't I use ng-include? -->
   <!-- <div ng-include="'login_form.html'"</div> -->
-  <div ng-controller='LoginCtrl'>
+  <div ng-controller='LoginCtrl' id='login'>
     <form ng-submit='login()'>
       <div ng-hide='currentUser'>
         <span>username:<input type='text' ng-model='usernameInput' />password:<input type='password' ng-model='passwordInput' /></span>

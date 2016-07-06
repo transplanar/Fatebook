@@ -33,8 +33,6 @@
       });
     };
 
-  };
-
   angular
     .module('fatebook')
     .controller('LoginCtrl',['$scope', 'SessionsSrv','SessionSrv','UsersSrv','UserSessionSrv',LoginCtrl])

@@ -20,7 +20,10 @@
 
   <button ng-hide='currentStory' class="btn btn-success" type="button" ng-click="submit()">Submit</button>
   <div ng-show='currentStory'>
-    <button class="btn btn-success" type="button" ng-click="submit()">Update</button>
+    <!-- <button class="btn btn-success" type="button" ng-click="submit()">Update</button> -->
+    <button class="btn btn-success" type="button" ng-click="saveDraft()">Save Draft</button>
+    <!-- TODO add tooltip to show why the button is disabled via uib-tooltip https://angular-ui.github.io/bootstrap/-->
+    <button class="btn btn-success" type="button" ng-click="publish()" ng-disabled='incompletePages.length > 0'>Publish</button>
     <ul>
       <!-- <li ng-repeat='page in currentStory.pages track by $index'> {{page.title}} -->
       <li ng-repeat='page in completePages track by $index'> {{page.title}}
