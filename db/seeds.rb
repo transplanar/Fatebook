@@ -1,8 +1,9 @@
-User.create!(username:'admin',password:'password')
+@user = User.create!(username:'admin',password:'password')
 
 endings = 19
 
-story = Story.create!(
+# story = Story.create!(
+story = @user.stories.create!(
   {
     title: "Doors",
     description:"A surrealistic journey through a door",
@@ -18,7 +19,8 @@ def create_branch(child, parent_id)
     choice_text: child[:text]
     })
 
-  story = Story.first
+  # story = Story.first
+  story = @user.stories.first
   story.branches << branch
 end
 

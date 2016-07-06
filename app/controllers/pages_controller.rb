@@ -77,6 +77,7 @@ class PagesController < ApplicationController
     # TODO only require content
     def page_params
       # params.require(:page).permit(:title, :content, :summary, :parent_id)
+      # TODO add story_id
       params.require(:page).permit(:title, :content, :summary, :parent_id, :complete)
     end
 end

@@ -1,5 +1,5 @@
 (function(){
-  function LoginCtrl($scope, SessionsSrv, SessionSrv, UsersSrv){
+  function LoginCtrl($scope, SessionsSrv, SessionSrv, UsersSrv, UserSessionSrv){
     // REVIEW TODO move to appropriate spot
     $scope.login = function(){
       SessionsSrv.create({
@@ -8,6 +8,8 @@
       }).$promise.then(function(data){
         // console.log('current session' + data);
         $scope.currentUser = data;
+        UserSessionSrv.setCurrentUser(data);
+        // UserSessionSrv.currentUser = data;
       })
     };
 
@@ -16,16 +18,18 @@
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
-        console.log('new user', data)
+        // REVIEW sync these values better?
         $scope.currentUser = data;
+        UserSessionSrv.setCurrentUser($scope.currentUser);
+        // UserSessionSrv.currentUser = data;
       });
     };
 
     $scope.logOut = function(){
       // console.log('button')
       SessionSrv.delete({id: $scope.currentUser.id}).$promise.then(function(data){
-        console.log('logged out')
         $scope.currentUser = null;
+        UserSessionSrv.setCurrentUser(null);
       });
     };
 
@@ -33,5 +37,5 @@
 
   angular
     .module('fatebook')
-    .controller('LoginCtrl',['$scope', 'SessionsSrv','SessionSrv','UsersSrv',LoginCtrl])
+    .controller('LoginCtrl',['$scope', 'SessionsSrv','SessionSrv','UsersSrv','UserSessionSrv',LoginCtrl])
 })();

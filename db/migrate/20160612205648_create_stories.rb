@@ -7,6 +7,8 @@ class CreateStories < ActiveRecord::Migration
       t.string :keywords #NOTE convert this string to array?
       t.string :system
       t.float :rating
+
+      # t.references :user,
     end
   end
 end

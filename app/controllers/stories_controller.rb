@@ -45,6 +45,7 @@ class StoriesController < ApplicationController
 
     # TODO only require title and description
     def story_params
-      params.require(:story).permit(:title, :description, :summary)
+      # params.require(:story).permit(:title, :description, :summary)
+      params.require(:story).permit(:title, :description, :summary, :user_id)
     end
 end
