@@ -9,8 +9,6 @@ class CreateStories < ActiveRecord::Migration
       t.float :rating
 
       t.boolean :published
-
-      # REVIEW is this needed?
     end
   end
 end

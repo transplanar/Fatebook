@@ -5,13 +5,19 @@
 
     $scope.displayStories = function(){
       if(UserSessionSrv.currentUser){
-        StoriesSrv.query({user_id: UserSessionSrv.currentUser.id}).$promise.then(function(data){
+        StoriesSrv.many.query().$promise.then(function(data){
           $scope.stories = data;
+        });
+
+        StoriesSrv.published.query().$promise.then(function(data){
+          $scope.publishedStories = data;
+        });
+
+        StoriesSrv.owned.query({user_id: UserSessionSrv.currentUser.id}).$promise.then(function(data){
+          $scope.ownedStories = data;
         });
       }
     }
-
-
 
     // $scope.$watch('UserSessionSrv.currentUser', function(newVal,oldVal){
     //   console.log('changed');
@@ -30,7 +36,6 @@
     $scope.displayStories();
 
     $rootScope.$on('userLogin', function(){
-      // console.log('current user NOW', UserSessionSrv.currentUser);
       $scope.displayStories();
     })
   }

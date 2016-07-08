@@ -7,6 +7,7 @@ story = @user.stories.create!(
   {
     title: "Doors",
     description:"A surrealistic journey through a door",
+    published: true
   }
 )
 # TODO edit and revise pages

@@ -6,13 +6,6 @@
       update: {method: 'PUT', params: {id: '@id'}},
       delete: {method: 'DELETE', params: {id: '@id'}, isArray: true}
     });
-
-    // REVIEW Needed?
-    // function transformGet(data, headers){
-    //   var fromJson = angular.fromJson(data);
-    //   fromJson.json = data;
-    //   return fromJson;
-    // }
   }
 
   angular

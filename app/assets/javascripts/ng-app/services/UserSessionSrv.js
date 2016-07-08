@@ -1,4 +1,5 @@
 // REVIEW better way to do this?
+// TODO replace/merge with UserSrv?
 (function(){
   function UserSessionSrv() {
     UserSessionSrv = {};

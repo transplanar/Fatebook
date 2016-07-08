@@ -8,7 +8,7 @@ class StoriesController < ApplicationController
     # p "params #{params[:user_id]} ***********************************"
     # user_id = params[:user_id]
 
-    # render json: Story.all
+    render json: Story.all
     # render json: Story.owned_by_user(user_id).is_published
   end
 

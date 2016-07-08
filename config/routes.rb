@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   #   end
   # end
   get 'branches/find_by_destination/:id' => 'branches#find_by_destination'
+  get 'published_stories' => 'stories#published_stories'
+  get 'my_drafts/:user_id' => 'stories#owned_drafts'
 
   root 'landing#index'
 

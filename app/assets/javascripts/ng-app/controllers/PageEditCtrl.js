@@ -23,7 +23,6 @@
     var initParentPage = function(parent_id){
       PageSrv.show({id: parent_id}).$promise.then(function(data){
         $scope.parentPage = data;
-        // REVIEW better way to detect empty response?
         initSiblingPages();
       });
     };
@@ -80,6 +79,9 @@
           numBranches = $scope.page.branches.length +1;
         }
 
+        //REVIEW would this work?
+        // var numBranches = $scope.page.branches.length +1 | 1;
+
         var stubTitle = 'Child Page ' + numBranches + ' of Page ' + $scope.page.id;
 
         var pageDataHash = {
@@ -90,10 +92,7 @@
         }
 
         PagesSrv.create(pageDataHash).$promise.then(function(data){
-          // REVIEW is this the best way?
-          PageSrv.show({id: $scope.page.id}).$promise.then(function(data){
-            $scope.page = data;
-          });
+          $scope.page = data;
         });
       }
     }
