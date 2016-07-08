@@ -20,8 +20,6 @@ class SessionsController < ApplicationController
   def destroy
     destroy_session(current_user)
 
-    # REVIEW better way to dismiss no template error?
-    @user = nil
-    render json: @user
+    render json: {status: 200}
   end
 end

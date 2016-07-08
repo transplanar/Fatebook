@@ -5,15 +5,15 @@
 
     $scope.displayStories = function(){
       if(UserSessionSrv.currentUser){
-        StoriesSrv.many.query().$promise.then(function(data){
+        StoriesSrv.query().$promise.then(function(data){
           $scope.stories = data;
         });
 
-        StoriesSrv.published.query().$promise.then(function(data){
+        StoriesSrv.published().$promise.then(function(data){
           $scope.publishedStories = data;
         });
 
-        StoriesSrv.owned.query({user_id: UserSessionSrv.currentUser.id}).$promise.then(function(data){
+        StoriesSrv.owned({user_id: UserSessionSrv.currentUser.id}).$promise.then(function(data){
           $scope.ownedStories = data;
         });
       }
@@ -39,7 +39,8 @@
     // TODO move this to separate controller (reusable template)
     $rootScope.$on('userLogin', function(){
       $scope.displayStories();
-    })
+    });
+    //TODO create logout event listener
   }
 
   angular

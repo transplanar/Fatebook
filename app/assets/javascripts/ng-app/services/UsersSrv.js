@@ -1,10 +1,17 @@
 (function(){
   function UsersSrv($resource) {
-    return $resource('/users',{},
+    // TODO refactor to store user and routing methods
+    UserSrv = {};
+
+    UserSrv.currentUser = null;
+
+    UserSrv.route = $resource('/users',{},
     {
       query: {method: 'GET', isArray: true},
       create: {method: 'POST'}
     });
+
+    return UserSrv;
   }
 
   angular
