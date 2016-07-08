@@ -1,6 +1,5 @@
 (function(){
   function LoginCtrl($scope, $rootScope, SessionsSrv, SessionSrv, UsersSrv, UserSessionSrv){
-    // REVIEW TODO move to appropriate spot
     $scope.login = function(){
       SessionsSrv.create({
         username: $scope.usernameInput,
@@ -28,7 +27,6 @@
     };
 
     $scope.logOut = function(){
-      // console.log('button')
       SessionSrv.delete({id: $scope.currentUser.id}).$promise.then(function(data){
         $scope.currentUser = null;
         UserSessionSrv.setCurrentUser(null);

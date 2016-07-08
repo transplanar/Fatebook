@@ -11,7 +11,7 @@ class Story < ActiveRecord::Base
     # the story is owned by the user
 
   # scope :owned_by_user, ->(user){ user.stories.where(id: params[id]).exists? }
-  # REVIEW is current_user accessible from here?
+  # REVIEW scoping inheretance to pages? use join?
   # scope :owned_by_user, -> (user){ where(user_id: user.id) }
   scope :owned_by_user, -> (id){ where(user_id: id) }
   scope :is_published, -> { where(published: true) }

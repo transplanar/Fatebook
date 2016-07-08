@@ -35,6 +35,8 @@
 
     $scope.displayStories();
 
+    // REVIEW is this the best way to update story listings?
+    // TODO move this to separate controller (reusable template)
     $rootScope.$on('userLogin', function(){
       $scope.displayStories();
     })
