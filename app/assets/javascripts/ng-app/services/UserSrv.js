@@ -1,6 +1,13 @@
 (function(){
-  function UserSrv($resource) {
+  function UserSrv($resource,$rootScope) {
     var UserSrv = {};
+    UserSrv.currentUser = null;
+
+    UserSrv.setUser = function(user){
+      console.log('attempt');
+      UserSrv.currentUser = user;
+      $rootScope.$broadcast('updateCurrentUser');
+    };
 
     // return $resource('/users/:id.json', {id: '@id'},
     UserSrv.db = $resource('/users/:id.json', {id: '@id'},
@@ -17,5 +24,6 @@
 
   angular
     .module('fatebook')
-    .factory('UserSrv',['$resource', UserSrv])
+    .factory('UserSrv',['$resource','$rootScope', UserSrv])
+    // .service('UserSrv',['$resource','$rootScope', UserSrv])
 })()

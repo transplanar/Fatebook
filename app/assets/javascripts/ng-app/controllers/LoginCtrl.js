@@ -1,15 +1,14 @@
 (function(){
-  function LoginCtrl($scope, $rootScope, SessionSrv, UserSrv, UserSessionSrv){
+  // function LoginCtrl($scope, $rootScope, SessionSrv, UserSrv, UserSessionSrv){
+  function LoginCtrl($scope, $rootScope, SessionSrv, UserSrv){
     $scope.login = function(){
       SessionSrv.db.create({
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
-        // console.log('current session' + data);
+        UserSrv.setUser(data);
         $scope.currentUser = data;
-        // UserSessionSrv.setCurrentUser(data);
-        UserSessionSrv.currentUser = data;
-        $rootScope.$broadcast('userLogin');
+        // $rootScope.$broadcast('updateCurrentUser');
       })
     };
 
@@ -18,18 +17,23 @@
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
-        // REVIEW sync these values better?
+        UserSrv.setUser(data);
         $scope.currentUser = data;
-        UserSessionSrv.setCurrentUser($scope.currentUser);
-        // UserSessionSrv.currentUser = data;
-        $rootScope.$broadcast('userLogin');
+        // $rootScope.$broadcast('updateCurrentUser');
+
+
+        // REVIEW sync these values better?
+        // UserSessionSrv.setCurrentUser($scope.currentUser);
+        // UserSrv.currentUser = data;
+        // $rootScope.$broadcast('updateCurrentUser');
       });
     };
 
     $scope.logOut = function(){
       SessionSrv.db.delete({id: $scope.currentUser.id}).$promise.then(function(data){
         $scope.currentUser = null;
-        UserSessionSrv.setCurrentUser(null);
+        // UserSessionSrv.setCurrentUser(null);
+        UserSrv.setUser(null);
       });
     };
 
@@ -37,5 +41,5 @@
 
   angular
     .module('fatebook')
-    .controller('LoginCtrl',['$scope', '$rootScope', 'SessionSrv','SessionSrv','UserSrv','UserSessionSrv',LoginCtrl])
+    .controller('LoginCtrl',['$scope', '$rootScope', 'SessionSrv','UserSrv',LoginCtrl])
 })();

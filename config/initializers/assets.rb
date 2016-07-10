@@ -18,7 +18,6 @@ Rails.application.config.assets.precompile +=
         ng-app/services/BranchSrv.js
         ng-app/services/SessionSrv.js
         ng-app/services/UserSrv.js
-        ng-app/services/UserSessionSrv.js
         ng-app/controllers/StoryNavCtrl.js
         ng-app/controllers/StoryCreateCtrl.js
         ng-app/controllers/StoryEditCtrl.js

@@ -42,7 +42,8 @@ class PagesController < ApplicationController
         end
       end
 
-      render json: @page, status: 201
+      # render json: @page, status: 201
+      render json: @parent, status: 201
     end
   end
 

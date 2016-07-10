@@ -1,5 +1,5 @@
 (function(){
-  function PageEditCtrl($scope,$log, $state, $stateParams,PageSrv, StorySrv, BranchSrv){
+  function PageEditCtrl($scope, $log, $state, $stateParams, PageSrv, StorySrv, BranchSrv){
     $scope.choiceText = '';
 
     StorySrv.db.show({id: $stateParams.story_id}).$promise.then(function(data){
@@ -75,12 +75,12 @@
       if(!_.isEmpty($scope.choiceText)) {
         var numBranches = 1;
 
-        if($scope.page.branches){
-          numBranches = $scope.page.branches.length +1;
-        }
+        // if($scope.page.branches){
+        //   numBranches = $scope.page.branches.length +1;
+        // }
 
         //REVIEW would this work?
-        // var numBranches = $scope.page.branches.length +1 | 1;
+        var numBranches = $scope.page.branches.length +1 | 1;
 
         var stubTitle = 'Child Page ' + numBranches + ' of Page ' + $scope.page.id;
 
@@ -131,5 +131,5 @@
 
   angular
     .module('fatebook')
-    .controller('PageEditCtrl',['$scope','$log','$state','$stateParams','PageSrv', 'PageSrv', 'StorySrv', 'BranchSrv',PageEditCtrl]);
+    .controller('PageEditCtrl',['$scope', '$log', '$state', '$stateParams', 'PageSrv', 'StorySrv', 'BranchSrv', PageEditCtrl]);
 })();

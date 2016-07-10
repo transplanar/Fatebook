@@ -1,32 +1,38 @@
 <h1>Mode Selection (Testing)</h1>
 <div class='btn btn-info' ui-sref='create_story'>Create Story</div>
 
-<h2>Stories</h2>
-<ul>
+<!-- <h2>Stories</h2> -->
+<!-- <ul>
   <li ng-repeat='story in stories'>
-    <h2>{{story.title}} by {{story.user.username}}
+    <h3>{{story.title}} by {{story.user.username}}
       <span class='btn btn-info' ui-sref='play({story_id: story.id})'>Play</span>
       <span class='btn btn-success' ui-sref='edit_story({story_id: story.id})'>Edit</span>
       <span class='btn btn-danger' ng-click='deleteStory(story.id)'>Delete</span>
-    </h2>
+    </h3>
   </li>
+</ul> -->
 
-  <h2>Published</h2>
+<h2>Published</h2>
+<ul>
   <li ng-repeat='story in publishedStories'>
-    <h2>{{story.title}} by {{story.user.username}}
+    <h3>{{story.title}} by {{story.user.username}}
       <span class='btn btn-info' ui-sref='play({story_id: story.id})'>Play</span>
       <span class='btn btn-success' ui-sref='edit_story({story_id: story.id})'>Edit</span>
       <span class='btn btn-danger' ng-click='deleteStory(story.id)'>Delete</span>
-    </h2>
+    </h3>
   </li>
+</ul>
 
-  <h2>Owned</h2>
+<h2>Owned</h2>
+<ul>
   <li ng-repeat='story in ownedStories'>
-    <h2>{{story.title}} by {{story.user.username}}
+    <h3>{{story.title}} by {{story.user.username}}
       <span class='btn btn-info' ui-sref='play({story_id: story.id})'>Play</span>
       <span class='btn btn-success' ui-sref='edit_story({story_id: story.id})'>Edit</span>
       <span class='btn btn-danger' ng-click='deleteStory(story.id)'>Delete</span>
-    </h2>
+      <span ng-hide='story.published'>(incomplete)</span>
+    </h3>
   </li>
+</ul>
 
 </ul>

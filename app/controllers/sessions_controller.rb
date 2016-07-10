@@ -20,6 +20,6 @@ class SessionsController < ApplicationController
   def destroy
     destroy_session(current_user)
 
-    render json: {status: 200}
+    render json: [{status: 200}]
   end
 end
