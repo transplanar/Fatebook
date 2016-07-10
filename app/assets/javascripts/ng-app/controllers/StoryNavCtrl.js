@@ -8,7 +8,7 @@
     // TODO allow different stories to be set
 
     $scope.setStory = function(id){
-      StorySrv.show({id: id}).$promise.then(function(data){
+      StorySrv.db.show({id: id}).$promise.then(function(data){
         $scope.currentStory = data;
         StoryNavSrv.currentStory = data;
         $scope.initFirstPage();
@@ -24,7 +24,7 @@
 
     // Controller methods
     $scope.setPage = function(page_id){
-      PageSrv.show({story_id: StoryNavSrv.currentStory.id, id: page_id}).$promise.then(function(data){
+      PageSrv.db.show({story_id: StoryNavSrv.currentStory.id, id: page_id}).$promise.then(function(data){
         // TODO sync $scope with Service
         $scope.currentPage = data;
         StoryNavSrv.currentPage = data;

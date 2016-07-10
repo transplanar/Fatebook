@@ -1,6 +1,9 @@
 (function(){
   function PageSrv($resource) {
-    return $resource('/pages/:id.json', {id: '@id'},
+    var PageSrv = {};
+
+    // return $resource('/pages/:id.json', {id: '@id'},
+    PageSrv.db = $resource('/pages/:id.json', {id: '@id'},
     {
       query: {method: 'GET', isArray: true},
       create: {method: 'POST'},
@@ -8,6 +11,8 @@
       update: {method: 'PUT'},
       delete: {method: 'DELETE', isArray: true},
     });
+
+    return PageSrv;
   }
 
   angular

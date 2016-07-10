@@ -3,6 +3,7 @@
 (function(){
   function UserSessionSrv() {
     UserSessionSrv = {};
+    UserSessionSrv.currentUser = null;
 
     UserSessionSrv.setCurrentUser = function(user){
       console.log('user set to ', user);

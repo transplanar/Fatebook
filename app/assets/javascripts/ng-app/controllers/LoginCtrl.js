@@ -1,7 +1,7 @@
 (function(){
   function LoginCtrl($scope, $rootScope, SessionSrv, UserSrv, UserSessionSrv){
     $scope.login = function(){
-      SessionSrv.create({
+      SessionSrv.db.create({
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
@@ -14,7 +14,7 @@
     };
 
     $scope.signUp = function(){
-      UserSrv.create({
+      UserSrv.db.create({
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
@@ -27,7 +27,7 @@
     };
 
     $scope.logOut = function(){
-      SessionSrv.delete({id: $scope.currentUser.id}).$promise.then(function(data){
+      SessionSrv.db.delete({id: $scope.currentUser.id}).$promise.then(function(data){
         $scope.currentUser = null;
         UserSessionSrv.setCurrentUser(null);
       });

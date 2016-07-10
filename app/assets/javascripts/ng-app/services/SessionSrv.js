@@ -1,6 +1,9 @@
 (function(){
   function SessionSrv($resource) {
-    return $resource('/sessions/:id.json', {id: '@id'},
+    var SessionSrv = {};
+
+    // return $resource('/sessions/:id.json', {id: '@id'},
+    SessionSrv.db = $resource('/sessions/:id.json', {id: '@id'},
     {
       query: {method: 'GET', isArray: true},
       create: {method: 'POST'},
@@ -8,6 +11,8 @@
       update: {method: 'PUT'},
       delete: {method: 'DELETE', isArray: true},
     });
+
+    return SessionSrv;
   }
 
   angular

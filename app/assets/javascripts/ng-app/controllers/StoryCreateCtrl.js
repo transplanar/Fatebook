@@ -1,7 +1,7 @@
 (function(){
   function StoryCreateCtrl($scope, $state, StorySrv, PageSrv, UserSessionSrv){
     $scope.submit = function(){
-      StorySrv.many.create(
+      StorySrv.db.create(
         {
           user_id: UserSessionSrv.currentUser.id,
           title: $scope.title,

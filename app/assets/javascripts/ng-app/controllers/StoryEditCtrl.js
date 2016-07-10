@@ -1,13 +1,13 @@
 (function(){
   function StoryEditCtrl($scope, $stateParams, PageSrv, StorySrv){
-    StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
+    StorySrv.db.show({id: $stateParams.story_id}).$promise.then(function(data){
       $scope.currentStory = data;
       $scope.title = $scope.currentStory.title;
       $scope.description = $scope.currentStory.description;
       $scope.summary = $scope.currentStory.summary;
     });
 
-    PageSrv.query({story_id: $stateParams.story_id}).$promise.then(function(data){
+    PageSrv.db.query({story_id: $stateParams.story_id}).$promise.then(function(data){
       var pages = data;
       $scope.completePages = [];
       $scope.incompletePages = [];
@@ -42,7 +42,7 @@
             published: readyToPublish
           }
 
-        StorySrv.update(storyDataHash).$promise.then(function(data){
+        StorySrv.db.update(storyDataHash).$promise.then(function(data){
           // TODO display page nesting
           $scope.currentStory = data;
         });

@@ -1,6 +1,9 @@
 (function(){
   function UserSrv($resource) {
-    return $resource('/users/:id.json', {id: '@id'},
+    var UserSrv = {};
+
+    // return $resource('/users/:id.json', {id: '@id'},
+    UserSrv.db = $resource('/users/:id.json', {id: '@id'},
     {
       query: {method: 'GET', isArray: true},
       create: {method: 'POST'},
@@ -8,6 +11,8 @@
       update: {method: 'PUT'},
       delete: {method: 'DELETE', isArray: true},
     });
+
+    return UserSrv;
   }
 
   angular
