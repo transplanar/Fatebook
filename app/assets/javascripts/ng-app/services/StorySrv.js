@@ -1,10 +1,14 @@
 (function(){
   function StorySrv($resource) {
-    return $resource('/stories/:id.json', {},
+    return $resource('/stories/:id.json', {id: '@id'},
     {
+      query: {method: 'GET', isArray: true},
+      create: {method: 'POST'},
       show: {method: 'GET'},
-      update: {method: 'PUT', params: {id: '@id'}},
-      delete: {method: 'DELETE', params: {id: '@id'}, isArray: true}
+      update: {method: 'PUT'},
+      delete: {method: 'DELETE', isArray: true},
+      published: {method: 'GET', isArray: true, url: '/published_stories'},
+      owned: {method: 'GET', isArray: true, url: '/my_drafts/:user_id'}
     });
   }
 

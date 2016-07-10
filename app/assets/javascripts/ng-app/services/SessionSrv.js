@@ -1,10 +1,12 @@
 (function(){
   function SessionSrv($resource) {
-    return $resource('/sessions/:id.json',{},
+    return $resource('/sessions/:id.json', {id: '@id'},
     {
+      query: {method: 'GET', isArray: true},
+      create: {method: 'POST'},
       show: {method: 'GET'},
-      update: {method: 'PUT', params: {id: '@id'}},
-      delete: {method: 'DELETE', params: {id: '@id'}}
+      update: {method: 'PUT'},
+      delete: {method: 'DELETE', isArray: true},
     });
   }
 

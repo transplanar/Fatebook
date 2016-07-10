@@ -1,5 +1,5 @@
 (function(){
-  function StoryEditCtrl($scope, $stateParams, PagesSrv, StorySrv){
+  function StoryEditCtrl($scope, $stateParams, PageSrv, StorySrv){
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
       $scope.currentStory = data;
       $scope.title = $scope.currentStory.title;
@@ -7,7 +7,7 @@
       $scope.summary = $scope.currentStory.summary;
     });
 
-    PagesSrv.query({story_id: $stateParams.story_id}).$promise.then(function(data){
+    PageSrv.query({story_id: $stateParams.story_id}).$promise.then(function(data){
       var pages = data;
       $scope.completePages = [];
       $scope.incompletePages = [];
@@ -52,5 +52,5 @@
 
   angular
     .module('fatebook')
-    .controller('StoryEditCtrl', ['$scope', '$stateParams','PagesSrv', 'StorySrv', StoryEditCtrl]);
+    .controller('StoryEditCtrl', ['$scope', '$stateParams','PageSrv', 'StorySrv', StoryEditCtrl]);
 })();

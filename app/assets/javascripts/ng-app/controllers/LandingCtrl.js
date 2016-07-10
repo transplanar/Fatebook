@@ -1,19 +1,19 @@
 (function(){
-  function LandingCtrl($scope, $rootScope, StorySrv, StoriesSrv,UserSessionSrv){
+  function LandingCtrl($scope, $rootScope, StorySrv,UserSessionSrv){
     // TODO update landing controller later
-    // StoriesSrv.query().$promise.then(function(data){
+    // StorySrv.query().$promise.then(function(data){
 
     $scope.displayStories = function(){
       if(UserSessionSrv.currentUser){
-        StoriesSrv.query().$promise.then(function(data){
+        StorySrv.query().$promise.then(function(data){
           $scope.stories = data;
         });
 
-        StoriesSrv.published().$promise.then(function(data){
+        StorySrv.published().$promise.then(function(data){
           $scope.publishedStories = data;
         });
 
-        StoriesSrv.owned({user_id: UserSessionSrv.currentUser.id}).$promise.then(function(data){
+        StorySrv.owned({user_id: UserSessionSrv.currentUser.id}).$promise.then(function(data){
           $scope.ownedStories = data;
         });
       }
@@ -45,5 +45,5 @@
 
   angular
     .module('fatebook')
-    .controller('LandingCtrl',['$scope','$rootScope', 'StorySrv', 'StoriesSrv', 'UserSessionSrv', LandingCtrl]);
+    .controller('LandingCtrl',['$scope','$rootScope', 'StorySrv', 'UserSessionSrv', LandingCtrl]);
 })();

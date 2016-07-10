@@ -1,11 +1,12 @@
 (function(){
   function PageSrv($resource) {
-    return $resource('/pages/:id.json',{},
+    return $resource('/pages/:id.json', {id: '@id'},
     {
+      query: {method: 'GET', isArray: true},
+      create: {method: 'POST'},
       show: {method: 'GET'},
-      update: {method: 'PUT', params: {id: '@id'}},
-      // update: {method: 'PUT'},
-      delete: {method: 'DELETE', params: {id: '@id'}}
+      update: {method: 'PUT'},
+      delete: {method: 'DELETE', isArray: true},
     });
   }
 

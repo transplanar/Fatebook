@@ -5,7 +5,7 @@
     UserSessionSrv = {};
 
     UserSessionSrv.setCurrentUser = function(user){
-      console.log('user set to ', user)
+      console.log('user set to ', user);
       UserSessionSrv.currentUser = user;
     };
 

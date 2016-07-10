@@ -1,5 +1,5 @@
 (function(){
-  function StoryNavCtrl($scope, $stateParams, StoryNavSrv, StorySrv, StoriesSrv, PageSrv, PagesSrv, $resource){
+  function StoryNavCtrl($scope, $stateParams, StoryNavSrv, StorySrv, PageSrv, $resource){
 
     $scope.debugMode = true;
 
@@ -57,5 +57,5 @@
 
   angular
     .module('fatebook')
-     .controller('StoryNavCtrl', ['$scope', '$stateParams', 'StoryNavSrv', 'StorySrv', 'StoriesSrv', 'PageSrv', 'PagesSrv', '$resource', StoryNavCtrl]);
+     .controller('StoryNavCtrl', ['$scope', '$stateParams', 'StoryNavSrv', 'StorySrv', 'StorySrv', 'PageSrv', 'PageSrv', '$resource', StoryNavCtrl]);
 })();

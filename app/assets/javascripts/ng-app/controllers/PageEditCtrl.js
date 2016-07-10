@@ -1,5 +1,5 @@
 (function(){
-  function PageEditCtrl($scope,$log, $state, $stateParams,PageSrv, PagesSrv, StorySrv, BranchSrv){
+  function PageEditCtrl($scope,$log, $state, $stateParams,PageSrv, StorySrv, BranchSrv){
     $scope.choiceText = '';
 
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
@@ -91,7 +91,7 @@
           choice_text: $scope.choiceText,
         }
 
-        PagesSrv.create(pageDataHash).$promise.then(function(data){
+        PageSrv.create(pageDataHash).$promise.then(function(data){
           $scope.page = data;
         });
       }
@@ -131,5 +131,5 @@
 
   angular
     .module('fatebook')
-    .controller('PageEditCtrl',['$scope','$log','$state','$stateParams','PageSrv', 'PagesSrv', 'StorySrv', 'BranchSrv',PageEditCtrl]);
+    .controller('PageEditCtrl',['$scope','$log','$state','$stateParams','PageSrv', 'PageSrv', 'StorySrv', 'BranchSrv',PageEditCtrl]);
 })();

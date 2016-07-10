@@ -1,20 +1,20 @@
 (function(){
-  function LoginCtrl($scope, $rootScope, SessionsSrv, SessionSrv, UsersSrv, UserSessionSrv){
+  function LoginCtrl($scope, $rootScope, SessionSrv, UserSrv, UserSessionSrv){
     $scope.login = function(){
-      SessionsSrv.create({
+      SessionSrv.create({
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
         // console.log('current session' + data);
         $scope.currentUser = data;
-        UserSessionSrv.setCurrentUser(data);
-        // UserSessionSrv.currentUser = data;
+        // UserSessionSrv.setCurrentUser(data);
+        UserSessionSrv.currentUser = data;
         $rootScope.$broadcast('userLogin');
       })
     };
 
     $scope.signUp = function(){
-      UsersSrv.create({
+      UserSrv.create({
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
@@ -37,5 +37,5 @@
 
   angular
     .module('fatebook')
-    .controller('LoginCtrl',['$scope', '$rootScope', 'SessionsSrv','SessionSrv','UsersSrv','UserSessionSrv',LoginCtrl])
+    .controller('LoginCtrl',['$scope', '$rootScope', 'SessionSrv','SessionSrv','UserSrv','UserSessionSrv',LoginCtrl])
 })();

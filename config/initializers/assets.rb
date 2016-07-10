@@ -13,15 +13,11 @@ Rails.application.config.assets.precompile +=
         stories.css
         normalize.css
         authoring_tools.css
-        ng-app/services/StoryNavSrv.js
         ng-app/services/StorySrv.js
-        ng-app/services/StoriesSrv.js
         ng-app/services/PageSrv.js
-        ng-app/services/PagesSrv.js
         ng-app/services/BranchSrv.js
-        ng-app/services/SessionsSrv.js
         ng-app/services/SessionSrv.js
-        ng-app/services/UsersSrv.js
+        ng-app/services/UserSrv.js
         ng-app/services/UserSessionSrv.js
         ng-app/controllers/StoryNavCtrl.js
         ng-app/controllers/StoryCreateCtrl.js
