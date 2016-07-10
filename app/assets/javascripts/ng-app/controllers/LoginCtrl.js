@@ -6,6 +6,7 @@
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
+        // TODO add broadcast thing here
         UserSrv.setUser(data);
         $scope.currentUser = data;
         // $rootScope.$broadcast('updateCurrentUser');
@@ -17,22 +18,17 @@
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
+        // TODO add broadcast thing here
         UserSrv.setUser(data);
         $scope.currentUser = data;
-        // $rootScope.$broadcast('updateCurrentUser');
-
-
-        // REVIEW sync these values better?
-        // UserSessionSrv.setCurrentUser($scope.currentUser);
-        // UserSrv.currentUser = data;
         // $rootScope.$broadcast('updateCurrentUser');
       });
     };
 
     $scope.logOut = function(){
       SessionSrv.db.delete({id: $scope.currentUser.id}).$promise.then(function(data){
+        // TODO add broadcast thing here
         $scope.currentUser = null;
-        // UserSessionSrv.setCurrentUser(null);
         UserSrv.setUser(null);
       });
     };

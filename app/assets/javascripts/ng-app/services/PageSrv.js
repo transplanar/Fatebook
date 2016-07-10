@@ -10,6 +10,7 @@
       show: {method: 'GET'},
       update: {method: 'PUT'},
       delete: {method: 'DELETE', isArray: true},
+      first: {method: 'GET', url: '/pages/get_first_page/:story_id'}
     });
 
     return PageSrv;

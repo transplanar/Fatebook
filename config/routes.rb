@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'published_stories' => 'stories#published_stories'
   get 'my_drafts/:user_id' => 'stories#owned_drafts'
 
+  get '/pages/get_first_page/:story_id' => 'pages#get_first_page'
+
   root 'landing#index'
 
   get "*unmatched_route" => 'landing#index'

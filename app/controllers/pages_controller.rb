@@ -14,6 +14,13 @@ class PagesController < ApplicationController
     render json: @page
   end
 
+  def get_first_page
+    @story = Story.find(params[:story_id])
+    @page = @story.pages.first
+
+    render json: @page
+  end
+
   def new
     @story = Story.find(params[:story_id])
     @page = Page.new
