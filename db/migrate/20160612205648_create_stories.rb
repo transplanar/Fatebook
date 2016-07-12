@@ -1,3 +1,4 @@
+# TODO remove unused attributes
 class CreateStories < ActiveRecord::Migration
   def change
     create_table :stories do |t|
@@ -7,6 +8,8 @@ class CreateStories < ActiveRecord::Migration
       t.string :keywords #NOTE convert this string to array?
       t.string :system
       t.float :rating
+
+      t.boolean :published
     end
   end
 end

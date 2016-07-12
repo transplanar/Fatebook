@@ -1,9 +1,13 @@
+@user = User.create!(username:'admin',password:'password')
+
 endings = 19
 
-story = Story.create!(
+# story = Story.create!(
+story = @user.stories.create!(
   {
     title: "Doors",
     description:"A surrealistic journey through a door",
+    published: true
   }
 )
 # TODO edit and revise pages
@@ -16,7 +20,8 @@ def create_branch(child, parent_id)
     choice_text: child[:text]
     })
 
-  story = Story.first
+  # story = Story.first
+  story = @user.stories.first
   story.branches << branch
 end
 
@@ -36,10 +41,12 @@ end
   text: 'The red door', id: story.pages.create!(
     {
       title: 'Through the red door...',
-      content: "Through the red door is a long staircase made out of dry, tangled vines.
-      It extends into a dark abyss that seems to have no end. After walking for a while
-      you find a soda machine off to the side of it. There in it are three choices of drinks:
-      Super Mega Awesome Soda, Lameass Soda, and Mystery Capitalist Adventure Soda. Which one do you chose?"
+      content: "Through the red door you discover a long staircase covered in dry, tangled vines.
+      It spirals downward into a seemingly endless chasm below. Just as your legs start to tire,
+      you see the glow of a strange box in the distance. As you approach, it is revealed to be a vending
+      machine of some kind. Within it resides three drinks: Super Mega Awesome Soda, The Phantom Mehnace,
+      and Mystery Capitalist Adventure Soda. Their enticing branding becons to you like a siren song.
+      To which one do you partake of?"
     }
     ).id
   }
@@ -61,7 +68,7 @@ create_branch(@A1, @A[:id])
 @A1a = {
   text: 'Uh... hi?', id: story.pages.create!(
     {
-      title: 'The Taste of Super Mega Awesome Soda',
+      title: 'The Man Beast and Me',
       content: "The man-beast smiles graciously and gives you a warm hug. \n\“Brother!\”
       he says to you in a jolly voice, \“it has been so long since I have seen you!
       How have you been?\”\n How do you answer him?"
@@ -73,7 +80,7 @@ create_branch(@A1a, @A1[:id])
 @A1a1 = {
   text: 'Who the heck are you?', id: story.pages.create!(
   {
-    title: 'The Taste of Super Mega Awesome Soda',
+    title: 'Vexation of the Beast',
     content: "The man-beast looks at you angrily. Never has such an insult been levied
     toward his person in all the infinites he has existed. He challenges you to a battle
     to the death, wielding an Ax the size of a mountain against your Magnum Revolver
@@ -157,7 +164,7 @@ create_branch(@A1b1, @A1b[:id])
 @A1b2 = {
   text: "Yeah, I am pretty awesome, aren't I?", id: story.pages.create!(
   {
-    title: "Don't Mess with the Claw...",
+    title: "Sublimination of the Self",
     content: "Oh give me a break. Seriously? Cut it out on the macho thing man, its annoying.\n
     \“Hey, who the heck are you?\”\n
     Who me? Oh no one... no one at all.\n
@@ -266,7 +273,7 @@ create_branch(@A3, @A[:id])
 @A3a = {
   text: "Yep", id: story.pages.create!(
   {
-    title: "Winging It",
+    title: "Taking Wing",
     content: "You're damn right those are wings! You start to soar into the air,
     high above the staircase, until you penetrate the dark veil of oblivion and come
     across a mysterious forest of a thousand colors and shades. It is the bastion of
@@ -309,7 +316,7 @@ create_branch(@A3a2, @A3a[:id])
 @A3b = {
   text: "Nope", id: story.pages.create!(
   {
-    title: "Wing Things",
+    title: "My Bad!",
     content: "Ah, okay, must just be the medication acting up. Oh snap, dude! What's that?" } ).id
 }
 create_branch(@A3b, @A3[:id])
@@ -367,7 +374,7 @@ create_branch(@B, @start[:id])
 @B1 = {
   text: 'Ask the woman about the emblem.', id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'The Secretary',
       content: "The woman looks up at you, then in an irritated tone tells you that it is the sacred emblem of
       Agor-Norath the Mightily Disquieted, and that the forms she was stamping were music requests for
       his late-night radio show. How do you respond to this?" }).id
@@ -378,7 +385,7 @@ create_branch(@B1, @B[:id])
 @B1a = {
   text: 'Marry me, you magnificent goddess of womanhood!', id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'A Heavenly Offer',
       content: "Flattered by your offer, the woman heartily agrees. The two of you get married atop a shining
       ivory tower overlooking a vast a beautiful ocean of happiness and rapture. You win at life. \n\nTHE END 13/#{endings}" }).id
       # your song makes the heavens weep...
@@ -388,7 +395,7 @@ create_branch(@B1a, @B1[:id])
 @B1b = {
   text: 'That is fascinating, tell me more!', id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'Let Me Tell You a Tale...',
       content: "The woman tells you an epic tale of love, war, deception, and liberation. It was a tale so grand
       and magnificent, that you very mind struggles to comprehend it. Like a great sea of information it
       floods into your mind, through your ears, coursing through your very veins, with it's mighty rapids
@@ -401,7 +408,7 @@ create_branch(@B1b, @B1[:id])
 @B1b1 = {
   text: "Eh, I'll walk it off. I have a good health plan.", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'Walking is the Best Medicine',
       content: "Indeed you do. Clever you for getting coverage for this very thing. After a few days in the
       hospital you are in the best shape of your life. After all that useless information is drained from your
       system, you decide to compete at a triathlon. You finish third out of thirty eight, which isn't too bad.
@@ -419,7 +426,7 @@ create_branch(@B1b1, @B1b[:id])
 @B1b2 = {
   text: "Oh dear Christ and all that is tastefully accessorized, someone get me a doctor!", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'A Desperate Plea',
       content: "Fine, fine, quit your whining! The woman calls the doctor and he comes and puts corks into
       every orifice of your body. With no where to go, the ink starts inflating you like a balloon,
       transforming your insides into a torrent sea of narrative and endless exposition. The haunting sound
@@ -444,7 +451,7 @@ create_branch(@B1b2, @B1b[:id])
   text: "That is the most boring thing I have ever heard. You are boring, and you are a failure at
       everything you do.", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'Opening Her Eyes',
       content: "The woman stood agasp at the revelation. Pondering your words she began to contemplate the
       error of her ways, and at once began to write up her letter of resignation. She never felt happier in
       her life, and felt liberated enough to finally peruse her lifelong dream of domesticating sand.
@@ -463,7 +470,7 @@ create_branch(@B1c, @B1[:id])
 @B2 = {
     text: "Creepily stare at the woman until she notices you.", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'Staring into the Soul',
       content: "You stare at the woman while she works, getting lost in her eyes. A black desert of nothingness
       spreads out before you, with only the mighty arcs of her glasses decorating the heavens. You walk
       onward, determined to find something that would get her attention.
@@ -476,7 +483,7 @@ create_branch(@B2, @B[:id])
 @B2a = {
     text: "Pull it up out of the ground.", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'The Sword in the Stone',
       content: "With some effort you pull the mighty structure out of the ground, revealing an enormous sword.
       Inscribed upon it is the names of every man to have ever carried a sword in all of history, written in a
       thousand languages, all glowing with a harmonious yellow light. You realize the moment you look at
@@ -494,7 +501,7 @@ create_branch(@B2a, @B2[:id])
 @B2b = {
     text: "Press the button on its side labeled \“Do not push\”", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'The Slots Within',
       content: "The obelisk opens to reveal a slot machine. What do you do with it?"
     }).id
   }
@@ -503,7 +510,7 @@ create_branch(@B2b, @B2[:id])
 @B2b1 = {
     text: "Play them slots, son!", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'Money for Days',
       content: "You play the slot machine, and you find you are a master of it. No other man has come close to
       becoming such an expert at this skill than you. After winning a fortune at playing, you found a
       monastery atop the highest mountain in Asgard and teach others you fantastic gambling skills. You
@@ -519,7 +526,7 @@ create_branch(@B2b1, @B2b[:id])
 @B2b2 = {
     text: "Damn, I'm broke!", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'Insufficient Funds',
       content: "Yeah you are! Have fun living in that box, loser!\n
       Nah, just kidding. You find a couple of bucks in your back pocket and play a few rounds. Once you get
       bored you head back to the receptionist and steal her face. You paint it with clown pain and start
@@ -535,7 +542,7 @@ create_branch(@B2b2, @B2b[:id])
 @B3 = {
     text: "Summon a cranberry pie from the Ninth layer of hell.", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'Food from the Abyss',
       content: "You call upon the demons of hell to conjure forth the most wicked and foul of all cranberry pies
       from the Stygian pits of Eternal Suffering, and boy is it delicious! Hey, want some? Great, looks like
       the receptionist is going to be joining this.\n
@@ -548,7 +555,7 @@ create_branch(@B3, @B[:id])
 @B3a = {
     text: "Hey lady, this guy thinks you're fat!", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'Who Knew She Was a Cultist?',
       content: "Apparently ol' Beelzebub doesn't take kindly to people insulting his most favored acolyte. The
       woman's flesh pulls back from her face, revealing a scull with flaming eyes. Her eyes start shooting
       razor sharp blades of sugar at you. You deftly deflect it with the pie, then hurl the pie like a discus
@@ -562,7 +569,7 @@ create_branch(@B3a, @B3[:id])
 @B3b = {
     text: "I got your back, bro.", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'The Seduction of the Narrator',
       content: "Thanks, bro. Oh hey, baby. How's it going? Nice, nice, those must be some really important
       forms you got there, eh? Hey listen, if you wanted maybe later we could- what? You're on the clock?
       Nah, I'm sure your boss won't mind.\n
@@ -577,7 +584,7 @@ create_branch(@B3b, @B3[:id])
 @B3b1 = {
     text: "Fear not, I will handle this villain!", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'Slaying the Villain',
       content: "Like Hercules himself, you rip off your shirt to reveal a chest of mighty muscle and with a single
       blow from your fist you take the boss's face off and cause him to fly toward the horizon.
       That was awesome! Oh... yeah, I bet you find that hot there... uh, you know I can do stuff like
@@ -589,7 +596,7 @@ create_branch(@B3b1, @B3b[:id])
 @B3b2 = {
     text: "Mmm pie...", id: story.pages.create!(
     {
-      title: 'Through the blue door...',
+      title: 'Subsumed by the Taste...',
       content: "What! What are you doing! Help me! Ow! Come on, the pie isn't that great. Argh! Will you
       stop punching me for like 2 seconds, man. Ow! Let me tell you som- black! Okay, that loosened a
       tooth there. You'll be hearing from my insurance- ow! My ribs, that sound can't be good. Puh! Okay,

@@ -1,8 +1,9 @@
 (function(){
-  function StoryCreateCtrl($scope, $state, StoriesSrv, PagesSrv){
+  function StoryCreateCtrl($scope, $state, StorySrv, PageSrv, UserSrv){
     $scope.submit = function(){
-      StoriesSrv.create(
+      StorySrv.create(
         {
+          user_id: UserSrv.currentUser.id,
           title: $scope.title,
           description: $scope.description,
           summary: $scope.summary
@@ -15,5 +16,5 @@
 
   angular
     .module('fatebook')
-    .controller('StoryCreateCtrl', ['$scope', '$state', 'StoriesSrv', 'PagesSrv', StoryCreateCtrl]);
+    .controller('StoryCreateCtrl', ['$scope', '$state', 'StorySrv', 'PageSrv', 'UserSrv', StoryCreateCtrl]);
 })();

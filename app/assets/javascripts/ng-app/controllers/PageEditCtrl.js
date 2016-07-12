@@ -1,5 +1,5 @@
 (function(){
-  function PageEditCtrl($scope,$log, $state, $stateParams,PageSrv, PagesSrv, StorySrv, BranchSrv){
+  function PageEditCtrl($scope, $rootScope, $log, $state, $stateParams, PageSrv, StorySrv, BranchSrv, UserSrv){
     $scope.choiceText = '';
 
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
@@ -10,6 +10,15 @@
     var initCurrentPage =  function(){
       PageSrv.show({id: $stateParams.page_id}).$promise.then(function(data){
         $scope.page = data;
+        if(UserSrv.currentUser){
+          UserSrv.db.update(
+            {
+              id: UserSrv.currentUser.id,
+              last_page_edit_id: $scope.page.id,
+              last_page_edit_story_id: $scope.story.id
+            });
+          $rootScope.$broadcast('updateLastPageEdit', {story: $scope.story, page: $scope.page});
+        }
 
         BranchSrv.findPageByDestination({id: $scope.page.id}).$promise.then(function(data){
           if(data){
@@ -23,7 +32,6 @@
     var initParentPage = function(parent_id){
       PageSrv.show({id: parent_id}).$promise.then(function(data){
         $scope.parentPage = data;
-        // REVIEW better way to detect empty response?
         initSiblingPages();
       });
     };
@@ -76,9 +84,7 @@
       if(!_.isEmpty($scope.choiceText)) {
         var numBranches = 1;
 
-        if($scope.page.branches){
-          numBranches = $scope.page.branches.length +1;
-        }
+        var numBranches = $scope.page.branches.length +1 | 1;
 
         var stubTitle = 'Child Page ' + numBranches + ' of Page ' + $scope.page.id;
 
@@ -89,18 +95,15 @@
           choice_text: $scope.choiceText,
         }
 
-        PagesSrv.create(pageDataHash).$promise.then(function(data){
-          // REVIEW is this the best way?
-          PageSrv.show({id: $scope.page.id}).$promise.then(function(data){
-            $scope.page = data;
-          });
+        PageSrv.create(pageDataHash).$promise.then(function(data){
+          $scope.page = data;
         });
       }
     }
 
     $scope.deleteBranch = function(index){
-      var page = $scope.page.branches[index];
-      PageSrv.delete({parent_id: $scope.page.id, id: page.id}).$promise.then(function(data){
+      var branch = $scope.page.branches[index];
+      BranchSrv.delete({id: branch.id}).$promise.then(function(data){
           $scope.page = data;
       });
     }
@@ -132,5 +135,6 @@
 
   angular
     .module('fatebook')
-    .controller('PageEditCtrl',['$scope','$log','$state','$stateParams','PageSrv', 'PagesSrv', 'StorySrv', 'BranchSrv',PageEditCtrl]);
+    .controller('PageEditCtrl',['$scope', '$rootScope', '$log', '$state', '$stateParams',
+                'PageSrv', 'StorySrv', 'BranchSrv', 'UserSrv', PageEditCtrl]);
 })();

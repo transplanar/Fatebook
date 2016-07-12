@@ -1,6 +1,6 @@
-<span><b>Choice {{$index+1}}:</b> </span> <input type='text' ng-model="page.branches[$index].choice_text">
-
-  <span class='btn btn-danger' ng-click='deleteBranch($index)'>Delete</span>
-  <!-- TODO add highlight for enabled/disabled -->
-  <span class='btn btn-warning' ng-show="page.branches[$index]" ng-click='navToChildPage($index)'>View Page</span>
- </span>
+<div>
+  <span><input type='text' ng-model="page.branches[$index].choice_text">
+    <span class='btn btn-danger' ng-click='deleteBranch($index)'>Delete</span>
+    <span class='btn btn-warning' ng-show="page.branches[$index]" ng-click='navToChildPage($index)'>View Page</span>
+  </span>
+</div>

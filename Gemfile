@@ -50,3 +50,5 @@ gem 'angular-rails-templates'
 gem 'bootstrap-sass'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'underscore-rails'
+
+gem 'bcrypt'

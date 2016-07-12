@@ -3,11 +3,7 @@ class PagesController < ApplicationController
 
   # REVIEW change to custom route?
   def index
-    # render json: Page.all
-    p 'index'
     if(params[:story_id])
-      p 'hit this'
-      # @pages = Page.where(parent_id: params[:story_id]);
       @pages = Page.where(story_id: params[:story_id]);
     end
 
@@ -15,6 +11,13 @@ class PagesController < ApplicationController
   end
 
   def show
+    render json: @page
+  end
+
+  def get_first_page
+    @story = Story.find(params[:story_id])
+    @page = @story.pages.first
+
     render json: @page
   end
 
@@ -26,6 +29,7 @@ class PagesController < ApplicationController
   def edit
   end
 
+  # TODO refactor to prevent unauthorized params
   def create
     @story = Story.find(params[:story_id])
     @page = @story.pages.build(page_params)
@@ -35,7 +39,7 @@ class PagesController < ApplicationController
     if @page.save!
       if(params[:parent_id] && params[:choice_text])
         @parent = Page.find(params[:parent_id]);
-        @branch = @parent.branches.build(destination_id: @page.id, choice_text: params[:choice_text])
+        @branch = @parent.branches.build(destination_id: @page.id, choice_text: params[:choice_text], story_id: @story.id)
 
         if !@branch.save
           render json: { error: "Error saving page", status: 400 }, status: 400
@@ -46,7 +50,7 @@ class PagesController < ApplicationController
         end
       end
 
-      render json: @page, status: 201
+      render json: @parent, status: 201
     end
   end
 
@@ -74,9 +78,8 @@ class PagesController < ApplicationController
     end
 
     # TODO update for proper reqs and permits
-    # TODO only require content
     def page_params
       # params.require(:page).permit(:title, :content, :summary, :parent_id)
-      params.require(:page).permit(:title, :content, :summary, :parent_id, :complete)
+      params.require(:page).permit(:title, :content, :summary, :parent_id, :story_id, :complete)
     end
 end

@@ -6,6 +6,7 @@ class CreateBranch < ActiveRecord::Migration
       t.string :choice_text
 
       t.references :story, index: true, foreign_key: true
+      t.references :page, index: true, foreign_key: true
     end
   end
 end
