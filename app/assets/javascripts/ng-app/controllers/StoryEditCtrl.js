@@ -2,7 +2,7 @@
 (function(){
   function StoryEditCtrl($scope, $stateParams, PageSrv, StorySrv, BranchSrv){
 
-    StorySrv.db.show({id: $stateParams.story_id}).$promise.then(function(data){
+    StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
       $scope.currentStory = data;
       $scope.title = $scope.currentStory.title;
       $scope.description = $scope.currentStory.description;
@@ -11,6 +11,7 @@
       BranchSrv.query({story_id: $stateParams.story_id}).$promise.then(function(data){
         $scope.branches = data;
         initBranches(data);
+        checkIncomplete();
       });
     });
 
@@ -27,29 +28,16 @@
     };
 
     var initBranches = function(branches){
-      console.log('initializing branches');
-      PageSrv.db.first({story_id: $scope.currentStory.id}).$promise.then(function(data){
+      PageSrv.first({story_id: $scope.currentStory.id}).$promise.then(function(data){
         var firstPage = data;
         $scope.tree = [];
         $scope.tree.push({page: firstPage, children: getTree(firstPage)});
-        console.log('tree rendered');
       });
     };
 
-    // PageSrv.db.query({story_id: $stateParams.story_id}).$promise.then(function(data){
-    //   var pages = data;
-    //   $scope.completePages = [];
-    //   $scope.incompletePages = [];
-    //
-    //   // TODO list incomplete and highlight in tree
-    //   _.each(pages, function(page){
-    //     if(page.complete){
-    //       $scope.completePages.push(page);
-    //     }else{
-    //       $scope.incompletePages.push(page);
-    //     }
-    //   })
-    // });
+    var checkIncomplete = function(){
+      $scope.incompletePages = _.filter($scope.currentStory.pages, {complete: false });
+    }
 
     // TODO allow for draft changes to remain saved but not published?
     $scope.saveDraft = function(){
@@ -71,7 +59,7 @@
             published: readyToPublish
           }
 
-        StorySrv.db.update(storyDataHash).$promise.then(function(data){
+        StorySrv.update(storyDataHash).$promise.then(function(data){
           $scope.currentStory = data;
         });
       }

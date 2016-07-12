@@ -6,8 +6,6 @@
   From Choice = {{ fromChoiceText }}
 </div>
 
-<!-- FIXME if you hit this button multiple times, reaches first page and still appears -->
-<!-- this should not happen - first page has no parent page -->
 <div ng-show='parentPage.id'>
   <span class='btn btn-success' ng-click='navToParentPage()'>Parent Page</span>
 </div>
@@ -23,14 +21,12 @@
 
 </b>
 
-<!-- TODO rename to generic container -->
 <div class="page_create_container">
-  <!-- <form ng-submit='submit()'> -->
   <form ng-submit='submitDraft()'>
     <span>Title: </span> <input type='text' ng-model='page.title'> <br />
-    <!-- <span>Summary (WIP)</span> <br /> -->
     <span>Content: </span> <input type='text' ng-model='page.content'> <br />
 
+    <h2>Choices</h2>
     <!-- REVIEW why doesn't this work as a css class? -->
     <ul style='list-style-type:none'>
       <li ng-show = 'page.branches.length > 0' ng-repeat='choice in page.branches track by $index' ng-include="'choice_input.html'"> </li>
@@ -40,9 +36,6 @@
     <span>New Choice:</span><input type='text' ng-model='choiceText' />  <span class='btn btn-success' ng-click='createBranch()'>Create</span>
   </form>
 
-
-  <!-- TODO switch between update or submit based on state of page (COSMETIC) -->
-  <!-- <button class="btn btn-info" type="button" ng-click="submit()">Submit Draft</button> -->
   <button class="btn btn-info" type="button" ng-click="submitDraft()">Submit Draft</button>
   <button class="btn btn-success" type="button" ng-click="submitComplete()">Submit Complete</button>
 </div>

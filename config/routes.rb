@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :pages
   resources :stories
-  resources :users, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create, :update, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :branches, only: [:index, :destroy]
 

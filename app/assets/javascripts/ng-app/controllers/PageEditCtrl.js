@@ -1,15 +1,24 @@
 (function(){
-  function PageEditCtrl($scope, $log, $state, $stateParams, PageSrv, StorySrv, BranchSrv){
+  function PageEditCtrl($scope, $rootScope, $log, $state, $stateParams, PageSrv, StorySrv, BranchSrv, UserSrv){
     $scope.choiceText = '';
 
-    StorySrv.db.show({id: $stateParams.story_id}).$promise.then(function(data){
+    StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
       $scope.story = data;
       initCurrentPage();
     });
 
     var initCurrentPage =  function(){
-      PageSrv.db.show({id: $stateParams.page_id}).$promise.then(function(data){
+      PageSrv.show({id: $stateParams.page_id}).$promise.then(function(data){
         $scope.page = data;
+        if(UserSrv.currentUser){
+          UserSrv.db.update(
+            {
+              id: UserSrv.currentUser.id,
+              last_page_edit_id: $scope.page.id,
+              last_page_edit_story_id: $scope.story.id
+            });
+          $rootScope.$broadcast('updateLastPageEdit', {story: $scope.story, page: $scope.page});
+        }
 
         BranchSrv.findPageByDestination({id: $scope.page.id}).$promise.then(function(data){
           if(data){
@@ -21,7 +30,7 @@
     }
 
     var initParentPage = function(parent_id){
-      PageSrv.db.show({id: parent_id}).$promise.then(function(data){
+      PageSrv.show({id: parent_id}).$promise.then(function(data){
         $scope.parentPage = data;
         initSiblingPages();
       });
@@ -32,7 +41,7 @@
       $scope.siblingPages = [];
 
       _.each($scope.parentPage.branches, function(branch){
-        PageSrv.db.show({id: branch.destination_id}).$promise.then(function(data){
+        PageSrv.show({id: branch.destination_id}).$promise.then(function(data){
           $scope.siblingPages.push(data);
         });
       });
@@ -65,7 +74,7 @@
           pageDataHash.parent_id = $scope.parentPage.id;
         }
 
-        PageSrv.db.update(pageDataHash).$promise.then(function(data){
+        PageSrv.update(pageDataHash).$promise.then(function(data){
           $scope.page = data;
         });
       }
@@ -75,11 +84,6 @@
       if(!_.isEmpty($scope.choiceText)) {
         var numBranches = 1;
 
-        // if($scope.page.branches){
-        //   numBranches = $scope.page.branches.length +1;
-        // }
-
-        //REVIEW would this work?
         var numBranches = $scope.page.branches.length +1 | 1;
 
         var stubTitle = 'Child Page ' + numBranches + ' of Page ' + $scope.page.id;
@@ -91,23 +95,17 @@
           choice_text: $scope.choiceText,
         }
 
-        PageSrv.db.create(pageDataHash).$promise.then(function(data){
+        PageSrv.create(pageDataHash).$promise.then(function(data){
           $scope.page = data;
         });
       }
     }
 
     $scope.deleteBranch = function(index){
-      // TODO delete branch and destination page at the same time
-      // console.log('deleting branch ', index);
       var branch = $scope.page.branches[index];
-      // console.log('page elem', branch);
-      // PageSrv.db.delete({parent_id: $scope.page.id, id: branch.destination_id}).$promise.then(function(data){
       BranchSrv.delete({id: branch.id}).$promise.then(function(data){
-      // BranchSrv.delete({id: branch.id});
           $scope.page = data;
       });
-      console.log('branch deleted');
     }
 
     $scope.navToParentStory = function(){
@@ -137,5 +135,6 @@
 
   angular
     .module('fatebook')
-    .controller('PageEditCtrl',['$scope', '$log', '$state', '$stateParams', 'PageSrv', 'StorySrv', 'BranchSrv', PageEditCtrl]);
+    .controller('PageEditCtrl',['$scope', '$rootScope', '$log', '$state', '$stateParams',
+                'PageSrv', 'StorySrv', 'BranchSrv', 'UserSrv', PageEditCtrl]);
 })();

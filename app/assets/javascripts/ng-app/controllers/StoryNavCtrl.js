@@ -1,28 +1,31 @@
 (function(){
-  function StoryNavCtrl($scope, $stateParams, StorySrv, PageSrv, $resource, $rootScope){
-
-    $scope.debugMode = true;
-
+  function StoryNavCtrl($scope, $stateParams, StorySrv, PageSrv, UserSrv, $resource, $rootScope){
     $scope.setStory = function(id){
-      StorySrv.db.show({id: id}).$promise.then(function(data){
+      StorySrv.show({id: id}).$promise.then(function(data){
         $scope.currentStory = data;
-        $scope.initFirstPage();
+
+        if($stateParams.page_id){
+          $scope.setPage($stateParams.page_id);
+        }else{
+          $scope.initFirstPage();
+        }
       });
     }
 
     $scope.setStory($stateParams.story_id);
 
     $scope.initFirstPage = function(){
-      //IDEA use _.first instead?
-      PageSrv.db.first({story_id: $scope.currentStory.id}).$promise.then(function(data){
+      PageSrv.first({story_id: $scope.currentStory.id}).$promise.then(function(data){
         $scope.currentPage = data;
       });
     };
 
-    // Controller methods
     $scope.setPage = function(page_id){
-      PageSrv.db.show({story_id: $scope.currentStory.id, id: page_id}).$promise.then(function(data){
+      PageSrv.show({story_id: $scope.currentStory.id, id: page_id}).$promise.then(function(data){
         $scope.currentPage = data;
+        if(UserSrv.currentUser){
+          $rootScope.$broadcast('updateLastPagePlay', {story: $scope.currentStory, page: $scope.currentPage});
+        }
       });
 
       // TODO simulate mouse click on keyboard input
@@ -48,13 +51,9 @@
         return num - 49;
       }
     });
-
-    $rootScope.$on('pageNav', function(){
-
-    });
   }
 
   angular
     .module('fatebook')
-     .controller('StoryNavCtrl', ['$scope', '$stateParams', 'StorySrv', 'PageSrv', '$resource', '$rootScope', StoryNavCtrl]);
+     .controller('StoryNavCtrl', ['$scope', '$stateParams', 'StorySrv', 'PageSrv', 'UserSrv', '$resource', '$rootScope', StoryNavCtrl]);
 })();

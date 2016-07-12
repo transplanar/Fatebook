@@ -7,7 +7,6 @@ class CreateBranch < ActiveRecord::Migration
 
       t.references :story, index: true, foreign_key: true
       t.references :page, index: true, foreign_key: true
-      # t.references :parent_page, index: true, foreign_key: true
     end
   end
 end

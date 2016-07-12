@@ -8,7 +8,6 @@
       requireBase: false
     });
 
-    // TODO update later
     $stateProvider
       .state('landing',{
         url:'/',
@@ -16,7 +15,7 @@
         templateUrl: 'landing.html'
       })
       .state('play',{
-        url:'/play/:story_id',
+        url:'/play/story/:story_id/page/:page_id',
         controller: 'StoryNavCtrl',
         templateUrl: 'play.html'
       })

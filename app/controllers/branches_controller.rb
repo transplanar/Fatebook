@@ -1,4 +1,3 @@
-# FIXME set up custom rails routes for this
 class BranchesController < ApplicationController
   def index
     @branches = Branch.where(story_id: params[:story_id])

@@ -7,6 +7,12 @@
     </div>
     <div ng-show='currentUser'>
       <span><b>Welcome Back {{currentUser.username}}!</b> <div class='btn btn-warning' ng-click='logOut()'>Logout</div> </span>
+      <span><div class='btn btn-info'
+                      ui-sref='edit_page({story_id: currentUser.last_page_edit_story_id,
+                      page_id: currentUser.last_page_edit_id } )' ng-click='test()'>Resume Edit </div></span>
+      <span><div class='btn btn-info'
+                      ui-sref='play({story_id: currentUser.last_page_play_story_id,
+                      page_id: currentUser.last_page_play_id } )' ng-click='test()'>Resume Play </div></span>
     </div>
   </form>
 </div>

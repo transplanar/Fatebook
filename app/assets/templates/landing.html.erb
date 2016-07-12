@@ -1,17 +1,6 @@
 <h1>Mode Selection (Testing)</h1>
 <div class='btn btn-info' ui-sref='create_story'>Create Story</div>
 
-<!-- <h2>Stories</h2> -->
-<!-- <ul>
-  <li ng-repeat='story in stories'>
-    <h3>{{story.title}} by {{story.user.username}}
-      <span class='btn btn-info' ui-sref='play({story_id: story.id})'>Play</span>
-      <span class='btn btn-success' ui-sref='edit_story({story_id: story.id})'>Edit</span>
-      <span class='btn btn-danger' ng-click='deleteStory(story.id)'>Delete</span>
-    </h3>
-  </li>
-</ul> -->
-
 <h2>Published</h2>
 <ul>
   <li ng-repeat='story in publishedStories'>
@@ -27,12 +16,11 @@
 <ul>
   <li ng-repeat='story in ownedStories'>
     <h3>{{story.title}} by {{story.user.username}}
+      <!-- REVIEW set a default page id in url? Alter url?-->
       <span class='btn btn-info' ui-sref='play({story_id: story.id})'>Play</span>
       <span class='btn btn-success' ui-sref='edit_story({story_id: story.id})'>Edit</span>
       <span class='btn btn-danger' ng-click='deleteStory(story.id)'>Delete</span>
       <span ng-hide='story.published'>(incomplete)</span>
     </h3>
   </li>
-</ul>
-
 </ul>

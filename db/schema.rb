@@ -57,8 +57,12 @@ ActiveRecord::Schema.define(version: 20160706210152) do
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "last_page_edit_id"
+    t.integer  "last_page_edit_story_id"
+    t.integer  "last_page_play_id"
+    t.integer  "last_page_play_story_id"
   end
 
   add_foreign_key "branches", "pages"

@@ -11,10 +11,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body ng-app='fatebook'>
-
-  <!-- <%= yield  %> -->
-
-  <!-- REVIEW why can't I use ng-include? -->
   <div ng-include="'login_form.html'"></div>
 
   <ui-view></ui-view>
@@ -39,10 +35,7 @@
   <%= javascript_include_tag 'ng-app/controllers/StoryCreateCtrl' %>
   <%= javascript_include_tag 'ng-app/controllers/StoryEditCtrl' %>
   <%= javascript_include_tag 'ng-app/controllers/PageEditCtrl' %>
-
-  <!-- TODO delete this? -->
   <%= javascript_include_tag 'ng-app/controllers/LoginCtrl' %>
-
 
 </body>
 </html>

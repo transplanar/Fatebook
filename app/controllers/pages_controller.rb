@@ -29,6 +29,7 @@ class PagesController < ApplicationController
   def edit
   end
 
+  # TODO refactor to prevent unauthorized params
   def create
     @story = Story.find(params[:story_id])
     @page = @story.pages.build(page_params)
@@ -77,10 +78,8 @@ class PagesController < ApplicationController
     end
 
     # TODO update for proper reqs and permits
-    # TODO only require content
     def page_params
       # params.require(:page).permit(:title, :content, :summary, :parent_id)
-      # TODO add story_id
-      params.require(:page).permit(:title, :content, :summary, :parent_id, :complete)
+      params.require(:page).permit(:title, :content, :summary, :parent_id, :story_id, :complete)
     end
 end
