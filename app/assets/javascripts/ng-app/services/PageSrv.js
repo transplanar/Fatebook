@@ -1,5 +1,6 @@
 (function(){
   function PageSrv($resource) {
+    // TODO directly return $resource? Need to store currentPage here?
     var PageSrv = {};
 
     // return $resource('/pages/:id.json', {id: '@id'},

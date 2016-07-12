@@ -4,7 +4,6 @@
     UserSrv.currentUser = null;
 
     UserSrv.setUser = function(user){
-      console.log('attempt');
       UserSrv.currentUser = user;
       $rootScope.$broadcast('updateCurrentUser');
     };

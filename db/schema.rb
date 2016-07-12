@@ -21,8 +21,10 @@ ActiveRecord::Schema.define(version: 20160706210152) do
     t.integer "destination_id"
     t.string  "choice_text"
     t.integer "story_id"
+    t.integer "page_id"
   end
 
+  add_index "branches", ["page_id"], name: "index_branches_on_page_id", using: :btree
   add_index "branches", ["story_id"], name: "index_branches_on_story_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160706210152) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "branches", "pages"
   add_foreign_key "branches", "stories"
   add_foreign_key "pages", "stories"
 end

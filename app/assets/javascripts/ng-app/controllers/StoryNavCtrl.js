@@ -13,6 +13,7 @@
     $scope.setStory($stateParams.story_id);
 
     $scope.initFirstPage = function(){
+      //IDEA use _.first instead?
       PageSrv.db.first({story_id: $scope.currentStory.id}).$promise.then(function(data){
         $scope.currentPage = data;
       });

@@ -24,12 +24,11 @@
     <button class="btn btn-success" type="button" ng-click="saveDraft()">Save Draft</button>
     <!-- TODO add tooltip to show why the button is disabled via uib-tooltip https://angular-ui.github.io/bootstrap/-->
     <button class="btn btn-success" type="button" ng-click="publish()" ng-disabled='incompletePages.length > 0'>Publish</button>
-    <ul>
-      <!-- <li ng-repeat='page in currentStory.pages track by $index'> {{page.title}} -->
+    <!-- <ul>
       <li ng-repeat='page in completePages track by $index'> {{page.title}}
         <span class='btn btn-warning' ui-sref='edit_page({story_id: currentStory.id, page_id: page.id } )'>Edit</span>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </div>
 
@@ -39,3 +38,6 @@
     <span class='btn btn-warning' ui-sref='edit_page({story_id: currentStory.id, page_id: page.id } )'>Edit</span>
   </li>
 </ul>
+
+<h1>Tree View</h1>
+<div ng-include="'branch_tree.html'"> </div>

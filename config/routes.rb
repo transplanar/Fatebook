@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :stories
   resources :users, only: [:new, :create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :branches, only: [:index]
 
   get 'branches/find_by_destination/:id' => 'branches#find_by_destination'
   get 'published_stories' => 'stories#published_stories'
