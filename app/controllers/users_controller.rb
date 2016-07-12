@@ -21,6 +21,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
+
+    render json: User.all
   end
 
   private

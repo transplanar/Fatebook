@@ -1,4 +1,7 @@
-<span>{{data.page.title}}</span> <span class='btn btn-warning' ui-sref='edit_page({story_id: currentStory.id, page_id: data.page.id } )'>Edit</span>
+<span>{{data.page.title}}
+  <span class='btn btn-warning' ui-sref='edit_page({story_id: currentStory.id, page_id: data.page.id } )'>Edit</span>
+  <span class='btn btn-danger' ng-hide='data.page.complete'>Incomplete</span>
+</span>
 <ul>
   <li ng-repeat='data in data.children' ng-include="'tree_element_renderer.html'"> </li>
 </ul>

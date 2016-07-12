@@ -38,7 +38,7 @@ class PagesController < ApplicationController
     if @page.save!
       if(params[:parent_id] && params[:choice_text])
         @parent = Page.find(params[:parent_id]);
-        @branch = @parent.branches.build(destination_id: @page.id, choice_text: params[:choice_text])
+        @branch = @parent.branches.build(destination_id: @page.id, choice_text: params[:choice_text], story_id: @story.id)
 
         if !@branch.save
           render json: { error: "Error saving page", status: 400 }, status: 400
@@ -49,7 +49,6 @@ class PagesController < ApplicationController
         end
       end
 
-      # render json: @page, status: 201
       render json: @parent, status: 201
     end
   end

@@ -10,12 +10,7 @@
 
       BranchSrv.query({story_id: $stateParams.story_id}).$promise.then(function(data){
         $scope.branches = data;
-
-        // REVIEW why is this called twice?
-        // console.log('query complete');
         initBranches(data);
-        // console.log('branches ', $scope.branches);
-        // console.log('first page', _.first($scope.currentStory.pages));
       });
     });
 
@@ -29,65 +24,33 @@
       });
 
       return tree;
-    }
+    };
 
     var initBranches = function(branches){
+      console.log('initializing branches');
       PageSrv.db.first({story_id: $scope.currentStory.id}).$promise.then(function(data){
         var firstPage = data;
-
-        // console.log('first call');
-        $scope.tree = getTree(firstPage);
-        // console.log('full tree', $scope.tree);
-
-        // console.log('tree', $scope.tree);
-
-
-        // var tree = [];
-        // tree.push(firstPage);
-
-        // tree[0].push(getDescenants);
-
-        // $scope.tree = tree;
-
-        // _.each( getDescenants(firstPage) ;
-
-        // var tier1 = _.where(branches, {parent_id: firstPage.id});
-
-
-
-        // console.log('tier1', tier1);
+        $scope.tree = [];
+        $scope.tree.push({page: firstPage, children: getTree(firstPage)});
+        console.log('tree rendered');
       });
+    };
 
-      // var pageTree = _.where(branches, {parent_id: 1})
+    // PageSrv.db.query({story_id: $stateParams.story_id}).$promise.then(function(data){
+    //   var pages = data;
+    //   $scope.completePages = [];
+    //   $scope.incompletePages = [];
+    //
+    //   // TODO list incomplete and highlight in tree
+    //   _.each(pages, function(page){
+    //     if(page.complete){
+    //       $scope.completePages.push(page);
+    //     }else{
+    //       $scope.incompletePages.push(page);
+    //     }
+    //   })
+    // });
 
-      // var currentBranches = [];
-
-      // var getDescenants = function(parentBranch){
-        // return _.where(branches, {parent_id: parentBranch.id});
-        // return _.where(branches, {destination_id: parentBranch.id});
-      // }
-
-      // $scope.branches = _.map(branches, function(branch){
-        // branch.children = getDescenants(branch);
-
-        // return branch;
-      // });
-
-    }
-
-    PageSrv.db.query({story_id: $stateParams.story_id}).$promise.then(function(data){
-      var pages = data;
-      $scope.completePages = [];
-      $scope.incompletePages = [];
-
-      _.each(pages, function(page){
-        if(page.complete){
-          $scope.completePages.push(page);
-        }else{
-          $scope.incompletePages.push(page);
-        }
-      })
-    });
     // TODO allow for draft changes to remain saved but not published?
     $scope.saveDraft = function(){
       update(false);
@@ -97,7 +60,6 @@
       update(true);
     }
 
-    // $scope.submit = function(){
     var update = function(readyToPublish){
       if(!_.isEmpty($scope.title)){
         var storyDataHash =
@@ -110,7 +72,6 @@
           }
 
         StorySrv.db.update(storyDataHash).$promise.then(function(data){
-          // TODO display page nesting
           $scope.currentStory = data;
         });
       }

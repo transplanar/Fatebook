@@ -6,6 +6,14 @@ class BranchesController < ApplicationController
     render json: @branches
   end
 
+  def destroy
+    @branch = Branch.find(params[:id])
+    @parent_page = @branch.parent_page
+    @branch.destroy
+
+    render json: @parent_page
+  end
+
   def find_by_destination
     @branch = Branch.find_by(destination_id: params[:id])
 

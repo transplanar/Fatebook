@@ -98,10 +98,16 @@
     }
 
     $scope.deleteBranch = function(index){
-      var page = $scope.page.branches[index];
-      PageSrv.db.delete({parent_id: $scope.page.id, id: page.id}).$promise.then(function(data){
+      // TODO delete branch and destination page at the same time
+      // console.log('deleting branch ', index);
+      var branch = $scope.page.branches[index];
+      // console.log('page elem', branch);
+      // PageSrv.db.delete({parent_id: $scope.page.id, id: branch.destination_id}).$promise.then(function(data){
+      BranchSrv.delete({id: branch.id}).$promise.then(function(data){
+      // BranchSrv.delete({id: branch.id});
           $scope.page = data;
       });
+      console.log('branch deleted');
     }
 
     $scope.navToParentStory = function(){
