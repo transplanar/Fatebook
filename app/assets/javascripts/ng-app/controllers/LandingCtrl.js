@@ -1,5 +1,5 @@
 (function(){
-  function LandingCtrl($scope, $rootScope, StorySrv,UserSrv){
+  function LandingCtrl($scope, $rootScope, $cookies, StorySrv,UserSrv){
     $scope.displayStories = function(){
       if(UserSrv.currentUser){
         StorySrv.query().$promise.then(function(data){
@@ -36,10 +36,15 @@
     // TODO move this to separate controller (reusable template)
     $rootScope.$on('updateCurrentUser', function(){
       $scope.displayStories();
+
+      if(UserSrv.currentUser){
+        $cookies.put('currentUser_id', UserSrv.currentUser.id);
+      }
     });
   }
 
   angular
     .module('fatebook')
-    .controller('LandingCtrl',['$scope','$rootScope', 'StorySrv', 'UserSrv', LandingCtrl]);
+    // .controller('LandingCtrl',['$scope','$rootScope', 'StorySrv', 'UserSrv', LandingCtrl]);
+    .controller('LandingCtrl',['$scope','$rootScope', '$cookies', 'StorySrv', 'UserSrv', LandingCtrl]);
 })();

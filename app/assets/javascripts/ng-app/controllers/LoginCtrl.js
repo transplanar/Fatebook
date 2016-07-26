@@ -1,12 +1,26 @@
 (function(){
-  function LoginCtrl($scope, $rootScope, SessionSrv, UserSrv){
+  function LoginCtrl($scope, $rootScope, $cookies, SessionSrv, UserSrv){
+    var userID = $cookies.get('currentUser_id');
+
+    if(userID){
+      UserSrv.db.show({id: userID}).$promise.then(function(data){
+        UserSrv.setUser(data);
+        $scope.currentUser = data;
+      });
+    }
+
     $scope.login = function(){
       SessionSrv.create({
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
-        UserSrv.setUser(data);
-        $scope.currentUser = data;
+        if(data.length){
+          UserSrv.setUser(data);
+          $scope.currentUser = data;
+        }else{
+          // TODO add bad login response
+          console.log('Invalid username ' + $scope.usernameInput);
+        }
       })
     };
 
@@ -24,6 +38,8 @@
       SessionSrv.delete({id: $scope.currentUser.id}).$promise.then(function(data){
         $scope.currentUser = null;
         UserSrv.setUser(null);
+        $cookies.remove('currentUser_id');
+        console.log('logged out');
       });
     };
 
@@ -57,5 +73,6 @@
 
   angular
     .module('fatebook')
-    .controller('LoginCtrl',['$scope', '$rootScope', 'SessionSrv','UserSrv',LoginCtrl])
+    // .controller('LoginCtrl',['$scope', '$rootScope', 'SessionSrv','UserSrv',LoginCtrl])
+    .controller('LoginCtrl',['$scope', '$rootScope', '$cookies', 'SessionSrv','UserSrv',LoginCtrl])
 })();
