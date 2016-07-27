@@ -2,6 +2,15 @@
   function PageEditCtrl($scope, $rootScope, $log, $state, $stateParams, PageSrv, StorySrv, BranchSrv, UserSrv){
     $scope.choiceText = '';
 
+    $scope.content = '';
+
+    $scope.options = {
+       language: 'en',
+       allowedContent: true,
+       entities: false
+    };
+
+
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
       $scope.story = data;
       initCurrentPage();

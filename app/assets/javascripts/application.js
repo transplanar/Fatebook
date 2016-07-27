@@ -18,4 +18,5 @@
 //= require angular-rails-templates
 //= require bootstrap
 //= require underscore
+//= require angular-ckeditor
 //= require_tree ../templates

@@ -24,7 +24,8 @@
 <div class="page_create_container">
   <form ng-submit='submitDraft()'>
     <span>Title: </span> <input type='text' ng-model='page.title'> <br />
-    <span>Content: </span> <input type='text' ng-model='page.content'> <br />
+    <!-- <span>Content: </span> <input type='text' ng-model='page.content'> <br /> -->
+    <div ckeditor="options" ng-model="page.content"></div>
 
     <h2>Choices</h2>
     <!-- REVIEW why doesn't this work as a css class? -->
