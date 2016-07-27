@@ -41,6 +41,6 @@
   };
 
   angular
-    .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies', 'templates', 'ngResource'])
+    .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies', 'templates', 'ngResource', 'ckeditor'])
     .config(config)
 })();

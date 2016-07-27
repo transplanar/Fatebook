@@ -1,7 +1,6 @@
 //TODO merge story edit and create controllers
 (function(){
   function StoryEditCtrl($scope, $stateParams, PageSrv, StorySrv, BranchSrv){
-
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
       $scope.currentStory = data;
       $scope.title = $scope.currentStory.title;
