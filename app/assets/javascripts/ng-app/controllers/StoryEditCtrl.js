@@ -2,6 +2,12 @@
 (function(){
   function StoryEditCtrl($scope, $stateParams, PageSrv, StorySrv, BranchSrv){
 
+    $scope.editorOptions = {
+      language: 'en',
+      allowedContent: true,
+      entities: false
+    }
+
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
       $scope.currentStory = data;
       $scope.title = $scope.currentStory.title;
