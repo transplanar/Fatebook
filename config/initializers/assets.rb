@@ -13,6 +13,8 @@ Rails.application.config.assets.precompile +=
         app.js
         stories.css
         normalize.css
+        login.scss
+        topnav.scss
         authoring_tools.css
         ng-app/*
         )

@@ -14,11 +14,10 @@
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
-        if(data.length){
+        if(data.username){
           UserSrv.setUser(data);
           $scope.currentUser = data;
         }else{
-          // TODO add bad login response
           console.log('Invalid username ' + $scope.usernameInput);
         }
       })
@@ -29,15 +28,22 @@
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
+        // $scope.$apply(function(){
+          $scope.currentUser = data;
+        // })
+
         UserSrv.setUser(data);
-        $scope.currentUser = data;
       });
     };
 
     $scope.logOut = function(){
       SessionSrv.delete({id: $scope.currentUser.id}).$promise.then(function(data){
-        $scope.currentUser = null;
         UserSrv.setUser(null);
+
+        // $scope.$apply(function(){
+          $scope.currentUser = null;
+        // })
+
         $cookies.remove('currentUser_id');
         console.log('logged out');
       });

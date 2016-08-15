@@ -3,15 +3,19 @@
 <head>
   <title>Fatebook</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag    'normalize' %>
+  <%= stylesheet_link_tag    'login' %>
+  <%= stylesheet_link_tag    'topnav' %>
   <%= stylesheet_link_tag    'authoring_tools' %>
   <%= stylesheet_link_tag    'stories' %>
+  <%= stylesheet_link_tag    'normalize' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'app' %>
   <%= csrf_meta_tags %>
 </head>
 <body ng-app='fatebook'>
-  <div ng-include="'login_form.html'"></div>
+  <div ng-include="'top_nav.html'"> </div>
+  <div ng-include="'side-nav.html'"
+  <!-- <div ng-include="'login_form.html'"></div> -->
 
   <ui-view></ui-view>
 
