@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(username: params[:session][:username].downcase)
+    @user = User.find_by(username: params[:session][:username])
 
     if @user && @user.authenticate(params[:session][:password])
       create_session(@user)
@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
       # p @user
 
       render json: {}
+      # render json: @user.errors, status: :unprocessable_entity
 
     end
 
