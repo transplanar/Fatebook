@@ -37,7 +37,12 @@
         params: {
           parent_id: null
         }
-      });;
+      })
+      .state('user_stories',{
+        url:'/my_stories/',
+        controller: 'UserStoriesCtrl',
+        templateUrl: 'user_stories.html'
+      });
   };
 
   angular

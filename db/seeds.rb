@@ -612,4 +612,5 @@ story.pages.each do |page|
 end
 
 p 'Story created'
+p "#{@user.stories.length} story copies made"
 p "#{story.pages.length} pages created with #{endings} endings"

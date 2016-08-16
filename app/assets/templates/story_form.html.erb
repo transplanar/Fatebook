@@ -9,7 +9,7 @@
     <span>Description: </span> <input type='text' ng-model='description'> <br />
     <!-- IDEA remove summaries (until later)? -->
     <!-- <span>Summary: </span> <input type='text' ng-model='summary'> <br /> -->
-    <span>Keywords (WIP)</span> <br />
+<!--    <span>Keywords (WIP)</span> <br />-->
   </form>
 
   <button ng-hide='currentStory' class="btn btn-success" type="button" ng-click="submit()">Submit</button>
@@ -26,7 +26,8 @@
       <span class='btn btn-warning' ui-sref='edit_page({story_id: currentStory.id, page_id: page.id } )'>Edit</span>
     </li>
   </ul>
+  
+  <h1>Tree View</h1>
+  <div ng-include="'branch_tree.html'"> </div>
 </div>
 
-<h1>Tree View</h1>
-<div ng-include="'branch_tree.html'"> </div>

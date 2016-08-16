@@ -1,0 +1,8 @@
+<div id='side-nav' ng-controller='SideNavCtrl'>
+  <b>Available Adventures</b>
+  <ul>
+    <li ng-repeat='story in publishedStories'>
+      <span ui-sref='play({story_id: story.id})'><b>{{story.title}} by {{story.user.username}}</b></span>
+    </li>
+  </ul>
+</div>

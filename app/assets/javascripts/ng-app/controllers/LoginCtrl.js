@@ -1,13 +1,14 @@
 (function(){
   function LoginCtrl($scope, $rootScope, $cookies, SessionSrv, UserSrv){
-    var userID = $cookies.get('currentUser_id');
-
-    if(userID){
-      UserSrv.db.show({id: userID}).$promise.then(function(data){
-        UserSrv.setUser(data);
-        $scope.currentUser = data;
-      });
-    }
+//    var userID = $cookies.get('currentUser_id');
+//
+//    if(userID){
+//      console.log('setting user on load');
+//      UserSrv.db.show({id: userID}).$promise.then(function(data){
+//        UserSrv.setUser(data);
+//        $scope.currentUser = data;
+//      });
+//    }
 
     $scope.login = function(){
       SessionSrv.create({
@@ -37,6 +38,7 @@
     };
 
     $scope.logOut = function(){
+      console.log('logging out');
       SessionSrv.delete({id: $scope.currentUser.id}).$promise.then(function(data){
         UserSrv.setUser(null);
 
@@ -74,6 +76,15 @@
 
     $rootScope.$on('updateLastPagePlay', function(event, args){
       updateLastPageVisited('play', args);
+    });
+    
+    $rootScope.$on('updateCurrentUser', function(){
+      console.log('updating user cookie', UserSrv.currentUser);
+
+      if(UserSrv.currentUser){
+        $scope.currentUser = UserSrv.currentUser;
+        $cookies.put('currentUser_id', UserSrv.currentUser.id);
+      }
     });
   };
 

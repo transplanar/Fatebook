@@ -4,20 +4,23 @@
   <title>Fatebook</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'login' %>
-  <%= stylesheet_link_tag    'topnav' %>
+  <%= stylesheet_link_tag    'navbars' %>
   <%= stylesheet_link_tag    'authoring_tools' %>
   <%= stylesheet_link_tag    'stories' %>
   <%= stylesheet_link_tag    'normalize' %>
+  <%= stylesheet_link_tag    'landing' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'app' %>
   <%= csrf_meta_tags %>
 </head>
 <body ng-app='fatebook'>
   <div ng-include="'top_nav.html'"> </div>
-  <div ng-include="'side-nav.html'"
+  <div ng-include="'side-nav.html'"></div>
   <!-- <div ng-include="'login_form.html'"></div> -->
 
-  <ui-view></ui-view>
+  <div class='container'>
+    <ui-view></ui-view>
+  </div>
 
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,600,700,300">
   <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -42,6 +45,8 @@
   <%= javascript_include_tag 'ng-app/controllers/StoryEditCtrl' %>
   <%= javascript_include_tag 'ng-app/controllers/PageEditCtrl' %>
   <%= javascript_include_tag 'ng-app/controllers/LoginCtrl' %>
+  <%= javascript_include_tag 'ng-app/controllers/SideNavCtrl' %>
+  <%= javascript_include_tag 'ng-app/controllers/UserStoriesCtrl' %>
 
 </body>
 </html>
