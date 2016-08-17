@@ -12,14 +12,7 @@ class SessionsController < ApplicationController
       create_session(@user)
       render json: @user, status: 201
     else
-      # render json: { error: "Error saving session. PARAMS #{params}", status: 400 }, status: 400
-      # render json: { head :ok }
-      # render json: {errors: @user.errors}, status: 422
-      # p @user
-
       render json: {}
-      # render json: @user.errors, status: :unprocessable_entity
-
     end
 
   end

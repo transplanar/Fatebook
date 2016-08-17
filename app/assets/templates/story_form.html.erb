@@ -19,7 +19,6 @@
   <h1>Incomplete</h1>
   <ul>
     <li ng-repeat='page in incompletePages track by $index'> {{page.title}}
-      <!-- <span class='btn btn-warning' ui-sref='edit_page({story_id: currentStory.id, page_id: page.id } )'>Edit</span> -->
       <span class='btn btn-success ion-edit story-btn' ui-sref='edit_page({story_id: currentStory.id, page_id: page.id } )' title='edit page'></span>
     </li>
   </ul>

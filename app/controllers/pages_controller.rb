@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
 
-  # REVIEW change to custom route?
   def index
     if(params[:story_id])
       @pages = Page.where(story_id: params[:story_id]);
@@ -77,9 +76,7 @@ class PagesController < ApplicationController
       @page = Page.find(params[:id])
     end
 
-    # TODO update for proper reqs and permits
     def page_params
-      # params.require(:page).permit(:title, :content, :summary, :parent_id)
       params.require(:page).permit(:title, :content, :summary, :parent_id, :story_id, :complete)
     end
 end
