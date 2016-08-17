@@ -11,12 +11,11 @@
     $stateProvider
       .state('landing',{
         url:'/',
-        controller: 'LandingCtrl',
         templateUrl: 'landing.html'
       })
       .state('preview_story',{
         url:'/preview/:story_name',
-        controller: 'StoryPreviewCtrls',
+        controller: 'StoryPreviewCtrl',
         templateUrl: 'story_preview.html'
       })
       .state('play',{
@@ -34,7 +33,6 @@
         controller: 'StoryEditCtrl',
         templateUrl: 'story_form.html'
       })
-      // FIXME fix page id display
       .state('edit_page',{
         url:'/edit_story/:story_id/editPage/:page_id',
         controller: 'PageEditCtrl',

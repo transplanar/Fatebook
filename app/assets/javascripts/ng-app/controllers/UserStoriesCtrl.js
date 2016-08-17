@@ -7,10 +7,9 @@
         });
       }
     };
-    
+
     $scope.getStories();
-    
-    
+
     $rootScope.$on('updateCurrentUser', function(){
       $scope.getStories();
     });

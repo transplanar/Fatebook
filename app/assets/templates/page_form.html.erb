@@ -5,29 +5,19 @@
     <span ng-switch-when='true'>Published</span>
     <span ng-switch-when='false'>Draft</span>
     </span></div>
-  <div class='page-edit-header'>Parent Story:</div><div class='btn btn-default' title='go to parent story' ng-click='navToParentStory()'> {{story.title}} </div></div> 
-  <div class='page-edit-header'>Parent Page:</div><div class='btn btn-default' title='go to parent story' ng-click='navToParentPage()'> {{parentPage.title}} </div></div> 
+  <div class='page-edit-header'>Parent Story:</div><div class='btn btn-default' title='go to parent story' ng-click='navToParentStory()'> {{story.title}} </div></div>
+  <div ng-show='parentPage.id' >
+    <div class='page-edit-header'>Parent Page:</div>
+      <div class='btn btn-default' title='go to parent story' ng-click='navToParentPage()'> {{parentPage.title}} </div>
+    </div>
+  </div>
   <div ng-show='siblingPages.length > 0'>
     <span class='page-edit-header'>Sibling Pages:</span>
       <span ng-repeat='sibling in siblingPages track by $index'>
         <span ng-hide='sibling.id == page.id' class='btn btn-default' title='go to sibling page' ng-click='navToSiblingPage(sibling)'> {{sibling.title}} </span>
-<!--        <span ng-hide='sibling.id == page.id' class='btn btn-default' title='go to sibling page' ng-click='navToSiblingPage($index)'> {{sibling.title}} </span>-->
       </span>
   </div>
 </div>
-
-<!--<span class='btn btn-success parent-story-button' ng-click='navToParentStory()'>Parent Story</span>-->
-
-
-
-<!--
-<div ng-show='parentPage.id'>
-  <span class='btn btn-success ' ng-click='navToParentPage()'>Parent Page</span>
-</div>
--->
-
-
-</b>
 
 <div class="page_create_container">
   <form ng-submit='submitDraft()'>
@@ -35,21 +25,15 @@
     <div ckeditor="options" ng-model="page.content"></div>
 
     <h2>Choices</h2>
-    <!-- REVIEW why doesn't this work as a css class? -->
-    <ul style='list-style-type:none'>
+    <ul class='list-no-bullets'>
       <li ng-show = 'page.branches.length > 0' ng-repeat='choice in page.branches track by $index' ng-include="'choice_input.html'"> </li>
     </ul>
 
-    <!-- TODO styling w/o spaces -->
     <span><b>New Choice:</b> </span><input type='text' ng-model='choiceText' />  <span class='btn btn-success ion-plus-circled story-btn' ng-click='createBranch()' title='new branch'></span>
   </form>
 
   <button class="btn btn-info " type="button" ng-click="submitDraft()">Submit Draft</button>
   <button class="btn btn-success " type="button" ng-click="submitComplete()">Submit Complete</button>
 </div>
-
-<!-- TODO replace with ng-switch -->
-<!--<h3 ng-show='page.complete'>This Page is Marked as Complete</h3>-->
-<!--<h3 ng-hide='page.complete'>This Page is Incomplete</h3>-->
 
 <div class='alert alert-success' ng-show='pageSaved'><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Page Saved! </div>

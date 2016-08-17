@@ -27,8 +27,6 @@
           $rootScope.$broadcast('updateLastPagePlay', {story: $scope.currentStory, page: $scope.currentPage});
         }
       });
-
-      // TODO simulate mouse click on keyboard input
     }
 
     angular.element(document).bind('keyup', function (e) {

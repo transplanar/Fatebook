@@ -1,15 +1,5 @@
 (function(){
-  function LoginCtrl($scope, $rootScope, $cookies, SessionSrv, UserSrv){
-//    var userID = $cookies.get('currentUser_id');
-//
-//    if(userID){
-//      console.log('setting user on load');
-//      UserSrv.db.show({id: userID}).$promise.then(function(data){
-//        UserSrv.setUser(data);
-//        $scope.currentUser = data;
-//      });
-//    }
-
+  function LoginCtrl($scope, $rootScope, $cookies, $state, SessionSrv, UserSrv){
     $scope.login = function(){
       SessionSrv.create({
         username: $scope.usernameInput,
@@ -29,26 +19,20 @@
         username: $scope.usernameInput,
         password: $scope.passwordInput
       }).$promise.then(function(data){
-        // $scope.$apply(function(){
-          $scope.currentUser = data;
-        // })
+        $scope.currentUser = data;
 
         UserSrv.setUser(data);
       });
     };
 
     $scope.logOut = function(){
-      console.log('logging out');
       SessionSrv.delete({id: $scope.currentUser.id}).$promise.then(function(data){
         UserSrv.setUser(null);
-
-        // $scope.$apply(function(){
-          $scope.currentUser = null;
-        // })
-
-        $cookies.remove('currentUser_id');
-        console.log('logged out');
+        $scope.currentUser = null;
       });
+
+      $cookies.remove('currentUser_id');
+      $state.go('landing');
     };
 
     var updateLastPageVisited = function(state, args){
@@ -77,10 +61,8 @@
     $rootScope.$on('updateLastPagePlay', function(event, args){
       updateLastPageVisited('play', args);
     });
-    
-    $rootScope.$on('updateCurrentUser', function(){
-      console.log('updating user cookie', UserSrv.currentUser);
 
+    $rootScope.$on('updateCurrentUser', function(){
       if(UserSrv.currentUser){
         $scope.currentUser = UserSrv.currentUser;
         $cookies.put('currentUser_id', UserSrv.currentUser.id);
@@ -90,6 +72,5 @@
 
   angular
     .module('fatebook')
-    // .controller('LoginCtrl',['$scope', '$rootScope', 'SessionSrv','UserSrv',LoginCtrl])
-    .controller('LoginCtrl',['$scope', '$rootScope', '$cookies', 'SessionSrv','UserSrv',LoginCtrl])
+    .controller('LoginCtrl',['$scope', '$rootScope', '$cookies', '$state', 'SessionSrv','UserSrv',LoginCtrl])
 })();
