@@ -1,30 +1,32 @@
 <h1>Edit Page</h1>
 
-<span class='btn btn-success' ng-click='navToParentStory()'>Parent Story</span>
-
-<div ng-show = "fromChoiceText">
-  From Choice = {{ fromChoiceText }}
+<div id='story_pages_topnavs'>
+  <div class='page-edit-header'>Story:</div><div class='btn btn-default' title='go to parent story' ng-click='navToParentStory()'> {{story.title}} </div></div> 
+  <div class='page-edit-header'>Parent Page:</div><div class='btn btn-default' title='go to parent story' ng-click='navToParentPage()'> {{parentPage.title}} </div></div> 
+  <div ng-show='siblingPages.length > 0'>
+    <span class='page-edit-header'>Sibling Pages:</span>
+      <span ng-repeat='sibling in siblingPages'>
+        <span ng-hide='sibling.id == page.id' class='btn btn-default' title='go to sibling page'> {{sibling.title}} </span>
+      </span>
+  </div>
 </div>
 
+<!--<span class='btn btn-success parent-story-button' ng-click='navToParentStory()'>Parent Story</span>-->
+
+
+
+<!--
 <div ng-show='parentPage.id'>
-  <span class='btn btn-success' ng-click='navToParentPage()'>Parent Page</span>
+  <span class='btn btn-success ' ng-click='navToParentPage()'>Parent Page</span>
 </div>
+-->
 
-<div ng-show='siblingPages'>
-  <b>Sibling Pages (list)</b>
-  <ul>
-    <li ng-repeat='s in siblingPages'>
-      {{ s.title }}
-    </li>
-  </ul>
-</div>
 
 </b>
 
 <div class="page_create_container">
   <form ng-submit='submitDraft()'>
-    <span>Title: </span> <input type='text' ng-model='page.title'> <br />
-    <!-- <span>Content: </span> <input type='text' ng-model='page.content'> <br /> -->
+    <span class='page-edit-header'>Title: </span> <input type='text' ng-model='page.title'>
     <div ckeditor="options" ng-model="page.content"></div>
 
     <h2>Choices</h2>
@@ -34,11 +36,11 @@
     </ul>
 
     <!-- TODO styling w/o spaces -->
-    <span>New Choice:</span><input type='text' ng-model='choiceText' />  <span class='btn btn-success' ng-click='createBranch()'>Create</span>
+    <span><b>New Choice:</b> </span><input type='text' ng-model='choiceText' />  <span class='btn btn-success ion-plus-circled story-btn' ng-click='createBranch()' title='new branch'></span>
   </form>
 
-  <button class="btn btn-info" type="button" ng-click="submitDraft()">Submit Draft</button>
-  <button class="btn btn-success" type="button" ng-click="submitComplete()">Submit Complete</button>
+  <button class="btn btn-info " type="button" ng-click="submitDraft()">Submit Draft</button>
+  <button class="btn btn-success " type="button" ng-click="submitComplete()">Submit Complete</button>
 </div>
 
 <!-- TODO replace with ng-switch -->

@@ -17,5 +17,6 @@ Rails.application.config.assets.precompile +=
         navbars.scss
         landing.scss
         authoring_tools.css
+        play_adventure.scss
         ng-app/*
         )

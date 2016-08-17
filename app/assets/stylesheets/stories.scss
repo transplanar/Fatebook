@@ -3,3 +3,11 @@
 //  text-align: right;
   margin-right: 25%;
 }
+.ck_input {
+  
+  &:before{
+    margin-top: 5px;
+  }
+//  margin-top: 5px;
+//  width: 100px !important;
+}

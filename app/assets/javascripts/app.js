@@ -14,6 +14,11 @@
         controller: 'LandingCtrl',
         templateUrl: 'landing.html'
       })
+      .state('preview_story',{
+        url:'/preview/:story_name',
+        controller: 'StoryPreviewCtrls',
+        templateUrl: 'story_preview.html'
+      })
       .state('play',{
         url:'/play/story/:story_id/page/:page_id',
         controller: 'StoryNavCtrl',
@@ -46,6 +51,6 @@
   };
 
   angular
-    .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies', 'templates', 'ngResource', 'ckeditor'])
+    .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies', 'templates', 'ngResource', 'ckeditor', 'ngSanitize'])
     .config(config)
 })();

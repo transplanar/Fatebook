@@ -7,7 +7,8 @@
     $scope.options = {
        language: 'en',
        allowedContent: true,
-       entities: false
+       entities: false,
+       width: '600px'
     };
 
 
