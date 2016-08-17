@@ -141,6 +141,20 @@
 
       $state.go('edit_page', pageDataHash);
     }
+    
+    $scope.navToSiblingPage = function(sibling){
+      var result = _.findWhere($scope.parentPage.branches, {destination_id: sibling.id});
+      
+      $scope.submit();
+      
+      var pageDataHash = {
+        story_id: $scope.story.id,
+        parent_id: $scope.parentPage.id,
+        page_id: result.destination_id
+      }
+      
+      $state.go('edit_page', pageDataHash);
+    }
   }
 
   angular
