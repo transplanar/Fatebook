@@ -3,6 +3,7 @@
     $scope.setStory = function(id){
       StorySrv.show({id: id}).$promise.then(function(data){
         $scope.currentStory = data;
+        console.log($scope.currentStory);
 
         if($stateParams.page_id){
           $scope.setPage($stateParams.page_id);
