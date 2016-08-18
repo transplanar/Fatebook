@@ -13,8 +13,10 @@
   "author": "Glen Cooney",
   "license": "ISC",
   "dependencies": {
+    "grunt-cli": "^0.1.13",
     "hapi": "~7.5.0",
-    "path": "^0.4.9"
+    "path": "^0.4.9",
+    "rr-ng-ckeditor": "^0.2.3"
   },
   "devDependencies": {
     "connect-modrewrite": "^0.7.9",
