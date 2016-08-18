@@ -3,5 +3,4 @@ class PageSerializer < ActiveModel::Serializer
 
   has_many :branches
   belongs_to :story
-  belongs_to :parent_branch
 end

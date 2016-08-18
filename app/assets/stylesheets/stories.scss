@@ -1,4 +1,26 @@
-.story_button_set {
+.story-edit-btn-set {
   float: right;
   margin-right: 25%;
+}
+
+.story-preview-title{
+  display: inline-block;
+  font-size: 3em;
+  font-family: fantasy;
+  text-transform: uppercase;
+}
+
+.story-preview-author{
+  // margin-left: 20px;
+  display: inline-block;
+  font-size: 1.25em;
+}
+
+.story-preview-description{
+  margin-left: 30px;
+  font-style: italic;
+}
+
+.play-story-btn{
+  margin-top: 20px;
 }

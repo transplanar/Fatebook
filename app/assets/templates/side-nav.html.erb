@@ -1,8 +1,9 @@
 <div id='side-nav' ng-controller='SideNavCtrl'>
   <div class='adventure-list-heading'>Available Adventures</div>
   <div class='adventure-list' ng-repeat='story in publishedStories'>
-    <span><b>{{story.title}}</b> by {{story.user.username}} 
-      <span class='btn btn-info ion-ios-book' ui-sref='play({story_id: story.id})' title='play adventure'></span>
+    <span><b>{{story.title}}</b> by {{story.user.username}}
+      <!-- <span class='btn btn-info ion-ios-book' ui-sref='play({story_id: story.id})' title='play adventure'></span> -->
+      <span class='btn btn-info ion-ios-book' ui-sref='preview_story({story_id: story.id})'></span>
     </span>
   </div>
 </div>

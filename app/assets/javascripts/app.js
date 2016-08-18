@@ -14,7 +14,7 @@
         templateUrl: 'landing.html'
       })
       .state('preview_story',{
-        url:'/preview/:story_name',
+        url:'/preview/:story_id',
         controller: 'StoryPreviewCtrl',
         templateUrl: 'story_preview.html'
       })
