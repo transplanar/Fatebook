@@ -4,7 +4,7 @@
   "description": "Social platform for sharing interactive stories.",
   "repository": {
     "type": "git",
-    "url": "https://fatebook-app.herokuapp.com/"
+    "url": "git+https://github.com/transplanar/Fatebook.git"
   },
   "main": "server.js",
   "scripts": {
@@ -27,9 +27,9 @@
     "grunt-hapi": "^0.8.1"
   },
   "bugs": {
-    "url": "https://github.com/bloc/bloc-frontend-project-starter/issues"
+    "url": "https://glencooney.com/"
   },
-  "homepage": "https://github.com/bloc/bloc-frontend-project-starter#readme",
+  "homepage": "https://fatebook-app.herokuapp.com/",
   "keywords": [
     "social",
     "media",
