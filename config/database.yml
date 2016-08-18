@@ -80,6 +80,5 @@ test:
 #
 production:
   <<: *default
-  database: Fatebook_production
-  username: Fatebook
-  password: <%= ENV['FATEBOOK_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  database: db/production.sqlite3
