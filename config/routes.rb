@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   root 'landing#index'
 
+#  TODO change this
   get "*unmatched_route" => 'landing#index'
 
   # NOTE more correct than landing?
