@@ -1,16 +1,16 @@
 {
   "name": "fatebook",
   "version": "0.0.1",
-  "description": "Starter project for the Bloc Frontend Web Development",
+  "description": "Social platform for sharing interactive stories.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bloc/bloc-frontend-project-starter.git"
+    "url": "https://fatebook-app.herokuapp.com/"
   },
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Bloc Inc",
+  "author": "Glen Cooney",
   "license": "ISC",
   "dependencies": {
     "hapi": "~7.5.0",
