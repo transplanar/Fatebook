@@ -15,3 +15,16 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+.container{
+  margin-left: 25%;
+}
+
+.story-btn {
+  font-size: 18px;
+  width: 40px;
+  margin-bottom: 5px;
+}
+.list-no-bullets {
+  list-style-type: none;
+}

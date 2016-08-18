@@ -30,9 +30,9 @@ end
 @start = story.pages.create!(
   {
     title: "Two Doors",
-    content: "You are in a white room. It is the only room you have ever known.
-    Quite a lonely existence you've had, eh? But wait! There two doors have
-    just appeared before you. A blue door and a red door. Which one should you go through?"
+    content: "<p>You are in a white room. It is the only room you have ever known.
+    Quite a lonely existence you've had, eh?</p>  <p>But wait! There two doors have
+    just appeared before you. A blue door and a red door.</p> <p>Which one should you go through?</p>"
   }
 )
 
@@ -612,4 +612,5 @@ story.pages.each do |page|
 end
 
 p 'Story created'
+p "#{@user.stories.length} story copies made"
 p "#{story.pages.length} pages created with #{endings} endings"

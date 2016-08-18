@@ -1,0 +1,19 @@
+<h2>Your Stories</h2>
+
+<h2>Published</h2>
+<ul>
+  <li ng-repeat='story in ownedStories' ng-show='story.published'>
+    <h3>{{story.title}}</h3>
+    <div ng-include="'story-edit-btn-set.html'"></div>
+    <p>{{story.description}}</p>
+  </li>
+</ul>
+
+<h2>Drafts</h2>
+<ul>
+  <li ng-repeat='story in ownedStories' ng-hide='story.published'>
+    <h3>{{story.title}}</h3>
+    <div ng-include="'story-edit-btn-set.html'"></div>
+    <p>{{story.description}}</p>
+  </li>
+</ul>

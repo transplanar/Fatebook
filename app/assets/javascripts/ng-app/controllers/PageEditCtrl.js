@@ -1,15 +1,14 @@
 (function(){
   function PageEditCtrl($scope, $rootScope, $log, $state, $stateParams, PageSrv, StorySrv, BranchSrv, UserSrv){
     $scope.choiceText = '';
-
     $scope.content = '';
 
     $scope.options = {
        language: 'en',
        allowedContent: true,
-       entities: false
+       entities: false,
+       width: '600px'
     };
-
 
     StorySrv.show({id: $stateParams.story_id}).$promise.then(function(data){
       $scope.story = data;
@@ -46,7 +45,6 @@
     };
 
     var initSiblingPages = function(){
-      // REVIEW sibling pages cleared on refresh
       $scope.siblingPages = [];
 
       _.each($scope.parentPage.branches, function(branch){
@@ -66,9 +64,7 @@
       $scope.submit();
     }
 
-    // FIXME content does not parse newline constants
     $scope.submit = function(){
-
       if($scope.page.title !==''){
         var pageDataHash = {
           story_id: $scope.page.story.id,
@@ -92,9 +88,7 @@
     $scope.createBranch = function(){
       if(!_.isEmpty($scope.choiceText)) {
         var numBranches = 1;
-
         var numBranches = $scope.page.branches.length +1 | 1;
-
         var stubTitle = 'Child Page ' + numBranches + ' of Page ' + $scope.page.id;
 
         var pageDataHash = {
@@ -136,6 +130,20 @@
         story_id: $scope.story.id,
         parent_id: $scope.page.branches[index].parent_id,
         page_id: $scope.page.branches[index].destination_id
+      }
+
+      $state.go('edit_page', pageDataHash);
+    }
+
+    $scope.navToSiblingPage = function(sibling){
+      var result = _.findWhere($scope.parentPage.branches, {destination_id: sibling.id});
+
+      $scope.submit();
+
+      var pageDataHash = {
+        story_id: $scope.story.id,
+        parent_id: $scope.parentPage.id,
+        page_id: result.destination_id
       }
 
       $state.go('edit_page', pageDataHash);

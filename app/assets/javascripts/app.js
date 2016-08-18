@@ -11,8 +11,12 @@
     $stateProvider
       .state('landing',{
         url:'/',
-        controller: 'LandingCtrl',
         templateUrl: 'landing.html'
+      })
+      .state('preview_story',{
+        url:'/preview/:story_id',
+        controller: 'StoryPreviewCtrl',
+        templateUrl: 'story_preview.html'
       })
       .state('play',{
         url:'/play/story/:story_id/page/:page_id',
@@ -29,7 +33,6 @@
         controller: 'StoryEditCtrl',
         templateUrl: 'story_form.html'
       })
-      // FIXME fix page id display
       .state('edit_page',{
         url:'/edit_story/:story_id/editPage/:page_id',
         controller: 'PageEditCtrl',
@@ -37,10 +40,15 @@
         params: {
           parent_id: null
         }
-      });;
+      })
+      .state('user_stories',{
+        url:'/my_stories/',
+        controller: 'UserStoriesCtrl',
+        templateUrl: 'user_stories.html'
+      });
   };
 
   angular
-    .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies', 'templates', 'ngResource', 'ckeditor'])
+    .module('fatebook', ['ui.bootstrap', 'ui.router', 'ngCookies', 'templates', 'ngResource', 'ckeditor', 'ngSanitize'])
     .config(config)
 })();

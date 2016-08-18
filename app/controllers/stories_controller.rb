@@ -1,7 +1,6 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
 
-  # TODO only assessible by admin?
   def index
     render json: Story.all
   end
@@ -52,7 +51,6 @@ class StoriesController < ApplicationController
       @story = Story.find(params[:id])
     end
 
-    # TODO only require title and description
     def story_params
       params.require(:story).permit(:title, :description, :summary, :user_id, :published)
     end

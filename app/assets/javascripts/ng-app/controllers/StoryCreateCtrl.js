@@ -1,5 +1,7 @@
 (function(){
   function StoryCreateCtrl($scope, $state, StorySrv, PageSrv, UserSrv){
+    // console.log($state);
+    // console.log($state.includes('create_story'));
     $scope.submit = function(){
       StorySrv.create(
         {

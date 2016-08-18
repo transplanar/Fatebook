@@ -5,17 +5,13 @@
   <form ng-submit='submit()'>
 
     <span>Title: </span> <input type='text' ng-model='title'> <br />
-    <!-- TODO by default have summary be truncated description -->
     <span>Description: </span> <input type='text' ng-model='description'> <br />
-    <!-- IDEA remove summaries (until later)? -->
-    <!-- <span>Summary: </span> <input type='text' ng-model='summary'> <br /> -->
-    <span>Keywords (WIP)</span> <br />
   </form>
 
   <button ng-hide='currentStory' class="btn btn-success" type="button" ng-click="submit()">Submit</button>
   <div ng-show='currentStory'>
     <button class="btn btn-success" type="button" ng-click="saveDraft()">Save Draft</button>
-    <button class="btn btn-success" type="button" ng-click="publish()" ng-disabled='incompletePages.length > 0'>Publish</button>
+    <button class="btn btn-info" type="button" ng-click="publish()" ng-disabled='incompletePages.length > 0'>Publish</button>
   </div>
 </div>
 
@@ -23,10 +19,10 @@
   <h1>Incomplete</h1>
   <ul>
     <li ng-repeat='page in incompletePages track by $index'> {{page.title}}
-      <span class='btn btn-warning' ui-sref='edit_page({story_id: currentStory.id, page_id: page.id } )'>Edit</span>
+      <span class='btn btn-success ion-edit story-btn' ui-sref='edit_page({story_id: currentStory.id, page_id: page.id } )' title='edit page'></span>
     </li>
   </ul>
-</div>
 
-<h1>Tree View</h1>
-<div ng-include="'branch_tree.html'"> </div>
+  <h1>Tree View</h1>
+  <div ng-include="'branch_tree.html'"> </div>
+</div>

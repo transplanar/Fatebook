@@ -11,10 +11,12 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile +=
         %w(
         app.js
-        stories.css
+        stories.scss
         normalize.css
         login.scss
-        topnav.scss
+        navbars.scss
+        landing.scss
         authoring_tools.css
+        play_adventure.scss
         ng-app/*
         )

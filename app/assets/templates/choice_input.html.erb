@@ -1,6 +1,6 @@
 <div>
   <span><input type='text' ng-model="page.branches[$index].choice_text">
-    <span class='btn btn-danger' ng-click='deleteBranch($index)'>Delete</span>
-    <span class='btn btn-warning' ng-show="page.branches[$index]" ng-click='navToChildPage($index)'>View Page</span>
+    <span class='btn btn-primary ion-eye story-btn' ng-show="page.branches[$index]" ng-click='navToChildPage($index)' title = 'view page'></span>
+    <span class='btn btn-danger ion-trash-b story-btn' ng-click='deleteBranch($index)' title = 'delete page'></span>
   </span>
 </div>

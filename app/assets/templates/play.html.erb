@@ -1,16 +1,12 @@
-<div >
-  <h1>{{ currentStory.title }}</h1>
+<div class='now-playing-story'>{{currentStory.title}}</div><div class='now-playing-author'>by {{currentStory.user.username}}</div>
+<div class='now-playing-page'>{{currentPage.title}}</div>
 
-  </br>
+<div class='page-play-content'>
+  <div ng-bind-html='currentPage.content'></div>
 
-  <div >
-    {{ currentPage.content }}
-  </div>
-
-  <!-- REVIEW why doesn't this work as a css class? -->
-  <ul style='list-style-type:none'>
+  <ul class='list-no-bullets'>
     <li ng-repeat='choice in currentPage.branches'>
-      <span id="choice-{{$index}}" class='btn btn-info' ng-click='setPage(choice)'>{{$index + 1}}. {{choice.choice_text }}</span>
+      <span id="choice-{{$index}}" class='page-play-choice btn btn-info' ng-click='setPage(choice.destination_id)'>{{$index + 1}}. {{choice.choice_text }}</span>
     </li>
   </ul>
 </div>

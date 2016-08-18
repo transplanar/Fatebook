@@ -1,33 +1,25 @@
-<div class='topnav-bar'>
-  <div class='logo'>
-    <h1>FATEBOOK</h1>
-  </div>
-
-  <div ng-controller='LoginCtrl'>
-    <div class='login-container clearfix'>
-        <!-- <div ng-include="'login_form.html'"></div> -->
-
-        <!-- REVIEW why can't two views share a controller and scope binding? -->
-        <form ng-submit='login()'>
-          <div ng-hide='currentUser'>
-            <span>username:<input type='text' ng-model='usernameInput' />password:<input type='password' ng-model='passwordInput' /></span>
-            <div class='btn btn-success' ng-click='login()'>Login</div>
-            <div class='btn btn-success' ng-click='signUp()' >Sign up</div>
-          </div>
-          <div ng-show='currentUser'>
-            <div><b>Welcome back {{currentUser.username}}</b> <div class='btn btn-warning' ng-click='logOut()'>Logout</div>
-          </div>
-        </form>
+<div class='topnav-bar' ng-controller='LoginCtrl'>
+<div class='logo'>
+  <h1 ui-sref='landing'>FATEBOOK</h1>
+</div>
+  <div class='login-container clearfix'>
+    <div ng-hide='currentUser'>
+      <form ng-submit='login()'>
+        <span>username:<input type='text' ng-model='usernameInput' />password:<input type='password' ng-model='passwordInput' /></span>
+        <div class='btn btn-success' ng-click='login()'>Login</div>
+        <div class='btn btn-success' ng-click='signUp()' >Sign up</div>
+        </div>
+      </form>
+      <div ng-show='currentUser'>
+        <div><b>Welcome back {{currentUser.username}}</b> <div class='btn btn-warning' ng-click='logOut()'>Logout</div>
       </div>
     </div>
+  </div>
 
-    <div ng-show='currentUser'>
-      <div class='top-nav-buttons'>
-        <div class='btn btn-default'>Create Story</div>
-        <div class='btn btn-default'>My Stories</div>
-        <div class='btn btn-default'>Resume Adventure</div>
-        <div class='btn btn-default'>My Adventures</div>
-      </div>
+  <div ng-show='currentUser'>
+    <div class='top-nav-buttons'>
+      <div class='btn btn-default' ui-sref='create_story'>Create Story</div>
+      <div class='btn btn-default' ui-sref='user_stories'>My Stories</div>
     </div>
   </div>
 </div>

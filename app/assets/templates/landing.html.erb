@@ -1,26 +1,6 @@
-<h1>Mode Selection (Testing)</h1>
-<div class='btn btn-info' ui-sref='create_story'>Create Story</div>
+<h1 id='hero-title'> Welcome to Fatebook</h1>
 
-<h2>Published</h2>
-<ul>
-  <li ng-repeat='story in publishedStories'>
-    <h3>{{story.title}} by {{story.user.username}}
-      <span class='btn btn-info' ui-sref='play({story_id: story.id})'>Play</span>
-      <span class='btn btn-success' ui-sref='edit_story({story_id: story.id})'>Edit</span>
-      <span class='btn btn-danger' ng-click='deleteStory(story.id)'>Delete</span>
-    </h3>
-  </li>
-</ul>
+<p id='hero-text'>Fatebook is a social platform for creating and sharing interactive, choose-your-own-adventure stories.</p>
 
-<h2>Owned</h2>
-<ul>
-  <li ng-repeat='story in ownedStories'>
-    <h3>{{story.title}} by {{story.user.username}}
-      <!-- REVIEW set a default page id in url? Alter url?-->
-      <span class='btn btn-info' ui-sref='play({story_id: story.id})'>Play</span>
-      <span class='btn btn-success' ui-sref='edit_story({story_id: story.id})'>Edit</span>
-      <span class='btn btn-danger' ng-click='deleteStory(story.id)'>Delete</span>
-      <span ng-hide='story.published'>(incomplete)</span>
-    </h3>
-  </li>
-</ul>
+<p>To get started, log in or create an account.</p>
+</p>From there you can <b>start an adventure</b> using an existing story or <b>create your own</b>!</p>
