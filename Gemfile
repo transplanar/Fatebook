@@ -49,8 +49,10 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'browserify-rails'
+#  gem 'browserify-rails'
 end
+
+gem 'angularjs-rails'
 
 gem 'angular-rails-templates'
 gem 'bootstrap-sass'
