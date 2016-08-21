@@ -9,8 +9,6 @@
   <%= stylesheet_link_tag    'play_adventure' %>
   <%= stylesheet_link_tag    'stories' %>
   <%= stylesheet_link_tag    'normalize' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'app' %>
   <%= csrf_meta_tags %>
 </head>
 <body ng-app='fatebook'>
@@ -31,6 +29,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.js"></script>
 
   <script src="https://cdn.ckeditor.com/4.5.10/standard/ckeditor.js"></script>
+  
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'app' %>
 
   <!--    Services-->
   <%= javascript_include_tag 'ng-app/services/StorySrv' %>
