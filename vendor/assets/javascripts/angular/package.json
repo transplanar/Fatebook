@@ -44,7 +44,13 @@
   "bugs": {
     "url": "https://github.com/angular/angular.js/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "browserify": "~10.2.4",
+    "browserify-incremental": "^3.0.1"
+  },
+  "engines":{
+    "node": ">= 0.10"
+  },
   "description": "HTML enhanced for web apps",
   "devDependencies": {},
   "directories": {},
