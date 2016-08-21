@@ -60,4 +60,4 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'underscore-rails'
 
 gem 'bcrypt'
-gem 'requirejs-rails'
+#gem 'requirejs-rails'
