@@ -33,7 +33,6 @@ pickle-email-*.html
 .powenv
 
 node_modules/
-bower_components/
 .idea/
 .sass-cache/
 .DS_Store
