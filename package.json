@@ -1,13 +1,13 @@
 {
   "name": "fatebook",
   "version": "0.0.1",
-  "description": "social platform for sharing interactive stories",
+  "description": "social app for sharing interactive stories",
   "main": "app.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "browserify": "^13.1.0",
+    "bower": "1.7.9",
     "browserify-incremental": "^3.1.1",
     "rr-ng-ckeditor": "^0.2.3"
   },
